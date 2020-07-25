@@ -1,6 +1,10 @@
 <?php
 
+// namespace Controller;
+
 include_once("model/Model.php");
+
+// use \Model\Model;
 
 class Controller {
   public $model;

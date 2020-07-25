@@ -1,8 +1,20 @@
 <?php
 
+// namespace Model;
+
+// use \Model\Database;
+
 include_once("model/Book.php");
+include_once("model/Database.php");
 
 class Model {
+
+  private $db;
+
+  public function __construct()
+  {
+    $this->db = new Database();
+  }
   public function getBookList() {
     // here goes some hardcoded values to simulate the database
     return array(
@@ -18,6 +30,4 @@ class Model {
     $allBooks = $this->getBookList();
     return $allBooks[$title];
   }
-
-
 }
