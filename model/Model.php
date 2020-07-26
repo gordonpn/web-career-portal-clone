@@ -11,10 +11,10 @@ class Model {
 
   private $db;
 
-  public function __construct()
-  {
+  public function __construct() {
     $this->db = new Database();
   }
+
   public function getBookList() {
     // here goes some hardcoded values to simulate the database
     return array(

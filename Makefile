@@ -1,15 +1,17 @@
-.PHONY: start-server start-db db stop-db
+.PHONY: start start-server start-db db stop-db run
+
+start: start-db start-server
 
 start-server:
 	php -S localhost:9000
 
 start-db:
 	docker run \
+	-e MYSQL_DATABASE=gxc353_1 \
+	-e MYSQL_PASSWORD=temp_password \
 	-e MYSQL_ROOT_HOST=% \
 	-e MYSQL_ROOT_PASSWORD=temp_password \
 	-e MYSQL_USER=gxc353_1 \
-	-e MYSQL_PASSWORD=temp_password \
-	-e MYSQL_DATABASE=gxc353_1 \
 	-e TZ=America/Montreal \
 	--name mysql-353 \
 	--rm \
@@ -25,3 +27,6 @@ db:
 
 stop-db:
 	docker stop mysql-353
+
+run:
+	bash -c "trap 'trap - SIGINT SIGTERM ERR; $(MAKE) stop-db; exit' SIGINT SIGTERM ERR; $(MAKE) start"
