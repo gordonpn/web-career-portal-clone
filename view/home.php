@@ -40,6 +40,8 @@
       <p>Tiffany Zeng, 40063115</p>
     </div>
   </footer>
+  <?php
+  ?>
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </body>
 

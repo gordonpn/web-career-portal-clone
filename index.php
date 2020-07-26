@@ -17,6 +17,12 @@ switch ($request) {
     case '/dashboard' :
         require __DIR__ . '/view/dashboard.php';
         break;
+    case '/login' :
+        require __DIR__ . '/view/login.php';
+        break;
+    case '/signup' :
+        require __DIR__ . '/view/signup.php';
+        break;
     default:
         http_response_code(404);
         require __DIR__ . '/view/404.php';

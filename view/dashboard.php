@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
-  <title>Home Dashboard</title>
+  <title>Dashboard</title>
 </head>
 
 <body>
@@ -16,11 +16,16 @@
           <div id="navbarMenuHeroA" class="navbar-menu">
             <div class="navbar-end">
               <span class="navbar-item">
-                <a class="button is-info is-inverted">
+                <a class="button is-info is-inverted" href="login">
                   <!-- <span class="icon">
                   <i class="fab fa-github"></i>
                 </span> -->
                   <span>Login</span>
+                </a>
+              </span>
+              <span class="navbar-item">
+                <a class="button is-info is-inverted" href="signup">
+                  <span>Sign Up</span>
                 </a>
               </span>
             </div>
@@ -38,6 +43,8 @@
       </div>
     </div>
   </section>
+  <?php
+  ?>
 </body>
 
 </html>
