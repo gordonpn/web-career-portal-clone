@@ -20,7 +20,7 @@
       <div class="field">
         <label class="label">Username</label>
         <div class="control has-icons-left has-icons-right">
-          <input class="input" type="text" placeholder="Username">
+          <input class="input" type="text" placeholder="Username" required>
           <span class="icon is-small is-left">
             <i class="fas fa-user"></i>
           </span>
@@ -29,7 +29,7 @@
       <div class="field">
         <label class="label">Password</label>
         <p class="control has-icons-left">
-          <input class="input" type="password" placeholder="Password">
+          <input class="input" type="password" placeholder="Password" required>
           <span class="icon is-small is-left">
             <i class="fas fa-lock"></i>
           </span>
@@ -45,6 +45,11 @@
       <p>
         <a href="signup">
           Don't have an account yet?
+        </a>
+      </p>
+      <p>
+        <a href="forgot">
+          Forgot your password?
         </a>
       </p>
     </div>

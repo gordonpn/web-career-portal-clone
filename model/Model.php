@@ -7,15 +7,18 @@
 include_once("model/Book.php");
 include_once("model/Database.php");
 
-class Model {
+class Model
+{
 
   private $db;
 
-  public function __construct() {
+  public function __construct()
+  {
     $this->db = new Database();
   }
 
-  public function getBookList() {
+  public function getBookList()
+  {
     // here goes some hardcoded values to simulate the database
     return array(
       "Jungle Book" => new Book("Jungle Book", "R. Kipling", "A classic book."),
@@ -24,7 +27,8 @@ class Model {
     );
   }
 
-  public function getBook($title) {
+  public function getBook($title)
+  {
     // we use the previous function to get all the books and then we return the requested one.
     // in a real life scenario this will be done through a db select command
     $allBooks = $this->getBookList();

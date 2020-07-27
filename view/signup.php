@@ -20,7 +20,7 @@
       <div class="field">
         <label class="label">Username</label>
         <div class="control has-icons-left has-icons-right">
-          <input class="input" type="text" placeholder="Username">
+          <input class="input" type="text" placeholder="Username" required>
           <span class="icon is-small is-left">
             <i class="fas fa-user"></i>
           </span>
@@ -29,7 +29,7 @@
       <div class="field">
         <label class="label">Password</label>
         <p class="control has-icons-left">
-          <input class="input" type="password" placeholder="Password">
+          <input class="input" type="password" placeholder="Password" required>
           <span class="icon is-small is-left">
             <i class="fas fa-lock"></i>
           </span>
@@ -38,11 +38,17 @@
       <div class="field">
         <label class="label">Email</label>
         <div class="control has-icons-left has-icons-right">
-          <input class="input" type="email" placeholder="Email">
+          <input class="input" type="email" placeholder="Email" required>
           <span class="icon is-small is-left">
             <i class="fas fa-envelope"></i>
           </span>
         </div>
+      </div>
+      <!-- TODO alternatively use https://github.com/nosir/cleave.js -->
+      <div class="field">
+        <label class="label">Credit Card Number:</label>
+        <input class="input" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number"
+               maxlength="19" placeholder="xxxx xxxx xxxx xxxx">
       </div>
       <div class="field">
         <label class="label">Select account type and plan</label>
@@ -69,12 +75,16 @@
         <a href="login">Already have an account?
         </a>
       </p>
+      <p>
+        <a href="forgot">
+          Forgot your password?
+        </a>
+      </p>
     </div>
   </section>
   <section class="section">
     <div class="container is-fluid">
-
-      <h1 class="title has-text-centered">
+      <h1 class="title is-1 has-text-centered">
         Plans
       </h1>
       <div class="columns">
@@ -83,13 +93,13 @@
             <article class="media">
               <div class="media-content">
                 <div class="content">
-                  <h2>Basic</h2>
-                  <h3>User</h3>
+                  <p class="title is-2">Basic</p>
+                  <p class="subtitle is-4">User</p>
                   <p>
-                    <br>
                     <strong>Free</strong>
                     <br>
                     User can only view jobs and cannot apply.
+                    <br>
                     Not available for Employer account type.
                   </p>
                 </div>
@@ -102,20 +112,20 @@
             <article class="media">
               <div class="media-content">
                 <div class="content">
-                  <h2>Prime</h2>
-                  <h3>User</h3>
+                  <p class="title is-2">Prime</p>
+                  <p class="subtitle is-4">User</p>
                   <p>
-                    <br>
                     <strong>$10/month</strong>
                     <br>
                     User can view jobs and apply up to 5 jobs.
-                  </p>
-                  <h3>Employer</h3>
-                  <p>
                     <br>
+                  </p>
+                  <p class="subtitle is-4">Employer</p>
+                  <p>
                     <strong>$50/month</strong>
                     <br>
                     Employer can post up to five jobs.
+                    <br>
                   </p>
                 </div>
               </div>
@@ -127,20 +137,20 @@
             <article class="media">
               <div class="media-content">
                 <div class="content">
-                  <h2>Gold</h2>
-                  <h3>User</h3>
+                  <p class="title is-2">Gold</p>
+                  <p class="subtitle is-4">User</p>
                   <p>
-                    <br>
                     <strong>$20/month</strong>
                     <br>
                     User can view jobs and apply to as many as you want.
-                  </p>
-                  <h3>Employer</h3>
-                  <p>
                     <br>
+                  </p>
+                  <p class="subtitle is-4">Employer</p>
+                  <p>
                     <strong>$100/month</strong>
                     <br>
                     Employer can post as many jobs as they want.
+                    <br>
                   </p>
                 </div>
               </div>

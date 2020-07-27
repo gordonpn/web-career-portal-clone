@@ -5,7 +5,7 @@
 </head>
 
 <body>
-<!-- TODO do no display login and signup buttons if the user is logged in -->
+  <!-- TODO do no display login and signup buttons if the user is logged in -->
   <section class="hero is-info">
     <div class="hero-head">
       <nav class="navbar">
@@ -39,6 +39,7 @@
           Dashboard
         </h1>
         <h2 class="subtitle">
+          You are not logged in
         </h2>
       </div>
     </div>
