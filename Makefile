@@ -13,11 +13,13 @@ start-db:
 	-e MYSQL_ROOT_PASSWORD=temp_password \
 	-e MYSQL_USER=gxc353_1 \
 	-e TZ=America/Montreal \
+	-v ${PWD}/sql/init:/docker-entrypoint-initdb.d \
 	--name mysql-353 \
 	--rm \
 	-d \
 	-p 3306:3306 \
 	mysql
+	sleep 8
 
 db:
 	docker exec \
