@@ -1,4 +1,7 @@
-<?php include "templates/head.html"; ?>
+<?php
+include "templates/head.html";
+session_start();
+?>
 
 <head>
   <title>404</title>

@@ -1,4 +1,7 @@
-<?php include "templates/head.html"; ?>
+<?php
+include "templates/head.html";
+session_start();
+?>
 
 <head>
   <title>My Profile</title>
@@ -12,11 +15,10 @@
         <h1 class="title">
           My Profile
         </h1>
-        <h2 class="subtitle">
-          USERNAME
-        </h2>
+        <?php include "templates/displayUsername.php"; ?>
       </div>
     </div>
+    <?php include "templates/dashboardNav.php"; ?>
   </section>
   <section class="section">
     <div class="container" style="max-width:40vw">

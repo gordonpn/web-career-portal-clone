@@ -1,4 +1,11 @@
-<?php include "templates/head.html"; ?>
+<?php
+include "templates/head.html";
+session_start();
+$_SESSION["loggedIn"] = true;
+$_SESSION["username"] = "gordonpn";
+$_SESSION["isAdmin"] = true;
+$_SESSION["isEmployer"] = true;
+?>
 
 <head>
   <title>Home</title>

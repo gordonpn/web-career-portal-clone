@@ -1,4 +1,7 @@
-<?php include "templates/head.html"; ?>
+<?php
+include "templates/head.html";
+session_start();
+?>
 
 <head>
   <title>Sign Up</title>
@@ -47,8 +50,7 @@
       <!-- TODO alternatively use https://github.com/nosir/cleave.js -->
       <div class="field">
         <label class="label">Credit Card Number:</label>
-        <input class="input" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number"
-               maxlength="19" placeholder="xxxx xxxx xxxx xxxx">
+        <input class="input" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="xxxx xxxx xxxx xxxx">
       </div>
       <div class="field">
         <label class="label">Select account type and plan</label>
