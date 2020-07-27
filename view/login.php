@@ -16,7 +16,10 @@
           <div id="navbarMenuHeroA" class="navbar-menu">
             <div class="navbar-end">
               <span class="navbar-item">
-                <a class="button is-info is-inverted" href="dashboard">
+                <a class="button is-inverted" href="dashboard">
+                  <span class="icon">
+                    <i class="fas fa-home"></i>
+                  </span>
                   <span>Home</span>
                 </a>
               </span>
@@ -34,19 +37,18 @@
     </div>
   </section>
   <section class="section">
-    <div class="container" style="width:50vw">
+    <div class="container" style="max-width:30vw">
       <div class="field">
+        <label class="label">Username</label>
         <div class="control has-icons-left has-icons-right">
-          <input class="input is-success" type="text" placeholder="Username">
+          <input class="input" type="text" placeholder="Username">
           <span class="icon is-small is-left">
             <i class="fas fa-user"></i>
-          </span>
-          <span class="icon is-small is-right">
-            <i class="fas fa-check"></i>
           </span>
         </div>
       </div>
       <div class="field">
+        <label class="label">Password</label>
         <p class="control has-icons-left">
           <input class="input" type="password" placeholder="Password">
           <span class="icon is-small is-left">
@@ -56,19 +58,16 @@
       </div>
       <div class="field">
         <p class="control">
-          <button class="button is-success">
+          <button class="button is-link">
             Login
           </button>
         </p>
       </div>
-      <p>Don't have an account yet?</p>
-      <div class="field">
-        <p class="control">
-          <a class="button is-info" href="signup">
-            Sign Up
-          </a>
-        </p>
-      </div>
+      <p>
+        <a href="signup">
+          Don't have an account yet?
+        </a>
+      </p>
     </div>
   </section>
   <?php

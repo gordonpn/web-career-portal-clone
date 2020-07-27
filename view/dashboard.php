@@ -16,15 +16,18 @@
           <div id="navbarMenuHeroA" class="navbar-menu">
             <div class="navbar-end">
               <span class="navbar-item">
-                <a class="button is-info is-inverted" href="login">
-                  <!-- <span class="icon">
-                  <i class="fab fa-github"></i>
-                </span> -->
+                <a class="button is-inverted" href="login">
+                  <span class="icon">
+                    <i class="fas fa-sign-in-alt"></i>
+                  </span>
                   <span>Login</span>
                 </a>
               </span>
               <span class="navbar-item">
-                <a class="button is-info is-inverted" href="signup">
+                <a class="button is-inverted" href="signup">
+                  <span class="icon">
+                    <i class="fas fa-pen"></i>
+                  </span>
                   <span>Sign Up</span>
                 </a>
               </span>
@@ -45,6 +48,7 @@
   </section>
   <?php
   ?>
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </body>
 
 </html>

@@ -5,39 +5,41 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
-  <title>Home Dashboard</title>
+  <title>404</title>
 </head>
 
 <body>
-  <section class="hero is-info is-medium">
+  <section class="hero is-info is-fullheight-with-navbar">
     <div class="hero-head">
       <nav class="navbar">
         <div class="container">
           <div id="navbarMenuHeroA" class="navbar-menu">
             <div class="navbar-end">
-              <a class="navbar-item" href="dashboard">Go To Dashboard</a>
+              <span class="navbar-item">
+                <a class="button is-inverted" href="/">
+                  <span class="icon">
+                    <i class="fas fa-home"></i>
+                  </span>
+                  <span>Home</span>
+                </a>
+              </span>
             </div>
           </div>
         </div>
       </nav>
     </div>
-
     <div class="hero-body">
-      <div class="container has-text-centered">
-        <h1 class="title">COMP 353 Main Project</h1>
+      <div class="container">
+        <h1 class="title">
+          404 Not Found
+        </h1>
+        <h2 class="subtitle">
+          What you are looking for is not here.
+        </h2>
       </div>
     </div>
-
   </section>
-  <footer class="footer">
-    <div class="content has-text-centered">
-      <p><strong>Authors:</strong></p>
-      <p>Arunraj Adlee, 40059206</p>
-      <p>Gordon Pham-Nguyen, 40018502</p>
-      <p>Leo Jr Silao, 40056822</p>
-      <p>Tiffany Zeng, 40063115</p>
-    </div>
-  </footer>
+
   <?php
   ?>
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>

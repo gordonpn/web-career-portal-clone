@@ -16,7 +16,10 @@
           <div id="navbarMenuHeroA" class="navbar-menu">
             <div class="navbar-end">
               <span class="navbar-item">
-                <a class="button is-info is-inverted" href="dashboard">
+                <a class="button is-inverted" href="dashboard">
+                  <span class="icon">
+                    <i class="fas fa-home"></i>
+                  </span>
                   <span>Home</span>
                 </a>
               </span>
@@ -34,19 +37,18 @@
     </div>
   </section>
   <section class="section">
-    <div class="container" style="width:50vw">
+    <div class="container" style="max-width:30vw">
       <div class="field">
+        <label class="label">Username</label>
         <div class="control has-icons-left has-icons-right">
-          <input class="input is-success" type="text" placeholder="Username">
+          <input class="input" type="text" placeholder="Username">
           <span class="icon is-small is-left">
             <i class="fas fa-user"></i>
-          </span>
-          <span class="icon is-small is-right">
-            <i class="fas fa-check"></i>
           </span>
         </div>
       </div>
       <div class="field">
+        <label class="label">Password</label>
         <p class="control has-icons-left">
           <input class="input" type="password" placeholder="Password">
           <span class="icon is-small is-left">
@@ -55,32 +57,39 @@
         </p>
       </div>
       <div class="field">
+        <label class="label">Email</label>
+        <div class="control has-icons-left has-icons-right">
+          <input class="input" type="email" placeholder="Email">
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Select account type and plan</label>
         <div class="control">
           <div class="select">
             <select>
-              <option>Select Plan</option>
-              <option>Basic</option>
-              <option>Prime</option>
-              <option>Gold</option>
+              <option>User Basic</option>
+              <option>User Prime</option>
+              <option>User Gold</option>
+              <option>Employer Prime</option>
+              <option>Employer Gold</option>
             </select>
           </div>
         </div>
       </div>
       <div class="field">
         <p class="control">
-          <button class="button is-success">
+          <button class="button is-link">
             Sign Up
           </button>
         </p>
       </div>
-      <p>Already have an account?</p>
-      <div class="field">
-        <p class="control">
-          <a class="button is-info" href="login">
-            Login
-          </a>
-        </p>
-      </div>
+      <p>
+        <a href="login">Already have an account?
+        </a>
+      </p>
     </div>
   </section>
   <section class="section">
@@ -95,12 +104,14 @@
             <article class="media">
               <div class="media-content">
                 <div class="content">
+                  <h2>Basic</h2>
+                  <h3>User</h3>
                   <p>
-                    <strong>Basic</strong>
                     <br>
                     <strong>Free</strong>
                     <br>
-                    You can only view jobs and cannot apply.
+                    User can only view jobs and cannot apply.
+                    Not available for Employer account type.
                   </p>
                 </div>
               </div>
@@ -112,12 +123,20 @@
             <article class="media">
               <div class="media-content">
                 <div class="content">
+                  <h2>Prime</h2>
+                  <h3>User</h3>
                   <p>
-                    <strong>Prime</strong>
                     <br>
                     <strong>$10/month</strong>
                     <br>
-                    You can view jobs and apply up to 5 jobs.
+                    User can view jobs and apply up to 5 jobs.
+                  </p>
+                  <h3>Employer</h3>
+                  <p>
+                    <br>
+                    <strong>$50/month</strong>
+                    <br>
+                    Employer can post up to five jobs.
                   </p>
                 </div>
               </div>
@@ -129,12 +148,20 @@
             <article class="media">
               <div class="media-content">
                 <div class="content">
+                  <h2>Gold</h2>
+                  <h3>User</h3>
                   <p>
-                    <strong>Gold</strong>
                     <br>
                     <strong>$20/month</strong>
                     <br>
-                    You can view jobs and apply to as many as you want.
+                    User can view jobs and apply to as many as you want.
+                  </p>
+                  <h3>Employer</h3>
+                  <p>
+                    <br>
+                    <strong>$100/month</strong>
+                    <br>
+                    Employer can post as many jobs as they want.
                   </p>
                 </div>
               </div>
