@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php include "templates/head.php"; ?>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
-  <title>Home Dashboard</title>
+  <title>Home</title>
 </head>
 
 <body>
@@ -38,8 +34,6 @@
       <p>Tiffany Zeng, 40063115</p>
     </div>
   </footer>
-  <?php
-  ?>
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </body>
 
