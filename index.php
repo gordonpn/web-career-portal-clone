@@ -5,7 +5,7 @@
 // $controller = new Controller();
 // $controller->invoke();
 
-$request = $_SERVER['REQUEST_URI'];
+$request = strtok($_SERVER["REQUEST_URI"], '?');
 
 switch ($request) {
   case '':

@@ -9,7 +9,7 @@ session_start();
 
 <body>
   <section class="hero is-info">
-    <?php include "templates/navbar.html"; ?>
+    <?php include "templates/navbar.php"; ?>
     <div class="hero-body">
       <div class="container">
         <h1 class="title">
