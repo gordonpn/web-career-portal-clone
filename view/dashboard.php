@@ -1,16 +1,7 @@
 <?php
 include "templates/head.html";
-session_start();
-
-function logout()
-{
-  session_unset();
-
-  session_destroy();
-}
-
-if (isset($_GET["logout"])) {
-  logOut();
+if (!isset($_SESSION)) {
+  session_start();
 }
 ?>
 

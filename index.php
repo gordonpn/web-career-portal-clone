@@ -1,9 +1,7 @@
 <?php
-
-// include_once("controller/Controller.php");
-
-// $controller = new Controller();
-// $controller->invoke();
+if (!isset($_SESSION)) {
+  session_start();
+}
 
 $request = strtok($_SERVER["REQUEST_URI"], '?');
 
@@ -13,7 +11,9 @@ switch ($request) {
     require __DIR__ . '/view/home.php';
     break;
   case '/dashboard':
-    require __DIR__ . '/view/dashboard.php';
+    include_once("controller/dashboard.php");
+    $dashboard = new Dashboard();
+    $dashboard->invoke();
     break;
   case '/login':
     require __DIR__ . '/view/login.php';

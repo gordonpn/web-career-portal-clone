@@ -1,6 +1,8 @@
 <?php
 include "templates/head.html";
-session_start();
+if (!isset($_SESSION)) {
+  session_start();
+}
 ?>
 
 <head>
