@@ -1,10 +1,11 @@
-<?php include "templates/head.php"; ?>
+<?php include "templates/head.html"; ?>
 
 <head>
   <title>Dashboard</title>
 </head>
 
 <body>
+<!-- TODO do no display login and signup buttons if the user is logged in -->
   <section class="hero is-info">
     <div class="hero-head">
       <nav class="navbar">

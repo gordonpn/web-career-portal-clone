@@ -1,4 +1,4 @@
-<?php include "templates/head.php"; ?>
+<?php include "templates/head.html"; ?>
 
 <head>
   <title>Home</title>

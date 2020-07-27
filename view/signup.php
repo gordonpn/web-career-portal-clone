@@ -1,4 +1,4 @@
-<?php include "templates/head.php"; ?>
+<?php include "templates/head.html"; ?>
 
 <head>
   <title>Sign Up</title>
@@ -6,24 +6,7 @@
 
 <body>
   <section class="hero is-info">
-    <div class="hero-head">
-      <nav class="navbar">
-        <div class="container">
-          <div id="navbarMenuHeroA" class="navbar-menu">
-            <div class="navbar-end">
-              <span class="navbar-item">
-                <a class="button is-inverted" href="dashboard">
-                  <span class="icon">
-                    <i class="fas fa-home"></i>
-                  </span>
-                  <span>Home</span>
-                </a>
-              </span>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </div>
+    <?php include "templates/navbar.html"; ?>
     <div class="hero-body">
       <div class="container">
         <h1 class="title">
