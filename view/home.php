@@ -3,10 +3,6 @@ include "templates/head.html";
 if (!isset($_SESSION)) {
   session_start();
 }
-$_SESSION["loggedIn"] = true;
-$_SESSION["username"] = "gordonpn";
-$_SESSION["isAdmin"] = true;
-$_SESSION["isEmployer"] = true;
 ?>
 
 <head>

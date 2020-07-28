@@ -16,7 +16,9 @@ switch ($request) {
     $dashboard->invoke();
     break;
   case '/login':
-    require __DIR__ . '/view/login.php';
+    include_once("controller/login.php");
+    $login = new Login();
+    $login->invoke();
     break;
   case '/signup':
     require __DIR__ . '/view/signup.php';
