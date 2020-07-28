@@ -10,16 +10,10 @@ if (!isset($_SESSION)) {
 </head>
 
 <body>
-  <section class="hero is-info">
-    <?php include "templates/navbar.php"; ?>
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title">
-          Forgot My Password
-        </h1>
-      </div>
-    </div>
-  </section>
+  <?php
+  $heroTitle = "Forgot My Password";
+  include "templates/hero.php";
+  ?>
   <section class="section">
     <div class="container" style="max-width:30vw">
       <div class="field">

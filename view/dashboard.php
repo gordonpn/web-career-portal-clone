@@ -11,18 +11,10 @@ if (!isset($_SESSION)) {
 
 <body>
   <!-- TODO do no display login and signup buttons if the user is logged in -->
-  <section class="hero is-info">
-    <?php include "templates/navbar.php"; ?>
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title">
-          Dashboard
-        </h1>
-        <?php include "templates/displayUsername.php"; ?>
-      </div>
-    </div>
-    <?php include "templates/dashboardNav.php"; ?>
-  </section>
+  <?php
+  $heroTitle = "Dashboard";
+  include "templates/hero.php";
+  ?>
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </body>
 

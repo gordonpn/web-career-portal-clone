@@ -10,18 +10,10 @@ if (!isset($_SESSION)) {
 </head>
 
 <body>
-  <section class="hero is-info">
-    <?php include "templates/navbar.php"; ?>
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title">
-          Job Categories
-        </h1>
-        <?php include "templates/displayUsername.php"; ?>
-      </div>
-    </div>
-    <?php include "templates/dashboardNav.php"; ?>
-  </section>
+  <?php
+  $heroTitle = "Job Categories";
+  include "templates/hero.php";
+  ?>
   <section class="section">
     <div class="container" style="max-width:40vw">
       <h1 class="title">
