@@ -3,8 +3,8 @@
     <nav class="tabs">
       <div class="container">
         <ul>
-          <li><a href="dashboard">Jobs</a></li>
-          <li><a>Job Categories</a></li>
+          <li><a href="jobs">Jobs</a></li>
+          <li><a href="categories">Job Categories</a></li>
           <li><a>Applied Jobs</a></li>
           <?php if ($_SESSION["isEmployer"]) : ?>
             <li><a>Posted Jobs</a></li>

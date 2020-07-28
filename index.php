@@ -23,6 +23,12 @@ switch ($request) {
   case '/signup':
     require __DIR__ . '/view/signup.php';
     break;
+  case '/jobs':
+    require __DIR__ . '/view/jobs.php';
+    break;
+  case '/categories':
+    require __DIR__ . '/view/categories.php';
+    break;
   case '/profile':
     require __DIR__ . '/view/profile.php';
     break;
