@@ -1,4 +1,4 @@
-.PHONY: start start-server start-db db stop-db run
+.PHONY: start start-server start-db db stop-db run dump
 
 start: start-db start-server
 
@@ -26,6 +26,9 @@ db:
 	-it \
 	mysql-353 \
 	mysql -ugxc353_1 -ptemp_password gxc353_1
+
+dump:
+	docker exec mysql-353 /usr/bin/mysqldump -uroot -ptemp_password gxc353_1 > db_dump.sql
 
 stop-db:
 	docker stop mysql-353
