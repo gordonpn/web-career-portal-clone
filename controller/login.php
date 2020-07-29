@@ -3,21 +3,55 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
+include_once("model/Model.php");
+
 class Login
 {
+
+  public $model;
+
   public function __construct()
   {
+    $this->model = new Model();
   }
 
   public function invoke()
   {
-    if (isset($_POST["username"])) {
+    if (isset($_POST["username"]) && isset($_POST["password"])) {
+      $user = $this->model->getUser($_POST["username"], $_POST["password"]);
+      if (is_null($user)) {
+        $error = "User does not exist";
+        include 'view/login.php';
+        return NULL;
+      }
+      $_SESSION["username"] = $user->username;
+      $_SESSION["email"] = $user->email;
+      $_SESSION["userType"] = $user->userType;
+      switch ($user->userType):
+        case 'admin':
+          $_SESSION["isAdmin"] = true;
+          $_SESSION["isEmployer"] = false;
+          $_SESSION["isEmployee"] = false;
+          break;
+        case 'employer':
+          $_SESSION["isAdmin"] = false;
+          $_SESSION["isEmployer"] = true;
+          $_SESSION["isEmployee"] = false;
+          break;
+        case 'employee':
+          $_SESSION["isAdmin"] = false;
+          $_SESSION["isEmployer"] = false;
+          $_SESSION["isEmployee"] = true;
+          break;
+      endswitch;
+      $_SESSION["planName"] = $user->planName;
+      $_SESSION["isActive"] = $user->isActive;
+      $_SESSION["startSufferingDate"] = $user->startSufferingDate;
+      $_SESSION["balance"] = $user->balance;
+      $_SESSION["isAutomatic"] = $user->isAutomatic;
       $_SESSION["loggedIn"] = true;
-      $_SESSION["username"] = $_POST["username"];
-      $_SESSION["isAdmin"] = true;
-      $_SESSION["isEmployer"] = true;
       include 'view/dashboard.php';
-      return null;
+      return NULL;
     }
     include 'view/login.php';
   }

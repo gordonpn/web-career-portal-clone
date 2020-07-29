@@ -2,7 +2,8 @@
 // namespace Model;
 
 // use \PDO;
-class Database {
+class Database
+{
   private $host = '127.0.0.1';
   private $user = 'gxc353_1';
   private $pass = 'temp_password';
@@ -12,15 +13,15 @@ class Database {
   private $stmt;
   private $error;
 
-  public function __construct() {
-    // Set DSN
+  public function __construct()
+  {
     $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->name;
     $options = [
-      PDO::ATTR_PERSISTENT => true,
+      PDO::ATTR_EMULATE_PREPARES => false,
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+      PDO::ATTR_PERSISTENT => true,
     ];
 
-    // Create PDO Instance
     try {
       $this->db_handler = new PDO($dsn, $this->user, $this->pass, $options);
     } catch (PDOException $e) {
@@ -29,13 +30,13 @@ class Database {
     }
   }
 
-  // Prepare statement with query
-  public function query($sql) {
+  public function query($sql)
+  {
     $this->stmt = $this->db_handler->prepare($sql);
   }
 
-  // Bind values
-  public function bind($param, $value, $type = null) {
+  public function bind($param, $value, $type = null)
+  {
     if (is_null($type)) {
       switch (true) {
         case is_int($value):
@@ -58,25 +59,25 @@ class Database {
     $this->stmt->bindValue($param, $value, $type);
   }
 
-  // Execute the prepared statement
-  public function execute() {
+  public function execute()
+  {
     return $this->stmt->execute();
   }
 
-  // Get result set as array of objects
-  public function resultSet() {
+  public function resultSet()
+  {
     $this->execute();
-    return $this->stmt->fetchAll(PDO::FETCH_OBJ);
+    return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  // Get single record as object
-  public function single() {
+  public function single()
+  {
     $this->execute();
-    return $this->stmt->fetch(PDO::FETCH_OBJ);
+    return $this->stmt->fetch(PDO::FETCH_ASSOC);
   }
 
-  // Get row count
-  public function rowCount() {
+  public function rowCount()
+  {
     return $this->stmt->rowCount();
   }
 }

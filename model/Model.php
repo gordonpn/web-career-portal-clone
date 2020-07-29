@@ -5,6 +5,7 @@
 // use \Model\Database;
 
 include_once("model/Book.php");
+include_once("model/User.php");
 include_once("model/Database.php");
 
 class Model
@@ -19,7 +20,6 @@ class Model
 
   public function getBookList()
   {
-    // here goes some hardcoded values to simulate the database
     return array(
       "Jungle Book" => new Book("Jungle Book", "R. Kipling", "A classic book."),
       "Moonwalker" => new Book("Moonwalker", "J. Walker", ""),
@@ -29,9 +29,36 @@ class Model
 
   public function getBook($title)
   {
-    // we use the previous function to get all the books and then we return the requested one.
-    // in a real life scenario this will be done through a db select command
     $allBooks = $this->getBookList();
     return $allBooks[$title];
+  }
+
+  public function getUser($user, $password)
+  {
+    $sql = "SELECT userID as username, email, userType, Plans.name AS planName, isActive, startSufferingDate, balance, isAutomatic
+    FROM Users, Plans
+    WHERE userID = :user
+    AND Users.planID = Plans.planID
+    AND password = :password";
+    $this->db->query($sql);
+    $this->db->bind(':user', $user, PDO::PARAM_STR);
+    $this->db->bind(':password', $password, PDO::PARAM_STR);
+    $this->db->execute();
+    $rowCount = $this->db->rowCount();
+    if ($rowCount < 1) {
+      return NULL;
+    }
+    $row = $this->db->single();
+
+    return new User(
+      $row['username'],
+      $row['email'],
+      $row['userType'],
+      $row['planName'],
+      $row['isActive'],
+      $row['startSufferingDate'],
+      $row['balance'],
+      $row['isAutomatic']
+    );
   }
 }

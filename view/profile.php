@@ -19,18 +19,12 @@ if (!isset($_SESSION)) {
       <h1 class="title">
         General Information
       </h1>
-      <p>
-        Registered email:
-      </p>
-      <p>
-        Your account type:
-      </p>
-      <p>
-        Your current plan:
-      </p>
-      <p>
-        Your current balance:
-      </p>
+      <?php
+      echo '<p>Registered email: ' . $_SESSION['email'] . '</p>';
+      echo '<p>Your account type: ' . $_SESSION['userType'] . '</p>';
+      echo '<p>Your current plan: ' . $_SESSION['planName'] . '</p>';
+      echo '<p>Your current balance: $' . $_SESSION['balance'] . '</p>';
+      ?>
     </div>
   </section>
   <section class="section">

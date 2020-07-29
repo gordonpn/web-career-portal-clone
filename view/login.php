@@ -18,6 +18,11 @@ if (!isset($_SESSION)) {
     <div class="container" style="max-width:30vw">
       <form action="login" method="POST">
         <div class="field">
+          <?php if (isset($error)) : ?>
+            <p class="has-text-danger	">
+              <?php echo $error; ?>
+            </p>
+          <?php endif; ?>
           <label class="label">Username</label>
           <div class="control has-icons-left has-icons-right">
             <input class="input" name="username" type="text" placeholder="Username" required>
