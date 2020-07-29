@@ -1,7 +1,7 @@
 INSERT INTO Plans(name, price, applyLimit, postLimit)
-VALUES ('User Basic', 0, 0, 0),
-       ('User Prime', 10, 5, 0),
-       ('User Gold', 20, NULL, 0),
+VALUES ('Employee Basic', 0, 0, 0),
+       ('Employee Prime', 10, 5, 0),
+       ('Employee Gold', 20, NULL, 0),
        ('Employer Prime', 50, 0, 5),
        ('Employer Gold', 100, 0, NULL);
 

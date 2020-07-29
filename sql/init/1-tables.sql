@@ -1,5 +1,5 @@
-SET
-    time_zone = '-04:00';
+SET TIME_ZONE = '-04:00';
+
 
 CREATE TABLE IF NOT EXISTS Location
 (
@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS Location
     province   varchar(255)
 );
 
+
 CREATE TABLE IF NOT EXISTS Plans
 (
     planID     int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -18,6 +19,7 @@ CREATE TABLE IF NOT EXISTS Plans
     applyLimit int,
     postLimit  int
 );
+
 
 CREATE TABLE IF NOT EXISTS Users
 (
@@ -33,6 +35,7 @@ CREATE TABLE IF NOT EXISTS Users
     isAutomatic        boolean                                NOT NULL,
     FOREIGN KEY (planID) REFERENCES Plans (planID)
 );
+
 
 CREATE TABLE IF NOT EXISTS Profiles
 (
@@ -50,6 +53,7 @@ CREATE TABLE IF NOT EXISTS Profiles
     FOREIGN KEY (locationID) REFERENCES Location (locationID)
 );
 
+
 CREATE TABLE IF NOT EXISTS Jobs
 (
     jobID              int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -66,6 +70,7 @@ CREATE TABLE IF NOT EXISTS Jobs
     FOREIGN KEY (locationID) REFERENCES Location (locationID)
 );
 
+
 CREATE TABLE IF NOT EXISTS Payment_Methods
 (
     paymentMethodID int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -76,6 +81,7 @@ CREATE TABLE IF NOT EXISTS Payment_Methods
     FOREIGN KEY (userID) REFERENCES Users (userID)
 );
 
+
 CREATE TABLE IF NOT EXISTS Payments
 (
     paymentID       int       NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -84,6 +90,7 @@ CREATE TABLE IF NOT EXISTS Payments
     paymentDate     timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (paymentMethodID) REFERENCES Payment_Methods (paymentMethodID)
 );
+
 
 CREATE TABLE IF NOT EXISTS Applications
 (
@@ -96,11 +103,13 @@ CREATE TABLE IF NOT EXISTS Applications
     FOREIGN KEY (jobID) REFERENCES Jobs (jobID)
 );
 
+
 CREATE TABLE IF NOT EXISTS Job_Categories_List
 (
     jobCategoriesID int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
     categoryName    varchar(255) NOT NULL
 );
+
 
 CREATE TABLE IF NOT EXISTS Job_Categories
 (
@@ -109,6 +118,7 @@ CREATE TABLE IF NOT EXISTS Job_Categories
     FOREIGN KEY (jobcategoryID) REFERENCES Job_Categories_List (jobCategoriesID),
     FOREIGN KEY (jobID) REFERENCES Jobs (jobID)
 );
+
 
 CREATE TABLE IF NOT EXISTS Emails
 (
@@ -119,6 +129,7 @@ CREATE TABLE IF NOT EXISTS Emails
     dateSent timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (userID) REFERENCES Users (userID)
 );
+
 
 CREATE TABLE IF NOT EXISTS Employer_Categories
 (

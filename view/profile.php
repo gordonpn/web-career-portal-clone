@@ -28,6 +28,9 @@ if (!isset($_SESSION)) {
       <p>
         Your current plan:
       </p>
+      <p>
+        Your current balance:
+      </p>
     </div>
   </section>
   <section class="section">
@@ -53,58 +56,68 @@ if (!isset($_SESSION)) {
       </div>
     </div>
   </section>
-  <section class="section">
-    <div class="container" style="max-width:40vw">
-      <h1 class="title">
-        Change Employer Information
-      </h1>
-      <div class="field">
-        <label class="label">Employer Contact</label>
-        <div class="control has-icons-left has-icons-right" style="max-width:400px;">
-          <input class="input" type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" maxlength="12" placeholder="000-000-0000" required>
-          <span class="icon is-small is-left">
-            <i class="fas fa-phone"></i>
-          </span>
-        </div>
-      </div>
-      <div class="field">
-        <p class="control">
-          <button class="button is-link">
-            Change Contact Info
-          </button>
-        </p>
-      </div>
-    </div>
-  </section>
-  <section class="section">
-    <div class="container" style="max-width:40vw">
-      <h1 class="title">
-        Change Plan
-      </h1>
-      <div class="field">
-        <!-- TODO should show plans according to account type, not all -->
-        <label class="label">New Plan</label>
-        <div class="control">
-          <div class="select">
-            <select>
-              <option>User Basic</option>
-              <option>User Prime</option>
-              <option>User Gold</option>
-              <option>Employer Prime</option>
-              <option>Employer Gold</option>
-            </select>
+  <?php if ($_SESSION["isEmployer"]) : ?>
+    <section class="section">
+      <div class="container" style="max-width:40vw">
+        <h1 class="title">
+          Change Employer Information
+        </h1>
+        <div class="field">
+          <label class="label">Employer Contact</label>
+          <div class="control has-icons-left has-icons-right" style="max-width:400px;">
+            <input class="input" type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" maxlength="12" placeholder="000-000-0000" required>
+            <span class="icon is-small is-left">
+              <i class="fas fa-phone"></i>
+            </span>
           </div>
         </div>
+        <div class="field">
+          <p class="control">
+            <button class="button is-link">
+              Change Contact Info
+            </button>
+          </p>
+        </div>
       </div>
-      <div class="field">
-        <p class="control">
-          <button class="button is-link">
-            Confirm Change
-          </button>
-        </p>
+    </section>
+  <?php endif; ?>
+  <?php if ($_SESSION["isEmployer"] || $_SESSION["isEmployee"]) : ?>
+    <section class="section">
+      <div class="container" style="max-width:40vw">
+        <h1 class="title">
+          Change Plan
+        </h1>
+        <div class="field">
+          <!-- TODO should show plans according to account type, not all -->
+          <label class="label">New Plan</label>
+          <div class="control">
+            <div class="select">
+              <select>
+                <?php if ($_SESSION["isEmployee"]) : ?>
+                  <option>Employee Basic</option>
+                  <option>Employee Prime</option>
+                  <option>Employee Gold</option>
+                <?php
+                endif;
+                if ($_SESSION["isEmployer"]) :
+                ?>
+                  <option>Employer Prime</option>
+                  <option>Employer Gold</option>
+                <?php endif; ?>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <p class="control">
+            <button class="button is-link">
+              Confirm Change
+            </button>
+          </p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  <?php endif; ?>
   <section class="section">
     <div class="container" style="max-width:40vw">
       <h1 class="title">
