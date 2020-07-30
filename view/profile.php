@@ -109,6 +109,30 @@ if (!isset($_SESSION)) {
         </div>
       </div>
     </section>
+  <section class="section">
+    <div class="container" style="max-width:40vw">
+      <h1 class="title">
+        Change Withdrawal Method
+      </h1>
+      <div class="field">
+        <label class="label">New Withdrawal Method</label>
+        <div class="control">
+          <div class="select">
+            <select>
+              <option> Automatic </option>
+              <option> Manual </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+          <p class="control">
+            <button class="button is-link">
+              Confirm Change
+            </button>
+          </p>
+        </div>
+  </section>
   <?php endif; ?>
   <section class="section">
     <div class="container" style="max-width:40vw">
