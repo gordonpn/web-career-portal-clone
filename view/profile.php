@@ -121,26 +121,14 @@ if (!isset($_SESSION)) {
         Change Withdrawal Method
       </h1>
       <div class="field">
-        <label class="label">New Withdrawal Method</label>
         <div class="control">
-          <div class="select">
-            <select>
               <?php if ($_SESSION["isAutomatic"]) : ?>
-              <option> Manual </option>
+              <button class="button is-link"> Switch to Manual </button>
               <?php else : ?>
-              <option> Automatic </option>
+                <button class="button is-link"> Switch to Automatic </button>
               <?php endif ?>
-            </select>
-          </div>
         </div>
       </div>
-      <div class="field">
-          <p class="control">
-            <button class="button is-link">
-              Confirm Change
-            </button>
-          </p>
-        </div>
   </section>
   <?php endif; ?>
   <section class="section">
