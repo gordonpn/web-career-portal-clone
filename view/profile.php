@@ -91,10 +91,8 @@ if (!isset($_SESSION)) {
                   <option>Employee Basic</option>
                   <option>Employee Prime</option>
                   <option>Employee Gold</option>
-                <?php
-                endif;
-                if ($_SESSION["isEmployer"]) :
-                ?>
+                <?php endif; ?>
+                <?php if ($_SESSION["isEmployer"]) : ?>
                   <option>Employer Prime</option>
                   <option>Employer Gold</option>
                 <?php endif; ?>

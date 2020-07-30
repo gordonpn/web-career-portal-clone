@@ -1,11 +1,11 @@
 <?php
 if (!isset($_SESSION)) {
-    session_start();
+  session_start();
 }
 
 class Jobs
 {
-    public function __construct()
-    {
-    }
+  public function __construct()
+  {
+  }
 }
