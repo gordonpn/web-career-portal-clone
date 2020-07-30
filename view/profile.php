@@ -24,11 +24,11 @@ if (!isset($_SESSION)) {
       echo '<p>Your account type: ' . $_SESSION['userType'] . '</p>';
       echo '<p>Your current plan: ' . $_SESSION['planName'] . '</p>';
       echo '<p>Your current withdrawal method: ';
-        if ($_SESSION['isAutomatic']) {
-          echo 'Automatic';
-        } else {
-          echo 'Manual';
-        }
+      if ($_SESSION['isAutomatic']) {
+        echo 'Automatic';
+      } else {
+        echo 'Manual';
+      }
       echo '<p>Your current balance: $' . $_SESSION['balance'] . '</p>';
       ?>
     </div>
@@ -115,21 +115,25 @@ if (!isset($_SESSION)) {
         </div>
       </div>
     </section>
-  <section class="section">
-    <div class="container" style="max-width:40vw">
-      <h1 class="title">
-        Change Withdrawal Method
-      </h1>
-      <div class="field">
-        <div class="control">
-              <?php if ($_SESSION["isAutomatic"]) : ?>
-              <button class="button is-link"> Switch to Manual </button>
-              <?php else : ?>
-                <button class="button is-link"> Switch to Automatic </button>
-              <?php endif ?>
+    <section class="section">
+      <div class="container" style="max-width:40vw">
+        <h1 class="title">
+          Change Withdrawal Method
+        </h1>
+        <div class="field">
+          <div class="control">
+            <a class="button is-link" href="profile?switchWithdrawal=true">
+              <?php
+              if ($_SESSION["isAutomatic"]) {
+                echo 'Switch to Manual';
+              } else {
+                echo 'Switch to Automatic';
+              }
+              ?>
+            </a>
+          </div>
         </div>
-      </div>
-  </section>
+    </section>
   <?php endif; ?>
   <section class="section">
     <div class="container" style="max-width:40vw">
