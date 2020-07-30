@@ -13,26 +13,26 @@ CREATE TABLE IF NOT EXISTS Location
 
 CREATE TABLE IF NOT EXISTS Plans
 (
-    planID     int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name       varchar(255) NOT NULL,
-    price      int          NOT NULL,
+    planID     int                                    NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name       varchar(255)                           NOT NULL,
+    price      int                                    NOT NULL,
     applyLimit int,
     postLimit  int,
-    userType           enum ('admin', 'employer', 'employee') NOT NULL DEFAULT 'employee',
+    userType   enum ('admin', 'employer', 'employee') NOT NULL DEFAULT 'employee'
 );
 
 
 CREATE TABLE IF NOT EXISTS Users
 (
-    userID             varchar(255)                           NOT NULL PRIMARY KEY,
+    userID             varchar(255) NOT NULL PRIMARY KEY,
     planID             int,
-    email              varchar(255)                           NOT NULL,
-    password           varchar(255)                           NOT NULL,
-    dateCreated        timestamp                              NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    isActive           boolean                                NOT NULL DEFAULT TRUE,
+    email              varchar(255) NOT NULL,
+    password           varchar(255) NOT NULL,
+    dateCreated        timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    isActive           boolean      NOT NULL DEFAULT TRUE,
     startSufferingDate timestamp,
-    balance            int                                    NOT NULL DEFAULT 0,
-    isAutomatic        boolean                                NOT NULL DEFAULT TRUE,
+    balance            int          NOT NULL DEFAULT 0,
+    isAutomatic        boolean      NOT NULL DEFAULT TRUE,
     FOREIGN KEY (planID) REFERENCES Plans (planID)
 );
 

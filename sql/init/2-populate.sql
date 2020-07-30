@@ -1,4 +1,4 @@
-INSERT INTO Plans(name, price, applyLimit, postLimit)
+INSERT INTO Plans(name, price, applyLimit, postLimit, userType)
 VALUES ('Employee Basic', 0, 0, 0, 'employee'),
        ('Employee Prime', 10, 5, 0, 'employee'),
        ('Employee Gold', 20, NULL, 0, 'employee'),
@@ -10,7 +10,6 @@ INSERT INTO Users (userID,
                    planID,
                    email,
                    password,
-                   userType,
                    dateCreated,
                    isActive,
                    balance,

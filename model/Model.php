@@ -35,10 +35,11 @@ class Model
 
   public function getUser($user, $password)
   {
-    $sql = "SELECT userID as username, email, userType, Plans.name AS planName, isActive, startSufferingDate, balance, isAutomatic
+    $sql = "SELECT userID as username, email, Plans.userType AS userType, Plans.name AS planName, isActive, startSufferingDate, balance, isAutomatic
     FROM Users, Plans
     WHERE userID = :user
-    AND password = :password";
+    AND password = :password
+    AND Plans.planID = Users.planID";
     $this->db->query($sql);
     $this->db->bind(':user', $user, PDO::PARAM_STR);
     $this->db->bind(':password', $password, PDO::PARAM_STR);
