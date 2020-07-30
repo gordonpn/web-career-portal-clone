@@ -23,6 +23,12 @@ if (!isset($_SESSION)) {
       echo '<p>Registered email: ' . $_SESSION['email'] . '</p>';
       echo '<p>Your account type: ' . $_SESSION['userType'] . '</p>';
       echo '<p>Your current plan: ' . $_SESSION['planName'] . '</p>';
+      echo '<p>Your current withdrawal method: ';
+        if ($_SESSION['isAutomatic']) {
+          echo 'Automatic';
+        } else {
+          echo 'Manual';
+        }
       echo '<p>Your current balance: $' . $_SESSION['balance'] . '</p>';
       ?>
     </div>
@@ -119,8 +125,11 @@ if (!isset($_SESSION)) {
         <div class="control">
           <div class="select">
             <select>
-              <option> Automatic </option>
+              <?php if ($_SESSION["isAutomatic"]) : ?>
               <option> Manual </option>
+              <?php else : ?>
+              <option> Automatic </option>
+              <?php endif ?>
             </select>
           </div>
         </div>
