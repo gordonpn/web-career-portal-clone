@@ -10,7 +10,7 @@ class Database
   private $name = 'gxc353_1';
 
   private $db_handler;
-  private $stmt;
+  private $statement;
   private $error;
 
   public function __construct()
@@ -32,7 +32,7 @@ class Database
 
   public function query($sql)
   {
-    $this->stmt = $this->db_handler->prepare($sql);
+    $this->statement = $this->db_handler->prepare($sql);
   }
 
   public function bind($param, $value, $type = null)
@@ -56,28 +56,28 @@ class Database
       }
     }
 
-    $this->stmt->bindValue($param, $value, $type);
+    $this->statement->bindValue($param, $value, $type);
   }
 
   public function execute()
   {
-    return $this->stmt->execute();
+    return $this->statement->execute();
   }
 
-  public function resultSet()
+  public function fetchAll()
   {
     $this->execute();
-    return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $this->statement->fetchAll(PDO::FETCH_OBJ);
   }
 
-  public function single()
+  public function fetchOne()
   {
     $this->execute();
-    return $this->stmt->fetch(PDO::FETCH_ASSOC);
+    return $this->statement->fetch(PDO::FETCH_OBJ);
   }
 
   public function rowCount()
   {
-    return $this->stmt->rowCount();
+    return $this->statement->rowCount();
   }
 }
