@@ -149,13 +149,30 @@ if (!isset($_SESSION)) {
         This change cannot be undone.
       </p>
       <br>
-      <div class="field">
-        <p class="control">
-          <button class="button is-danger">
-            Delete Account
-          </button>
-        </p>
+      <a class="button is-danger" id="delete-btn">
+        Delete Account
+      </a>
+      <!-- Modal -->
+      <div class="modal" id="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Are you sure?</p>
+            <a class="delete" aria-label="close" href="profile"></a>
+          </header>
+          <section class="modal-card-body">
+            <a class="button is-danger" href="dashboard?deleteAccount=true">Yes</a>
+            <a class="button" href="profile">Cancel</a>
+          </section>
+        </div>
       </div>
+      <script>
+        var modal = document.getElementById("modal");
+        var deleteBtn = document.getElementById("delete-btn");
+        deleteBtn.onclick = function() {
+          modal.className = "modal is-active";
+        }
+      </script>
     </div>
   </section>
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>

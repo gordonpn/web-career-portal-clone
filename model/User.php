@@ -37,4 +37,11 @@ class User
     $this->db->bind(':user', $user, PDO::PARAM_STR);
     return $this->db->execute();
   }
+
+  public function deleteUser($user) {
+    $sql = "DELETE FROM Users WHERE userID = :user";
+    $this->db->query($sql);
+    $this->db->bind(':user', $user, PDO::PARAM_STR);
+    return $this->db->execute();
+  }
 }

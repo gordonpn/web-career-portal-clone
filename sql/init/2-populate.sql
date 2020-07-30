@@ -61,6 +61,14 @@ VALUES ('gordon',
         '2020-06-15',
         TRUE,
         0,
+        TRUE),
+        ('tyson',
+        2, 
+        'tyson@comp353.com',
+        'tyson',
+        '2020-03-15',
+        TRUE,
+        10,
         TRUE);
 
 INSERT INTO Job_Categories_List(categoryName)
