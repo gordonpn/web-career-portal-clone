@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="pcsg-generated-ruleset">
+<description>Created with the PHP Coding Standard Generator. http://edorian.github.com/php-coding-standard-generator/
+</description>
+<rule ref="Generic.WhiteSpace.ScopeIndent">
+    <properties>
+        <property name="indent" value="2"/>
+    </properties>
+</rule>
+<rule ref="PEAR.Classes.ClassDeclaration">
+    <properties>
+        <property name="indent" value="2"/>
+    </properties>
+</rule>
+<rule ref="PEAR.Functions.FunctionCallSignature">
+    <properties>
+        <property name="indent" value="2"/>
+    </properties>
+</rule>
+<rule ref="PEAR.WhiteSpace.ObjectOperatorIndent">
+    <properties>
+        <property name="indent" value="2"/>
+    </properties>
+</rule>
+<rule ref="PEAR.WhiteSpace.ScopeClosingBrace">
+    <properties>
+        <property name="indent" value="2"/>
+    </properties>
+</rule>
+<rule ref="PSR2.ControlStructures.SwitchDeclaration">
+    <properties>
+        <property name="indent" value="2"/>
+    </properties>
+</rule>
+</ruleset>
