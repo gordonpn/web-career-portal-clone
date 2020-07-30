@@ -20,6 +20,8 @@ class Profile
         if (isset($_GET["switchWithdrawal"])) {
             if ($this->user->updateWithdrawal($_SESSION['username'])) {
                 $_SESSION["isAutomatic"] = !$_SESSION["isAutomatic"];
+            } else {
+                $error = "An error as occurred.";
             }
         }
         include 'view/profile.php';
