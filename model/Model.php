@@ -38,7 +38,6 @@ class Model
     $sql = "SELECT userID as username, email, userType, Plans.name AS planName, isActive, startSufferingDate, balance, isAutomatic
     FROM Users, Plans
     WHERE userID = :user
-    AND Users.planID = Plans.planID
     AND password = :password";
     $this->db->query($sql);
     $this->db->bind(':user', $user, PDO::PARAM_STR);
