@@ -18,7 +18,9 @@ class Login
   public function invoke()
   {
     if (isset($_POST["username"]) && isset($_POST["password"])) {
-      $user = $this->model->getUser($_POST["username"], $_POST["password"]);
+      $username = filter_var(trim($_POST["username"]), FILTER_SANITIZE_STRING);
+      $password = filter_var(trim($_POST["password"]), FILTER_SANITIZE_STRING);
+      $user = $this->model->getUser($username, $password);
       if (is_null($user)) {
         $error = "User does not exist";
         include 'view/login.php';
