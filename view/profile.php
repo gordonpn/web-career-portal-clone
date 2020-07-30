@@ -167,11 +167,16 @@ if (!isset($_SESSION)) {
         </div>
       </div>
       <script>
-        var modal = document.getElementById("modal");
-        var deleteBtn = document.getElementById("delete-btn");
-        deleteBtn.onclick = function() {
-          modal.className = "modal is-active";
+        const modal = document.getElementById("modal");
+
+        function closeModal() {
+          modal.className = "modal";
         }
+        document.getElementById("close-btn").addEventListener('click', closeModal);
+        document.getElementById("cancel-btn").addEventListener('click', closeModal);
+        document.getElementById("delete-btn").addEventListener('click', function() {
+          modal.className = "modal is-active";
+        });
       </script>
     </div>
   </section>
