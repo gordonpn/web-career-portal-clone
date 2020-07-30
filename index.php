@@ -30,7 +30,9 @@ switch ($request) {
     require __DIR__ . '/view/categories.php';
     break;
   case '/profile':
-    require __DIR__ . '/view/profile.php';
+    include_once("controller/profile.php");
+    $profile = new Profile();
+    $profile->invoke();
     break;
   case '/forgot':
     require __DIR__ . '/view/forgot.php';

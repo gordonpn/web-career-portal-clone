@@ -16,14 +16,25 @@ if (!isset($_SESSION)) {
   ?>
   <section class="section">
     <div class="container" style="max-width:40vw">
+      <?php
+      if (isset($error)) {
+        echo "<p class=\"has-text-danger\">$error</p>";
+      }
+      ?>
       <h1 class="title">
         General Information
       </h1>
       <?php
-      echo '<p>Registered email: ' . $_SESSION['email'] . '</p>';
-      echo '<p>Your account type: ' . $_SESSION['userType'] . '</p>';
-      echo '<p>Your current plan: ' . $_SESSION['planName'] . '</p>';
-      echo '<p>Your current balance: $' . $_SESSION['balance'] . '</p>';
+      echo "<p>Registered email: {$_SESSION['email']}</p>";
+      echo "<p>Account type: {$_SESSION['userType']}</p>";
+      echo "<p>Current plan: {$_SESSION['planName']}</p>";
+      echo "<p>Current withdrawal method: ";
+      if ($_SESSION['isAutomatic']) {
+        echo 'Automatic';
+      } else {
+        echo 'Manual';
+      }
+      echo '<p>Current balance: $' . $_SESSION['balance'] . '</p>';
       ?>
     </div>
   </section>
@@ -108,6 +119,25 @@ if (!isset($_SESSION)) {
           </p>
         </div>
       </div>
+    </section>
+    <section class="section">
+      <div class="container" style="max-width:40vw">
+        <h1 class="title">
+          Change Withdrawal Method
+        </h1>
+        <div class="field">
+          <div class="control">
+            <a class="button is-link" href="profile?switchWithdrawal=true">
+              <?php
+              if ($_SESSION["isAutomatic"]) {
+                echo 'Switch to Manual';
+              } else {
+                echo 'Switch to Automatic';
+              }
+              ?>
+            </a>
+          </div>
+        </div>
     </section>
   <?php endif; ?>
   <section class="section">

@@ -30,4 +30,11 @@ class User
 
     return $row;
   }
+
+  public function updateWithdrawal($user) {
+    $sql = "UPDATE Users SET isAutomatic = NOT isAutomatic WHERE userID = :user";
+    $this->db->query($sql);
+    $this->db->bind(':user', $user, PDO::PARAM_STR);
+    return $this->db->execute();
+  }
 }
