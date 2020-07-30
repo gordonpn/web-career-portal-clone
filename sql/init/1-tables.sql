@@ -17,7 +17,8 @@ CREATE TABLE IF NOT EXISTS Plans
     name       varchar(255) NOT NULL,
     price      int          NOT NULL,
     applyLimit int,
-    postLimit  int
+    postLimit  int,
+    userType           enum ('admin', 'employer', 'employee') NOT NULL DEFAULT 'employee',
 );
 
 
@@ -27,12 +28,11 @@ CREATE TABLE IF NOT EXISTS Users
     planID             int,
     email              varchar(255)                           NOT NULL,
     password           varchar(255)                           NOT NULL,
-    userType           enum ('admin', 'employer', 'employee') NOT NULL DEFAULT 'employee',
     dateCreated        timestamp                              NOT NULL DEFAULT CURRENT_TIMESTAMP,
     isActive           boolean                                NOT NULL DEFAULT TRUE,
     startSufferingDate timestamp,
     balance            int                                    NOT NULL DEFAULT 0,
-    isAutomatic        boolean                                NOT NULL,
+    isAutomatic        boolean                                NOT NULL DEFAULT TRUE,
     FOREIGN KEY (planID) REFERENCES Plans (planID)
 );
 
