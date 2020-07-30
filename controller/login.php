@@ -3,16 +3,16 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
-include_once("model/Model.php");
+include_once("model/User.php");
 
 class Login
 {
 
-  public $model;
+  public $user;
 
   public function __construct()
   {
-    $this->model = new Model();
+    $this->user = new User();
   }
 
   public function invoke()
@@ -20,11 +20,11 @@ class Login
     if (isset($_POST["username"]) && isset($_POST["password"])) {
       $username = filter_var(trim($_POST["username"]), FILTER_SANITIZE_STRING);
       $password = filter_var(trim($_POST["password"]), FILTER_SANITIZE_STRING);
-      $user = $this->model->getUser($username, $password);
+      $user = $this->user->getUser($username, $password);
       if (is_null($user)) {
         $error = "User does not exist";
         include 'view/login.php';
-        return NULL;
+        return null;
       }
       $_SESSION["username"] = $user->username;
       $_SESSION["email"] = $user->email;
@@ -53,7 +53,7 @@ class Login
       $_SESSION["isAutomatic"] = $user->isAutomatic;
       $_SESSION["loggedIn"] = true;
       include 'view/dashboard.php';
-      return NULL;
+      return null;
     }
     include 'view/login.php';
   }
