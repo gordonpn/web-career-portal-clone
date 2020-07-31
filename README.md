@@ -1,5 +1,9 @@
 # COMP 353 Main Project
 
+![PHP 7.4.8](https://badgen.net/badge/PHP/7%2e4%2e8/purple)
+![Docker 19.03.12](https://badgen.net/badge/Docker/19%2e03%2e12/blue)
+![MySQL 8.0.16](https://badgen.net/badge/MySQL/8%2e0%2e16/yellow)
+
 ## Instructions
 
 PHP must be installed.
