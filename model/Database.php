@@ -4,18 +4,18 @@
 // use \PDO;
 class Database
 {
-  private $host = '127.0.0.1';
-  private $user = 'gxc353_1';
-  private $pass = 'temp_password';
-  private $name = 'gxc353_1';
+  private $_host = '127.0.0.1';
+  private $_user = 'gxc353_1';
+  private $_pass = 'temp_password';
+  private $_name = 'gxc353_1';
 
-  private $db_handler;
-  private $statement;
-  private $error;
+  private $_databaseHandler;
+  private $_statement;
+  private $_error;
 
   public function __construct()
   {
-    $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->name;
+    $dsn = 'mysql:host=' . $this->_host . ';dbname=' . $this->_name;
     $options = [
       PDO::ATTR_EMULATE_PREPARES => false,
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -23,16 +23,16 @@ class Database
     ];
 
     try {
-      $this->db_handler = new PDO($dsn, $this->user, $this->pass, $options);
+      $this->_databaseHandler = new PDO($dsn, $this->_user, $this->_pass, $options);
     } catch (PDOException $e) {
-      $this->error = $e->getMessage();
-      echo $this->error;
+      $this->_error = $e->getMessage();
+      echo $this->_error;
     }
   }
 
   public function query($sql)
   {
-    $this->statement = $this->db_handler->prepare($sql);
+    $this->_statement = $this->_databaseHandler->prepare($sql);
   }
 
   public function bind($param, $value, $type = null)
@@ -56,28 +56,28 @@ class Database
       }
     }
 
-    $this->statement->bindValue($param, $value, $type);
+    $this->_statement->bindValue($param, $value, $type);
   }
 
   public function execute()
   {
-    return $this->statement->execute();
+    return $this->_statement->execute();
   }
 
   public function fetchAll()
   {
     $this->execute();
-    return $this->statement->fetchAll(PDO::FETCH_OBJ);
+    return $this->_statement->fetchAll(PDO::FETCH_OBJ);
   }
 
   public function fetchOne()
   {
     $this->execute();
-    return $this->statement->fetch(PDO::FETCH_OBJ);
+    return $this->_statement->fetch(PDO::FETCH_OBJ);
   }
 
   public function rowCount()
   {
-    return $this->statement->rowCount();
+    return $this->_statement->rowCount();
   }
 }
