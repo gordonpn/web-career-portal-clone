@@ -3,7 +3,7 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
-include_once("model/User.php");
+require "model/User.php";
 
 class Dashboard
 {
@@ -27,8 +27,8 @@ class Dashboard
         $error = "An error as occurred.";
         include 'view/profile.php';
         return null;
+      }
     }
-  }
     include 'view/dashboard.php';
   }
 
