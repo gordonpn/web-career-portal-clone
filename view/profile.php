@@ -152,17 +152,16 @@ if (!isset($_SESSION)) {
       <a class="button is-danger" id="delete-btn">
         Delete Account
       </a>
-      <!-- Modal -->
       <div class="modal" id="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
           <header class="modal-card-head">
             <p class="modal-card-title">Are you sure?</p>
-            <a class="delete" aria-label="close" href="profile"></a>
+            <a class="delete" aria-label="close" id="close-btn"></a>
           </header>
           <section class="modal-card-body">
             <a class="button is-danger" href="dashboard?deleteAccount=true">Yes</a>
-            <a class="button" href="profile">Cancel</a>
+            <a class="button" id="cancel-btn">Cancel</a>
           </section>
         </div>
       </div>
