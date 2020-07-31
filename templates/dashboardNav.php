@@ -8,6 +8,9 @@ if (!isset($_SESSION["loggedIn"])) {
     <div class="container">
       <ul>
         <?php
+        if ($_SESSION["balance"] < 0) {
+          return null;
+        }
 
         if ($_SESSION["balance"] < 0) {
           return null;
