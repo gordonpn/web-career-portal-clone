@@ -1,14 +1,14 @@
 <?php
 
-include_once("model/Database.php");
+require "model/Database.php";
 
 class User
 {
-  private $db;
+  private $_db;
 
   public function __construct()
   {
-    $this->db = new Database();
+    $this->_db = new Database();
   }
 
   public function getUser($user, $password)
@@ -18,15 +18,15 @@ class User
     WHERE userID = :user
     AND password = :password
     AND Plans.planID = Users.planID";
-    $this->db->query($sql);
-    $this->db->bind(':user', $user, PDO::PARAM_STR);
-    $this->db->bind(':password', $password, PDO::PARAM_STR);
-    $this->db->execute();
-    $rowCount = $this->db->rowCount();
+    $this->_db->query($sql);
+    $this->_db->bind(':user', $user, PDO::PARAM_STR);
+    $this->_db->bind(':password', $password, PDO::PARAM_STR);
+    $this->_db->execute();
+    $rowCount = $this->_db->rowCount();
     if ($rowCount < 1) {
       return null;
     }
-    $row = $this->db->fetchOne();
+    $row = $this->_db->fetchOne();
 
     return $row;
   }
@@ -34,16 +34,16 @@ class User
   public function updateWithdrawal($user)
   {
     $sql = "UPDATE Users SET isAutomatic = NOT isAutomatic WHERE userID = :user";
-    $this->db->query($sql);
-    $this->db->bind(':user', $user, PDO::PARAM_STR);
-    return $this->db->execute();
+    $this->_db->query($sql);
+    $this->_db->bind(':user', $user, PDO::PARAM_STR);
+    return $this->_db->execute();
   }
 
   public function deleteUser($user)
   {
     $sql = "DELETE FROM Users WHERE userID = :user";
-    $this->db->query($sql);
-    $this->db->bind(':user', $user, PDO::PARAM_STR);
-    return $this->db->execute();
+    $this->_db->query($sql);
+    $this->_db->bind(':user', $user, PDO::PARAM_STR);
+    return $this->_db->execute();
   }
 }
