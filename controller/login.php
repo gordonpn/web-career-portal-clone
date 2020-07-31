@@ -3,7 +3,7 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
-include_once("model/User.php");
+require "model/User.php";
 
 class Login
 {

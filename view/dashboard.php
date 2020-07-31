@@ -1,5 +1,5 @@
 <?php
-include "templates/head.html";
+require "templates/head.html";
 if (!isset($_SESSION)) {
   session_start();
 }
@@ -12,7 +12,7 @@ if (!isset($_SESSION)) {
 <body>
   <?php
   $heroTitle = "Dashboard";
-  include "templates/hero.php";
+  require "templates/hero.php";
   ?>
   <?php if (isset($_SESSION["loggedIn"]) && $_SESSION["balance"] < 0) : ?>
     <section class="hero is-danger">

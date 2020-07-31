@@ -1,5 +1,5 @@
 <?php
-include "templates/head.html";
+require "templates/head.html";
 if (!isset($_SESSION)) {
   session_start();
 }
@@ -12,7 +12,7 @@ if (!isset($_SESSION)) {
 <body>
   <?php
   $heroTitle = "Jobs";
-  include "templates/hero.php";
+  require "templates/hero.php";
   ?>
   <section class="section">
     <div class="container" style="max-width:40vw">
