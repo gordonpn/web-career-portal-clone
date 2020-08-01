@@ -85,5 +85,10 @@ class User
 
   public function updateBalance($username, $newBalance)
   {
+    $sql = "UPDATE Users SET balance = :newBalance WHERE userID = :user";
+    $this->_db->query($sql);
+    $this->_db->bind(':newBalance', $newBalance, PDO::PARAM_INT);
+    $this->_db->bind(':user', $username, PDO::PARAM_STR);
+    return $this->_db->execute();
   }
 }
