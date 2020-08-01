@@ -19,7 +19,7 @@ if (!isset($_SESSION)) {
       <form action="forgot" method="POST">
         <div class="field">
           <?php if (isset($error)) : ?>
-            <p class="has-text-danger">
+            <p class="has-text-weight-bold has-text-danger">
               <?php echo $error; ?>
             </p>
           <?php endif; ?>

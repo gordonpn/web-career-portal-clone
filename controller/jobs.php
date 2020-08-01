@@ -12,7 +12,7 @@ class Jobs
   public function invoke()
   {
     if (!isset($_SESSION['loggedIn'])) {
-      $message = "Please log in first.";
+      $error = "Please log in first.";
       include 'view/login.php';
       return null;
     }
