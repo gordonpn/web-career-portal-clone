@@ -46,4 +46,27 @@ class User
     $this->_db->bind(':user', $user, PDO::PARAM_STR);
     return $this->_db->execute();
   }
+
+  public function verifyEmail($email)
+  {
+    $sql = "SELECT userID FROM Users WHERE email = :email";
+    $this->_db->query($sql);
+    $this->_db->bind(':email', $email, PDO::PARAM_STR);
+    $this->_db->execute();
+    $rowCount = $this->_db->rowCount();
+    if ($rowCount < 1) {
+      return null;
+    } else {
+      return true;
+    }
+  }
+
+  public function updatePassword($email, $password)
+  {
+    $sql = "UPDATE Users SET password = :password WHERE email = :email";
+    $this->_db->query($sql);
+    $this->_db->bind(':password', $password, PDO::PARAM_STR);
+    $this->_db->bind(':email', $email, PDO::PARAM_STR);
+    return $this->_db->execute();
+  }
 }

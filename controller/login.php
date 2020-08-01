@@ -19,7 +19,7 @@ class Login
   {
     if (isset($_POST["username"]) && isset($_POST["password"])) {
       $username = filter_var(trim($_POST["username"]), FILTER_SANITIZE_STRING);
-      $password = filter_var(trim($_POST["password"]), FILTER_SANITIZE_STRING);
+      $password = $_POST["password"];
       $this->checkUser($username, $password);
       return null;
     }

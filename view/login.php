@@ -23,6 +23,11 @@ if (!isset($_SESSION)) {
               <?php echo $error; ?>
             </p>
           <?php endif; ?>
+          <?php if (isset($message)) : ?>
+            <p class="has-text-info">
+              <?php echo $message; ?>
+            </p>
+          <?php endif; ?>
           <label class="label">Username</label>
           <div class="control has-icons-left has-icons-right">
             <input class="input" name="username" type="text" placeholder="Username" required>
