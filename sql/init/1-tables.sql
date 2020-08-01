@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS Profiles
     profession     varchar(255),
     gender         varchar(255),
     displayPicture varchar(255),
-    result         varchar(255),
+    resume         varchar(255),
     phoneNumber    varchar(255),
     dateOfBirth    date,
     FOREIGN KEY (userID) REFERENCES Users (userID),
@@ -97,8 +97,8 @@ CREATE TABLE IF NOT EXISTS Applications
     jobID                int          NOT NULL,
     userID               varchar(255) NOT NULL,
     dateApplied          timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    isAcceptedByEmployer boolean      NOT NULL,
-    isAcceptedByEmployee boolean      NOT NULL,
+    isAcceptedByEmployer boolean      DEFAULT NULL,
+    isAcceptedByEmployee boolean      DEFAULT NULL,
     FOREIGN KEY (userID) REFERENCES Users (userID),
     FOREIGN KEY (jobID) REFERENCES Jobs (jobID)
 );
