@@ -92,32 +92,33 @@ if (!isset($_SESSION)) {
         <h1 class="title">
           Change Plan
         </h1>
-        <div class="field">
-          <!-- TODO should show plans according to account type, not all -->
-          <label class="label">New Plan</label>
-          <div class="control">
-            <div class="select">
-              <select>
-                <?php if ($_SESSION["isEmployee"]) : ?>
-                  <option>Employee Basic</option>
-                  <option>Employee Prime</option>
-                  <option>Employee Gold</option>
-                <?php endif; ?>
-                <?php if ($_SESSION["isEmployer"]) : ?>
-                  <option>Employer Prime</option>
-                  <option>Employer Gold</option>
-                <?php endif; ?>
-              </select>
+        <form action="profile" method="POST">
+          <div class="field">
+            <label class="label">New Plan</label>
+            <div class="control">
+              <div class="select">
+                <select name="newPlan">
+                  <?php if ($_SESSION["isEmployee"]) : ?>
+                    <option value="Employee Basic">Employee Basic</option>
+                    <option value="Employee Prime">Employee Prime</option>
+                    <option value="Employee Gold">Employee Gold</option>
+                  <?php endif; ?>
+                  <?php if ($_SESSION["isEmployer"]) : ?>
+                    <option value="Employer Prime">Employer Prime</option>
+                    <option value="Employer Gold">employer gold</option>
+                  <?php endif; ?>
+                </select>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="field">
-          <p class="control">
-            <button class="button is-link">
-              Confirm Change
-            </button>
-          </p>
-        </div>
+          <div class="field">
+            <p class="control">
+              <button type="submit" class="button is-link">
+                Confirm Change
+              </button>
+            </p>
+          </div>
+        </form>
       </div>
     </section>
     <section class="section">
