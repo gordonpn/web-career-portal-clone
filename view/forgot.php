@@ -87,6 +87,7 @@ if (!isset($_SESSION)) {
       function closeModal() {
         modal.className = "modal";
       }
+
       if (closeButton) {
         closeButton.addEventListener('click', closeModal);
       }
