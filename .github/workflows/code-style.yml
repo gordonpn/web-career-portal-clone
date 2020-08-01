@@ -1,11 +1,12 @@
-name: ci
+name: code-style
 on:
-  pull_request:
-    branches:
+  push:
+    branches-ignore:
+      - master
       - develop
+
 jobs:
-  build:
-    if: "false" # temporarily disable
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

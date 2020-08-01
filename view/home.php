@@ -1,5 +1,5 @@
 <?php
-include "templates/head.html";
+require "templates/head.html";
 if (!isset($_SESSION)) {
   session_start();
 }

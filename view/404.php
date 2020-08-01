@@ -1,5 +1,5 @@
 <?php
-include "templates/head.html";
+require "templates/head.html";
 if (!isset($_SESSION)) {
   session_start();
 }
@@ -11,7 +11,7 @@ if (!isset($_SESSION)) {
 
 <body>
   <section class="hero is-info is-fullheight-with-navbar">
-    <?php include "templates/navbar.php"; ?>
+    <?php require "templates/navbar.php"; ?>
     <div class="hero-body">
       <div class="container">
         <h1 class="title">

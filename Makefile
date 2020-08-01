@@ -19,7 +19,6 @@ start-db:
 	-d \
 	-p 3306:3306 \
 	mysql
-	sleep 8
 
 db:
 	docker exec \
