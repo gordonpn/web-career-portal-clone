@@ -37,10 +37,14 @@ class Profile
       if ($this->user->updatePlan($_SESSION['username'], $_POST['newPlan'])) {
         $balanceDifference = $this->balanceService->calculateBalanceDifference($_SESSION['planName'], $_POST['newPlan']);
         $newBalance = $_SESSION['balance'] + $balanceDifference;
-        $_SESSION['balance'] = $newBalance;
+        if ($this->user->updateBalance($_SESSION['username'], $newBalance)) {
+          $_SESSION['balance'] = $newBalance;
+        } else {
+          $error = "Could not update balance.";
+        }
         $_SESSION['planName'] = $_POST['newPlan'];
       } else {
-        $error = "An error as occurred.";
+        $error = "Could not update plan.";
       }
     }
 
