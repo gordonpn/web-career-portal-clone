@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS Users
 (
     userID             varchar(255) NOT NULL PRIMARY KEY,
     planID             int,
-    email              varchar(255) NOT NULL,
+    email              varchar(255) NOT NULL UNIQUE,
     password           varchar(255) NOT NULL,
     dateCreated        timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     isActive           boolean      NOT NULL DEFAULT TRUE,

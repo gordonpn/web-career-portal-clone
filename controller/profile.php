@@ -16,6 +16,12 @@ class Profile
 
   public function invoke()
   {
+    if (!isset($_SESSION['loggedIn'])) {
+      $error = "Please log in first.";
+      include 'view/login.php';
+      return null;
+    }
+
     if (isset($_GET["switchWithdrawal"])) {
       if ($this->user->updateWithdrawal($_SESSION['username'])) {
         $_SESSION["isAutomatic"] = !$_SESSION["isAutomatic"];

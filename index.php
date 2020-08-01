@@ -35,7 +35,9 @@ switch ($request) {
     $profile->invoke();
     break;
   case '/forgot':
-    include __DIR__ . '/view/forgot.php';
+    include "controller/forgot.php";
+    $forgot = new Forgot();
+    $forgot->invoke();
     break;
   default:
     http_response_code(404);

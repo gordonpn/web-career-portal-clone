@@ -16,13 +16,18 @@ if (!isset($_SESSION)) {
   ?>
   <section class="section">
     <div class="container" style="max-width:30vw">
+      <?php if (isset($error)) : ?>
+        <p class="has-text-weight-bold has-text-danger">
+          <?php echo $error; ?>
+        </p>
+      <?php endif; ?>
+      <?php if (isset($message)) : ?>
+        <p class="has-text-weight-bold has-text-info">
+          <?php echo $message; ?>
+        </p>
+      <?php endif; ?>
       <form action="login" method="POST">
         <div class="field">
-          <?php if (isset($error)) : ?>
-            <p class="has-text-danger">
-              <?php echo $error; ?>
-            </p>
-          <?php endif; ?>
           <label class="label">Username</label>
           <div class="control has-icons-left has-icons-right">
             <input class="input" name="username" type="text" placeholder="Username" required>
