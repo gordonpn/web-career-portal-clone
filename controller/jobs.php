@@ -16,5 +16,10 @@ class Jobs
       include 'view/login.php';
       return null;
     }
+
+    if (isset($_SESSION["loggedIn"]) && $_SESSION["balance"] < 0) {
+      include 'view/dashboard.php';
+      return null;
+    }
   }
 }
