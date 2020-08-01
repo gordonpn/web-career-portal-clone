@@ -16,23 +16,81 @@ if (!isset($_SESSION)) {
   ?>
   <section class="section">
     <div class="container" style="max-width:30vw">
-      <div class="field">
-        <label class="label">Email</label>
-        <div class="control has-icons-left has-icons-right">
-          <input class="input" type="email" placeholder="Email" required>
-          <span class="icon is-small is-left">
-            <i class="fas fa-envelope"></i>
-          </span>
+      <form action="forgot" method="POST">
+        <div class="field">
+          <label class="label">Email</label>
+          <div class="control has-icons-left has-icons-right">
+            <input class="input" name="email" type="email" placeholder="Email" required>
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+          </div>
         </div>
-      </div>
-      <div class="field">
-        <p class="control">
-          <button class="button is-link">
-            Forgot My Password
-          </button>
-        </p>
+        <div class="field">
+          <p class="control">
+            <button type="submit" class="button is-link">
+              Forgot My Password
+            </button>
+          </p>
+        </div>
+      </form>
+    </div>
+    <div class="modal" id="modal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Type a new password</p>
+          <a class="delete" aria-label="close" id="close-btn"></a>
+        </header>
+        <section class="modal-card-body">
+          <form action="forgot" method="POST" onsubmit="return validatePassword();">
+            <div class="field">
+              <label class="label">New Password</label>
+              <p class="control has-icons-left">
+                <input name="password" class="input" type="password" placeholder="Password" required id="new-password">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-lock"></i>
+                </span>
+              </p>
+            </div>
+            <div class="field">
+              <label class="label">Confirm New Password</label>
+              <p class="control has-icons-left">
+                <input class="input" type="password" placeholder="Password" required id="confirm-password">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-lock"></i>
+                </span>
+              </p>
+              <p style="visibility: hidden" class="has-text-danger" id="error-text">Passwords entered do not match</p>
+            </div>
+            <button class="button is-outlined is-link" id="confirm-btn" type="submit">Confirm change</button>
+            <a class="button is-outlined" id="cancel-btn">Cancel</a>
+          </form>
+        </section>
       </div>
     </div>
+    <script type="text/javascript">
+      const modal = document.getElementById("modal");
+      const errorText = document.getElementById("error-text");
+      const newPassword = document.getElementById("new-password");
+      const confirmPassword = document.getElementById("confirm-password");
+
+      function closeModal() {
+        modal.className = "modal";
+      }
+      document.getElementById("close-btn").addEventListener('click', closeModal);
+      document.getElementById("cancel-btn").addEventListener('click', closeModal);
+
+      function validatePassword() {
+        if (newPassword.value != confirmPassword.value) {
+          errorText.style.visibility = "visible";
+          return false;
+        } else {
+          errorText.style.visibility = "hidden";
+          return true;
+        }
+      };
+    </script>
   </section>
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </body>
