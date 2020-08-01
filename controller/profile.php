@@ -29,6 +29,14 @@ class Profile
         $error = "An error as occurred.";
       }
     }
+
+    if (isset($_POST['newPlan'])) {
+      if ($this->user->updatePlan($_SESSION['username'], $_POST['newPlan'])) {
+        $_SESSION['planName'] = $_POST['newPlan'];
+      } else {
+        $error = "An error as occurred.";
+      }
+    }
     include 'view/profile.php';
   }
 }

@@ -69,4 +69,21 @@ class User
     $this->_db->bind(':email', $email, PDO::PARAM_STR);
     return $this->_db->execute();
   }
+
+  public function updatePlan($username, $plan)
+  {
+    $sql = "UPDATE Users
+    SET planID = (SELECT planID
+                  FROM Plans
+                  WHERE name = :planName)
+    WHERE userID = :user";
+    $this->_db->query($sql);
+    $this->_db->bind(':planName', $plan, PDO::PARAM_STR);
+    $this->_db->bind(':user', $username, PDO::PARAM_STR);
+    return $this->_db->execute();
+  }
+
+  public function updateBalance($username, $newBalance)
+  {
+  }
 }
