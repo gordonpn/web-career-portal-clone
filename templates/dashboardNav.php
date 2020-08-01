@@ -9,24 +9,24 @@ if (!isset($_SESSION["loggedIn"])) {
       <ul>
         <?php
 
-          if ($_SESSION["balance"] < 0) {
-            return null;
+        if ($_SESSION["balance"] < 0) {
+          return null;
+        }
+
+        if ($_SESSION["isEmployee"]) {
+          if (strcasecmp($heroTitle, 'jobs') == 0) {
+            echo '<li class="is-active">';
+          } else {
+            echo '<li>';
           }
+          echo '<a href="jobs">Jobs</a></li>';
 
-          if ($_SESSION["isEmployee"]) {
-            if (strcasecmp($heroTitle, 'jobs') == 0) {
-              echo '<li class="is-active">';
-            } else {
-              echo '<li>';
-            }
-            echo '<a href="jobs">Jobs</a></li>';
-
-            if (strcasecmp($heroTitle, 'job categories') == 0) {
-              echo '<li class="is-active">';
-            } else {
-              echo '<li>';
-            }
-            echo '<a href="categories">Job Categories</a></li>';
+          if (strcasecmp($heroTitle, 'job categories') == 0) {
+            echo '<li class="is-active">';
+          } else {
+            echo '<li>';
+          }
+          echo '<a href="categories">Job Categories</a></li>';
 
           if (strcasecmp($heroTitle, 'applied jobs') == 0) {
             echo '<li class="is-active">';
