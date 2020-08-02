@@ -16,6 +16,18 @@ class ManageUsersController
 
   public function invoke()
   {
+    if (!isset($_SESSION['loggedIn'])) {
+      $error = "Please log in first.";
+      include 'view/login.php';
+      return null;
+    }
+
+    if (!$_SESSION['isAdmin']) {
+      $error = "You must be an admin to access this page.";
+      include 'view/dashboard.php';
+      return null;
+    }
+
     if (isset($_GET['toggleActive'])) {
       if (!$this->user->toggleUserActive($_GET['toggleActive'])) {
         $error = "An error occurred while toggling status for {$_GET['toggleActive']}";

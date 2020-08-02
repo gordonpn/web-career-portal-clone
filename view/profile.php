@@ -16,11 +16,11 @@ if (!isset($_SESSION)) {
   ?>
   <section class="section">
     <div class="container" style="max-width:40vw">
-      <?php
-      if (isset($error)) {
-        echo "<p class=\"has-text-danger\">$error</p>";
-      }
-      ?>
+      <?php if (isset($error)) : ?>
+        <p class="has-text-weight-bold has-text-danger">
+          <?php echo $error; ?>
+        </p>
+      <?php endif; ?>
       <h1 class="title">
         General Information
       </h1>
@@ -116,35 +116,6 @@ if (!isset($_SESSION)) {
         </form>
       </div>
     </section>
-    <section class="section">
-      <div class="container" style="max-width:40vw">
-        <h1 class="title">
-          Change Payment Method
-        </h1>
-        <form action="profile" method="POST">
-          <div class="field">
-            <label class="label">New Payment Method</label>
-            <div class="control">
-              <div class="select">
-                <select name="updatePaymentMethodType">
-                  <option value="Credit">Credit</option>
-                  <option value="Debit">Debit</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="field">
-            <p class="control">
-              <button type="submit" class="button is-link">
-                Confirm Change
-              </button>
-            </p>
-          </div>
-        </form>
-      </div>
-    </section>
-  <?php endif ?>
-  <?php if ($_SESSION["isEmployer"] || $_SESSION["isEmployee"]) : ?>
     <section class="section">
       <div class="container" style="max-width:40vw">
         <h1 class="title">

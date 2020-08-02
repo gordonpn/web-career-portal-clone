@@ -29,7 +29,9 @@ switch ($request) {
     include __DIR__ . '/view/signup.php';
     break;
   case '/jobs':
-    include __DIR__ . '/view/jobs.php';
+    include "controller/jobs.php";
+    $jobsController = new JobsController();
+    $jobsController->invoke();
     break;
   case '/categories':
     include __DIR__ . '/view/categories.php';
