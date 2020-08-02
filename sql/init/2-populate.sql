@@ -78,3 +78,12 @@ VALUES ('Human Resources'),
        ('IT Help Desk'),
        ('System Administrator'),
        ('Database Administrator');
+
+INSERT INTO Payment_Methods(userID, isPreSelected, cardNumber, paymentType)
+VALUES ('gordon', FALSE, 1234, 'debit'),
+        ('tiffany', TRUE, 1112, 'credit'),
+        ('arun', TRUE, 1718, 'credit'),
+        ('leo', TRUE, 2324, 'debit'),
+        ('bob', FALSE, 2930, 'credit'),
+        ('tyson', TRUE, 3536, 'debit');
+
