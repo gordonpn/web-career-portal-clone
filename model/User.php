@@ -101,4 +101,12 @@ class User
     $this->_db->query($sql);
     return $this->_db->fetchAll();
   }
+
+  public function toggleUserActive($username)
+  {
+    $sql = "UPDATE Users SET isActive = NOT isActive WHERE userID = :user";
+    $this->_db->query($sql);
+    $this->_db->bind(':user', $username, PDO::PARAM_STR);
+    return $this->_db->execute();
+  }
 }

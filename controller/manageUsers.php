@@ -16,6 +16,11 @@ class ManageUsersController
 
   public function invoke()
   {
+    if (isset($_GET['toggleActive'])) {
+      if (!$this->user->toggleUserActive($_GET['toggleActive'])) {
+        $error = "An error occurred while toggling status for {$_GET['toggleActive']}";
+      }
+    }
     $users = $this->user->getUsersAdminTable();
     include 'view/manageUsers.php';
   }
