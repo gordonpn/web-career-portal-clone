@@ -136,6 +136,7 @@ CREATE TABLE IF NOT EXISTS Employer_Categories
     userID             varchar(255) NOT NULL,
     categoryName       varchar(255) NOT NULL,
     FOREIGN KEY (userID) REFERENCES Users (userID) ON DELETE CASCADE
+<<<<<<< HEAD
 );
 
 CREATE TABLE IF NOT EXISTS System_Activity
@@ -144,6 +145,8 @@ CREATE TABLE IF NOT EXISTS System_Activity
     description  longtext     NOT NULL,
     title        varchar(255) NOT NULL,
     dateRecorded timestamp    NOT NULL DEFAULT current_timestamp
+=======
+>>>>>>> fe5a8b1... feat: set up on delete cascade where appropriate
 );
 
 CREATE TABLE IF NOT EXISTS System_Activity
