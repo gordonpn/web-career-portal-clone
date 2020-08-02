@@ -145,3 +145,11 @@ CREATE TABLE IF NOT EXISTS System_Activity
     title        varchar(255) NOT NULL,
     dateRecorded timestamp    NOT NULL DEFAULT current_timestamp
 );
+
+CREATE TABLE IF NOT EXISTS System_Activity
+(
+    activityID   int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    description  longtext     NOT NULL,
+    title        varchar(255) NOT NULL,
+    dateRecorded timestamp    NOT NULL DEFAULT current_timestamp
+);
