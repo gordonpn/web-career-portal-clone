@@ -16,11 +16,11 @@ if (!isset($_SESSION)) {
   ?>
   <section class="section">
     <div class="container" style="max-width:40vw">
-      <?php
-      if (isset($error)) {
-        echo "<p class=\"has-text-danger\">$error</p>";
-      }
-      ?>
+      <?php if (isset($error)) : ?>
+        <p class="has-text-weight-bold has-text-danger">
+          <?php echo $error; ?>
+        </p>
+      <?php endif; ?>
       <h1 class="title">
         General Information
       </h1>
@@ -28,13 +28,15 @@ if (!isset($_SESSION)) {
       echo "<p>Registered email: {$_SESSION['email']}</p>";
       echo "<p>Account type: {$_SESSION['userType']}</p>";
       echo "<p>Current plan: {$_SESSION['planName']}</p>";
-      echo "<p>Current withdrawal method: ";
-      if ($_SESSION['isAutomatic']) {
-        echo 'Automatic';
-      } else {
-        echo 'Manual';
+      if (!$_SESSION['isAdmin']) {
+        echo "<p>Current withdrawal method: ";
+        if ($_SESSION['isAutomatic']) {
+          echo 'Automatic';
+        } else {
+          echo 'Manual';
+        }
+        echo '<p>Current balance: $' . $_SESSION['balance'] . '</p>';
       }
-      echo '<p>Current balance: $' . $_SESSION['balance'] . '</p>';
       ?>
     </div>
   </section>
@@ -70,7 +72,7 @@ if (!isset($_SESSION)) {
         <div class="field">
           <label class="label">Employer Contact</label>
           <div class="control has-icons-left has-icons-right" style="max-width:400px;">
-            <input class="input" type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" maxlength="12" placeholder="000-000-0000" required>
+            <input class="input" type="tel" name="phone" pattern="[0-9]{10}" maxlength="10" placeholder="0000000000" required>
             <span class="icon is-small is-left">
               <i class="fas fa-phone"></i>
             </span>
@@ -86,7 +88,7 @@ if (!isset($_SESSION)) {
       </div>
     </section>
   <?php endif; ?>
-  <?php if ($_SESSION["isEmployer"] || $_SESSION["isEmployee"]) : ?>
+  <?php if (!$_SESSION['isAdmin']) : ?>
     <section class="section">
       <div class="container" style="max-width:40vw">
         <h1 class="title">
@@ -114,8 +116,6 @@ if (!isset($_SESSION)) {
         </form>
       </div>
     </section>
-  <?php endif ?>
-  <?php if ($_SESSION["isEmployer"] || $_SESSION["isEmployee"]) : ?>
     <section class="section">
       <div class="container" style="max-width:40vw">
         <h1 class="title">

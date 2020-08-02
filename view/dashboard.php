@@ -14,6 +14,15 @@ if (!isset($_SESSION)) {
   $heroTitle = "Dashboard";
   require "templates/hero.php";
   ?>
+  <?php if (isset($error)) : ?>
+    <section class="section">
+      <div class="container">
+        <p class="has-text-weight-bold has-text-danger">
+          <?php echo $error; ?>
+        </p>
+      </div>
+    </section>
+  <?php endif ?>
   <?php if (isset($_SESSION["loggedIn"]) && $_SESSION["balance"] < 0) : ?>
     <section class="hero is-danger">
       <div class="hero-body">

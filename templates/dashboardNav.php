@@ -53,12 +53,12 @@ if (!isset($_SESSION["loggedIn"])) {
         }
 
         if ($_SESSION["isAdmin"]) {
-          if (strcasecmp($heroTitle, 'users') == 0) {
+          if (strcasecmp($heroTitle, 'manage users') == 0) {
             echo '<li class="is-active">';
           } else {
             echo '<li>';
           }
-          echo '<a>Users</a></li>';
+          echo '<a href="manageUsers">Manage Users</a></li>';
 
           if (strcasecmp($heroTitle, 'system activity') == 0) {
             echo '<li class="is-active">';
