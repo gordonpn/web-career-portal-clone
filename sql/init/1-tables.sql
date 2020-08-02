@@ -1,6 +1,5 @@
 SET TIME_ZONE = '-04:00';
 
-
 CREATE TABLE IF NOT EXISTS Location
 (
     locationID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -64,8 +63,8 @@ CREATE TABLE IF NOT EXISTS Jobs
     description        longtext,
     companyName        varchar(255) NOT NULL,
     positionsAvailable int          NOT NULL,
-    datePosted         timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    status             varchar(255) NOT NULL,
+    datePosted         timestamp    NOT NULL      DEFAULT CURRENT_TIMESTAMP,
+    status             enum ('active', 'expired') DEFAULT 'active',
     FOREIGN KEY (userID) REFERENCES Users (userID),
     FOREIGN KEY (locationID) REFERENCES Location (locationID)
 );
@@ -137,4 +136,12 @@ CREATE TABLE IF NOT EXISTS Employer_Categories
     userID             varchar(255) NOT NULL,
     categoryName       varchar(255) NOT NULL,
     FOREIGN KEY (userID) REFERENCES Users (userID)
+);
+
+CREATE TABLE IF NOT EXISTS System_Activity
+(
+    activityID   int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    description  longtext     NOT NULL,
+    title        varchar(255) NOT NULL,
+    dateRecorded timestamp    NOT NULL DEFAULT current_timestamp
 );
