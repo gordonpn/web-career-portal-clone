@@ -20,6 +20,11 @@ switch ($request) {
     $login = new Login();
     $login->invoke();
     break;
+  case '/manageUsers':
+    include "controller/manageUsers.php";
+    $manageUsersController = new ManageUsersController();
+    $manageUsersController->invoke();
+    break;
   case '/signup':
     include __DIR__ . '/view/signup.php';
     break;
