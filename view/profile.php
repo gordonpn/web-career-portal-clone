@@ -126,7 +126,7 @@ if (!isset($_SESSION)) {
             <label class="label">New Payment Method</label>
             <div class="control">
               <div class="select">
-                <select name="newPaymentMethod">
+                <select name="updatePaymentMethodType">
                   <option value="Credit">Credit</option>
                   <option value="Debit">Debit</option>
                 </select>
