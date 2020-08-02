@@ -3,17 +3,20 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
-require "model/User.php";
+require_once "model/User.php";
+require_once "model/PaymentMethod.php";
 require "service/balance.php";
 
 class Profile
 {
   public $user;
+  public $paymentMethod;
   public $balanceService;
 
   public function __construct()
   {
     $this->user = new User();
+    $this->paymentMethod = new PaymentMethod();
     $this->balanceService = new BalanceService();
   }
 
@@ -30,6 +33,12 @@ class Profile
         $_SESSION["isAutomatic"] = !$_SESSION["isAutomatic"];
       } else {
         $error = "An error as occurred.";
+      }
+    }
+
+    if (isset($_POST['newPaymentMethod'])) {
+      if (!$this->paymentMethod->updatePaymentMethod($_SESSION['username'], $_POST["newPaymentMethod"])) {
+        $error = "Could not change payment method.";
       }
     }
 
