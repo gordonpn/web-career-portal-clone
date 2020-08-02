@@ -11,7 +11,7 @@ class PaymentMethod
     $this->_db = new Database();
   }
 
-  public function updatePaymentMethod($user, $payment)
+  public function updatePaymentMethodType($user, $payment)
   {
     $sql = "UPDATE Payment_Methods SET paymentType = :payment WHERE userID = :user";
     $this->_db->query($sql);
