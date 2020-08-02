@@ -76,8 +76,8 @@ CREATE TABLE IF NOT EXISTS Payment_Methods
     paymentMethodID int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
     userID          varchar(255) NOT NULL,
     isPreSelected   boolean      NOT NULL,
-    cardNumber      int          NOT NULL,
-    paymentType     enum ('credit', 'debit'),
+    cardNumber      bigint       NOT NULL,
+    paymentType     enum ('credit card', 'checking'),
     FOREIGN KEY (userID) REFERENCES Users (userID)
 );
 
@@ -97,8 +97,8 @@ CREATE TABLE IF NOT EXISTS Applications
     jobID                int          NOT NULL,
     userID               varchar(255) NOT NULL,
     dateApplied          timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    isAcceptedByEmployer boolean      DEFAULT NULL,
-    isAcceptedByEmployee boolean      DEFAULT NULL,
+    isAcceptedByEmployer boolean               DEFAULT NULL,
+    isAcceptedByEmployee boolean               DEFAULT NULL,
     FOREIGN KEY (userID) REFERENCES Users (userID),
     FOREIGN KEY (jobID) REFERENCES Jobs (jobID)
 );
@@ -138,5 +138,3 @@ CREATE TABLE IF NOT EXISTS Employer_Categories
     categoryName       varchar(255) NOT NULL,
     FOREIGN KEY (userID) REFERENCES Users (userID)
 );
-
--- TODO add triggers to record emails
