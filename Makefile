@@ -1,9 +1,24 @@
-.PHONY: start start-server start-db db stop-db run dump
+.PHONY: start start-server start-db-d db stop-db run dump start-db
 
-start: start-db start-server
+start: start-db-d start-server
 
 start-server:
 	php -S localhost:9000
+
+start-db-d:
+	docker run \
+	-e MYSQL_DATABASE=gxc353_1 \
+	-e MYSQL_PASSWORD=temp_password \
+	-e MYSQL_ROOT_HOST=% \
+	-e MYSQL_ROOT_PASSWORD=temp_password \
+	-e MYSQL_USER=gxc353_1 \
+	-e TZ=America/Montreal \
+	-v ${PWD}/sql/init:/docker-entrypoint-initdb.d \
+	--name mysql-353 \
+	--rm \
+	-d \
+	-p 3306:3306 \
+	mysql
 
 start-db:
 	docker run \
@@ -16,7 +31,6 @@ start-db:
 	-v ${PWD}/sql/init:/docker-entrypoint-initdb.d \
 	--name mysql-353 \
 	--rm \
-	-d \
 	-p 3306:3306 \
 	mysql
 
