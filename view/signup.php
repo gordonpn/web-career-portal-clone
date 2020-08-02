@@ -43,11 +43,6 @@ if (!isset($_SESSION)) {
           </span>
         </div>
       </div>
-      <!-- TODO alternatively use https://github.com/nosir/cleave.js -->
-      <div class="field">
-        <label class="label">Credit Card Number:</label>
-        <input class="input" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="xxxx xxxx xxxx xxxx">
-      </div>
       <div class="field">
         <label class="label">Select account type and plan</label>
         <div class="control">
@@ -61,6 +56,27 @@ if (!isset($_SESSION)) {
             </select>
           </div>
         </div>
+      </div>
+      <div class="field">
+        <label class="label">Select payment method type </label>
+        <div class="control">
+          <div class="select">
+            <select>
+              <option> Credit </option>
+              <option> Debit </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!-- TODO alternatively use https://github.com/nosir/cleave.js -->
+      <div class="field">
+        <label class="label"> Card Number:</label>
+        <p class="control has-icons-left">
+          <input class="input" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="xxxx xxxx xxxx xxxx">
+          <span class="icon is-small is-left">
+            <i class="far fa-credit-card"></i>
+          </span>
+        </p>
       </div>
       <div class="field">
         <p class="control">
