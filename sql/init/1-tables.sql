@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS Payment_Methods
     paymentMethodID int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
     userID          varchar(255) NOT NULL,
     isPreSelected   boolean      NOT NULL,
-    cardNumber      int          NOT NULL,
+    cardNumber      bigint       NOT NULL,
     paymentType     enum ('credit card', 'checking'),
     FOREIGN KEY (userID) REFERENCES Users (userID)
 );
@@ -97,8 +97,8 @@ CREATE TABLE IF NOT EXISTS Applications
     jobID                int          NOT NULL,
     userID               varchar(255) NOT NULL,
     dateApplied          timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    isAcceptedByEmployer boolean      DEFAULT NULL,
-    isAcceptedByEmployee boolean      DEFAULT NULL,
+    isAcceptedByEmployer boolean               DEFAULT NULL,
+    isAcceptedByEmployee boolean               DEFAULT NULL,
     FOREIGN KEY (userID) REFERENCES Users (userID),
     FOREIGN KEY (jobID) REFERENCES Jobs (jobID)
 );
@@ -139,4 +139,59 @@ CREATE TABLE IF NOT EXISTS Employer_Categories
     FOREIGN KEY (userID) REFERENCES Users (userID)
 );
 
--- TODO add triggers to record emails
+DELIMITER $$
+
+CREATE TRIGGER paymentMade
+    AFTER INSERT
+    ON Payments
+    FOR EACH ROW
+BEGIN
+    INSERT INTO Emails(userID, content, title)
+    VALUES ((SELECT userID
+             FROM Payment_Methods
+             WHERE NEW.paymentMethodID = Payment_Methods.paymentMethodID),
+            CONCAT('Payment made of ', NEW.amount, ' by ', userID, '. Current balance is ', (SELECT balance
+                                                                                             FROM Users,
+                                                                                                  Payment_Methods
+                                                                                             WHERE NEW.paymentMethodID = Payment_Methods.paymentMethodID
+                                                                                               AND Payment_Methods.userID = Users.userID),
+                   '$.'),
+            'Payment made');
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER userUpdate
+    AFTER UPDATE
+    ON Users
+    FOR EACH ROW
+BEGIN
+    IF NEW.planID IS NOT NULL THEN
+        INSERT INTO Emails(userID, content, title)
+        VALUES (OLD.userID, concat(OLD.userID, ' has changed their plan.'), 'Plan ID Changed');
+    END IF;
+    IF NEW.email IS NOT NULL THEN
+        INSERT INTO Emails(userID, content, title)
+        VALUES (OLD.userID, concat(OLD.userID, ' has changed their email.'), 'Email Changed');
+    END IF;
+    IF NEW.password IS NOT NULL THEN
+        INSERT INTO Emails(userID, content, title)
+        VALUES (OLD.userID, concat(OLD.userID, ' has changed their password.'), 'Password Changed');
+    END IF;
+    IF NEW.isActive IS NOT NULL THEN
+        INSERT INTO Emails(userID, content, title)
+        VALUES (OLD.userID, concat(OLD.userID, ' has changed their activity status.'), 'User Account Status Changed');
+    END IF;
+    IF NEW.balance IS NOT NULL THEN
+        INSERT INTO Emails(userID, content, title)
+        VALUES (OLD.userID, concat(OLD.userID, ' has changed their balance.'), 'Balance Changed');
+    END IF;
+    IF NEW.isAutomatic IS NOT NULL THEN
+        INSERT INTO Emails(userID, content, title)
+        VALUES (OLD.userID, concat(OLD.userID, ' has changed their withdrawal type.'), 'Withdrawal Type Changed');
+    END IF;
+END $$
+
+DELIMITER ;
