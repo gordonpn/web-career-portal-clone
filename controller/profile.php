@@ -36,7 +36,7 @@ class Profile
       }
     }
 
-    if (isset($_POST['newPaymentMethod'])) {
+    if (isset($_POST['updatePaymentMethodType'])) {
       if (!$this->paymentMethod->updatePaymentMethod($_SESSION['username'], $_POST["newPaymentMethod"])) {
         $error = "Could not change payment method type.";
       }
