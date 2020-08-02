@@ -68,7 +68,6 @@ if (!isset($_SESSION)) {
           </div>
         </div>
       </div>
-      <!-- TODO alternatively use https://github.com/nosir/cleave.js -->
       <div class="field">
         <label class="label"> Card Number:</label>
         <p class="control has-icons-left">
