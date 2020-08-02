@@ -119,6 +119,35 @@ if (!isset($_SESSION)) {
     <section class="section">
       <div class="container" style="max-width:40vw">
         <h1 class="title">
+          Change Payment Method
+        </h1>
+        <form action="profile" method="POST">
+          <div class="field">
+            <label class="label">New Payment Method</label>
+            <div class="control">
+              <div class="select">
+                <select name="newPaymentMethod">
+                  <option value="Credit">Credit</option>
+                  <option value="Debit">Debit</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <p class="control">
+              <button type="submit" class="button is-link">
+                Confirm Change
+              </button>
+            </p>
+          </div>
+        </form>
+      </div>
+    </section>
+  <?php endif ?>
+  <?php if ($_SESSION["isEmployer"] || $_SESSION["isEmployee"]) : ?>
+    <section class="section">
+      <div class="container" style="max-width:40vw">
+        <h1 class="title">
           Change Plan
         </h1>
         <form action="profile" method="POST">
