@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS Profiles
     resume         varchar(255),
     phoneNumber    varchar(255),
     dateOfBirth    date,
-    FOREIGN KEY (userID) REFERENCES Users (userID),
+    FOREIGN KEY (userID) REFERENCES Users (userID) ON DELETE CASCADE,
     FOREIGN KEY (locationID) REFERENCES Location (locationID)
 );
 
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS Jobs
     positionsAvailable int          NOT NULL,
     datePosted         timestamp    NOT NULL      DEFAULT CURRENT_TIMESTAMP,
     status             enum ('active', 'expired') DEFAULT 'active',
-    FOREIGN KEY (userID) REFERENCES Users (userID),
+    FOREIGN KEY (userID) REFERENCES Users (userID) ON DELETE CASCADE,
     FOREIGN KEY (locationID) REFERENCES Location (locationID)
 );
 
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS Payment_Methods
     isPreSelected   boolean      NOT NULL,
     cardNumber      bigint       NOT NULL,
     paymentType     enum ('credit card', 'checking'),
-    FOREIGN KEY (userID) REFERENCES Users (userID)
+    FOREIGN KEY (userID) REFERENCES Users (userID) ON DELETE CASCADE
 );
 
 
@@ -98,8 +98,8 @@ CREATE TABLE IF NOT EXISTS Applications
     dateApplied          timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     isAcceptedByEmployer boolean               DEFAULT NULL,
     isAcceptedByEmployee boolean               DEFAULT NULL,
-    FOREIGN KEY (userID) REFERENCES Users (userID),
-    FOREIGN KEY (jobID) REFERENCES Jobs (jobID)
+    FOREIGN KEY (userID) REFERENCES Users (userID) ON DELETE CASCADE,
+    FOREIGN KEY (jobID) REFERENCES Jobs (jobID) ON DELETE CASCADE
 );
 
 
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS Job_Categories
     jobID         int NOT NULL,
     jobCategoryID int NOT NULL,
     FOREIGN KEY (jobcategoryID) REFERENCES Job_Categories_List (jobCategoriesID),
-    FOREIGN KEY (jobID) REFERENCES Jobs (jobID)
+    FOREIGN KEY (jobID) REFERENCES Jobs (jobID) ON DELETE CASCADE
 );
 
 
@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS Employer_Categories
     employerCategoryID int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
     userID             varchar(255) NOT NULL,
     categoryName       varchar(255) NOT NULL,
-    FOREIGN KEY (userID) REFERENCES Users (userID)
+    FOREIGN KEY (userID) REFERENCES Users (userID) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS System_Activity
