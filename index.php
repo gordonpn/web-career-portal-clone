@@ -46,6 +46,11 @@ switch ($request) {
     $forgot = new Forgot();
     $forgot->invoke();
     break;
+  case '/systemActivity':
+    include "controller/systemActivity.php";
+    $systemActivityController = new SystemActivityController();
+    $systemActivityController->invoke();
+    break;
   default:
     http_response_code(404);
     include __DIR__ . '/view/404.php';

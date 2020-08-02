@@ -68,7 +68,7 @@ if (!isset($_SESSION["loggedIn"])) {
           } else {
             echo '<li>';
           }
-          echo '<a>System Activity</a></li>';
+          echo '<a href="systemActivity">System Activity</a></li>';
         }
 
         if (strcasecmp($heroTitle, 'my profile') == 0) {
