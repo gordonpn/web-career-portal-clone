@@ -11,7 +11,7 @@ if (!isset($_SESSION)) {
 
 <body>
   <?php
-  $heroTitle = "Manage Users";
+  $heroTitle = "System Activity";
   require "templates/hero.php";
   ?>
   <section class="section">
