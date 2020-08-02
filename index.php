@@ -42,13 +42,9 @@ switch ($request) {
     $profile->invoke();
     break;
   case '/forgot':
-<<<<<<< HEAD
     include "controller/forgot.php";
     $forgot = new Forgot();
     $forgot->invoke();
-=======
-    include __DIR__ . '/view/forgot.php';
->>>>>>> c94238c... fix: all code style issues reported by phpcs
     break;
   default:
     http_response_code(404);
