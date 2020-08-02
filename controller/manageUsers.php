@@ -16,6 +16,7 @@ class ManageUsersController
 
   public function invoke()
   {
+    $users = $this->user->getUsersAdminTable();
     include 'view/manageUsers.php';
   }
 }

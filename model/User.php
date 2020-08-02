@@ -91,4 +91,14 @@ class User
     $this->_db->bind(':user', $username, PDO::PARAM_STR);
     return $this->_db->execute();
   }
+
+  public function getUsersAdminTable()
+  {
+    $sql = "SELECT userID, email, Plans.userType, dateCreated, isActive, startSufferingDate
+    FROM Users,
+         Plans
+    WHERE Users.planID = Plans.planID";
+    $this->_db->query($sql);
+    return $this->_db->fetchAll();
+  }
 }
