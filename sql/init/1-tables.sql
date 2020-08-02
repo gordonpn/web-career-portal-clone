@@ -150,6 +150,9 @@ CREATE TABLE IF NOT EXISTS System_Activity
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9a0c31c... feat: define all necessary triggers for now
 CREATE TABLE IF NOT EXISTS System_Activity
 (
     activityID   int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -157,6 +160,7 @@ CREATE TABLE IF NOT EXISTS System_Activity
     title        varchar(255) NOT NULL,
     dateRecorded timestamp    NOT NULL DEFAULT current_timestamp
 );
+<<<<<<< HEAD
 =======
 DELIMITER $$
 
@@ -215,3 +219,5 @@ END $$
 
 DELIMITER ;
 >>>>>>> 7d78019... feat: add trigger to track payments and user account changes
+=======
+>>>>>>> 9a0c31c... feat: define all necessary triggers for now
