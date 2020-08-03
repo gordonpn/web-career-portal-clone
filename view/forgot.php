@@ -78,9 +78,6 @@ if (!isset($_SESSION)) {
     <?php endif; ?>
     <script type="text/javascript">
       const modal = document.getElementById("modal");
-      const errorText = document.getElementById("error-text");
-      const newPassword = document.getElementById("new-password");
-      const confirmPassword = document.getElementById("confirm-password");
       const closeButton = document.getElementById("close-btn");
       const cancelButton = document.getElementById("cancel-btn");
 
@@ -94,17 +91,8 @@ if (!isset($_SESSION)) {
       if (cancelButton) {
         cancelButton.addEventListener('click', closeModal);
       }
-
-      function validatePassword() {
-        if (newPassword.value != confirmPassword.value) {
-          errorText.style.visibility = "visible";
-          return false;
-        } else {
-          errorText.style.visibility = "hidden";
-          return true;
-        }
-      };
     </script>
+    <script type="text/javascript" src="templates/validatePassword.js"></script>
   </section>
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </body>

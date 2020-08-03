@@ -53,6 +53,7 @@ if (!isset($_SESSION)) {
           </p>
         </div>
       </form>
+      <br>
       <p>
         <a href="signup">
           Don't have an account yet?
