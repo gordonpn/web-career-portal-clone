@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS Payment_Methods
     paymentMethodID int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
     userID          varchar(255) NOT NULL,
     isPreSelected   boolean      NOT NULL,
-    paymentType     enum ('credit', 'debit'),
+    paymentType     enum ('credit', 'debit') NOT NULL,
     cardNumber      bigint       NOT NULL,
     FOREIGN KEY (userID) REFERENCES Users (userID) ON DELETE CASCADE
 );

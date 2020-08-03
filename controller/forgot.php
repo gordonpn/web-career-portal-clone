@@ -20,13 +20,14 @@ class Forgot
       $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
       if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = "Enter a valid email.";
+        include 'view/forgot.php';
         return null;
       }
       $_SESSION['email'] = $email;
-      if ($this->user->verifyEmail($email)) {
-        $showModalPassword = true;
-      } else {
+      if (is_null($this->user->verifyEmail($email))) {
         $error = "User not found.";
+      } else {
+        $showModalPassword = true;
       }
     }
 
