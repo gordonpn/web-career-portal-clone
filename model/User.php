@@ -123,4 +123,16 @@ class User
       return true;
     }
   }
+
+  public function createUser($username, $email, $password, $plan)
+  {
+    $sql = "INSERT INTO Users (userID, planID, email, password)
+    VALUES (:username, (SELECT planID FROM Plans WHERE name = :plan), :email, :password)";
+    $this->_db->query($sql);
+    $this->_db->bind(':username', $username, PDO::PARAM_STR);
+    $this->_db->bind(':plan', $plan, PDO::PARAM_STR);
+    $this->_db->bind(':email', $email, PDO::PARAM_STR);
+    $this->_db->bind(':password', $password, PDO::PARAM_STR);
+    return $this->_db->execute();
+  }
 }
