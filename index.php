@@ -26,7 +26,9 @@ switch ($request) {
     $manageUsersController->invoke();
     break;
   case '/signup':
-    include __DIR__ . '/view/signup.php';
+    include "controller/signup.php";
+    $signUpController = new SignUpController();
+    $signUpController->invoke();
     break;
   case '/jobs':
     include "controller/jobs.php";
