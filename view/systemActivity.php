@@ -32,11 +32,22 @@ if (!isset($_SESSION)) {
         </thead>
         <tbody>
           <?php
+          if (!isset($activities)) {
+            return null;
+          }
+          foreach ($activities as $index => $obj) {
+            echo '<tr>';
+            foreach ($obj as $propName => $propValue) {
+              echo "<td>$propValue</td>";
+            }
+            echo '</tr>';
+          }
           ?>
         </tbody>
       </table>
     </div>
   </section>
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </body>
 
 </html>
