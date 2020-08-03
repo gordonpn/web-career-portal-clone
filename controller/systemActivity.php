@@ -3,15 +3,15 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
-require "model/User.php";
+require "model/SystemActivity.php";
 
 class SystemActivityController
 {
-  public $user;
+  public $systemActivity;
 
   public function __construct()
   {
-    $this->user = new User();
+    $this->systemActivity = new SystemActivity();
   }
 
   public function invoke()
@@ -28,6 +28,7 @@ class SystemActivityController
       return null;
     }
 
+    $activities = $this->systemActivity->getAllSystemActivity();
     include 'view/systemActivity.php';
   }
 }
