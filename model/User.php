@@ -109,4 +109,18 @@ class User
     $this->_db->bind(':user', $username, PDO::PARAM_STR);
     return $this->_db->execute();
   }
+
+  public function verifyUser($username)
+  {
+    $sql = "SELECT userID FROM Users WHERE userID = :user";
+    $this->_db->query($sql);
+    $this->_db->bind(':user', $username, PDO::PARAM_STR);
+    $this->_db->execute();
+    $rowCount = $this->_db->rowCount();
+    if ($rowCount < 1) {
+      return null;
+    } else {
+      return true;
+    }
+  }
 }
