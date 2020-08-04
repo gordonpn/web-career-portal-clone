@@ -14,15 +14,20 @@ if (!isset($_SESSION)) {
   $heroTitle = "Dashboard";
   require "templates/hero.php";
   ?>
-  <?php if (isset($error)) : ?>
-    <section class="section">
-      <div class="container">
+  <section class="section">
+    <div class="container">
+      <?php if (isset($error)) : ?>
         <p class="has-text-weight-bold has-text-danger">
           <?php echo $error; ?>
         </p>
-      </div>
-    </section>
-  <?php endif ?>
+      <?php endif; ?>
+      <?php if (isset($message)) : ?>
+        <p class="has-text-weight-bold has-text-info">
+          <?php echo $message; ?>
+        </p>
+      <?php endif; ?>
+    </div>
+  </section>
   <?php if (isset($_SESSION["loggedIn"]) && $_SESSION["balance"] < 0) : ?>
     <section class="hero is-danger">
       <div class="hero-body">
