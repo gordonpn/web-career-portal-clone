@@ -38,8 +38,9 @@ CREATE TABLE IF NOT EXISTS Users
 
 CREATE TABLE IF NOT EXISTS Profiles
 (
-    userID         varchar(255) NOT NULL,
+    userID         varchar(255) NOT NULL PRIMARY KEY,
     locationID     int          NOT NULL,
+    companyName    varchar(255) NOT NULL,
     firstName      varchar(255),
     lastName       varchar(255),
     profession     varchar(255),
@@ -61,7 +62,6 @@ CREATE TABLE IF NOT EXISTS Jobs
     title              varchar(255) NOT NULL,
     salary             int          NOT NULL,
     description        longtext,
-    companyName        varchar(255) NOT NULL,
     positionsAvailable int          NOT NULL,
     datePosted         timestamp    NOT NULL      DEFAULT CURRENT_TIMESTAMP,
     status             enum ('active', 'expired') DEFAULT 'active',
@@ -72,11 +72,11 @@ CREATE TABLE IF NOT EXISTS Jobs
 
 CREATE TABLE IF NOT EXISTS Payment_Methods
 (
-    paymentMethodID int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    userID          varchar(255) NOT NULL,
-    isPreSelected   boolean      NOT NULL,
+    paymentMethodID int                      NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    userID          varchar(255)             NOT NULL,
+    isPreSelected   boolean                  NOT NULL,
     paymentType     enum ('credit', 'debit') NOT NULL,
-    cardNumber      bigint       NOT NULL,
+    cardNumber      bigint                   NOT NULL,
     FOREIGN KEY (userID) REFERENCES Users (userID) ON DELETE CASCADE
 );
 
