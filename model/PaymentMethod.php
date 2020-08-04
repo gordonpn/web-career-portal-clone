@@ -31,4 +31,14 @@ class PaymentMethod
     $this->_db->bind(':cardNumber', $cardNumber, PDO::PARAM_INT);
     return $this->_db->execute();
   }
+
+  public function getPaymentMethodsOf($username)
+  {
+    $sql = "SELECT paymentMethodID, isPreSelected, paymentType, cardNumber
+    FROM Payment_Methods
+    WHERE userID = :username";
+    $this->_db->query($sql);
+    $this->_db->bind(':username', $username, PDO::PARAM_STR);
+    return $this->_db->fetchAll();
+  }
 }
