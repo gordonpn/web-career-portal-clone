@@ -3,10 +3,15 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
+require "model/PaymentMethod.php";
+
 class ManagePaymentMethodsController
 {
+  public $paymentMethod;
+
   public function __construct()
   {
+    $this->paymentMethod = new PaymentMethod();
   }
 
   public function invoke()
@@ -27,6 +32,20 @@ class ManagePaymentMethodsController
       include 'view/dashboard.php';
       return null;
     }
+
+    if (isset($_POST['updatePreSelected'])) {
+      if (!$this->paymentMethod->updatePreSelected($_SESSION['username'], $_POST['updatePreSelected'])) {
+        $error = "An error occurred while updating.";
+      }
+    }
+
+    if (isset($_GET['deletePaymentMethod'])) {
+      if (!$this->paymentMethod->deletePaymentMethod($_GET['deletePaymentMethod'])) {
+        $error = "An error occurred while deleting.";
+      }
+    }
+
+    $paymentMethods = $this->paymentMethod->getPaymentMethodsOf($_SESSION['username']);
 
     include 'view/managePaymentMethods.php';
   }
