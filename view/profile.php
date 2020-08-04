@@ -241,6 +241,8 @@ if (!isset($_SESSION)) {
     const deleteAccountModal = document.getElementById("modal-delete-account");
     const changePasswordModal = document.getElementById("modal-change-password");
     const payBalanceModal = document.getElementById("modal-pay-balance");
+    const payBalanceCloseButton = document.getElementById("pay-balance-close-btn");
+    const payBalanceButton = document.getElementById("pay-balance-btn");
 
     function closeModal() {
       deleteAccountModal.className = "modal";
@@ -251,7 +253,9 @@ if (!isset($_SESSION)) {
     document.getElementById("delete-account-cancel-btn").addEventListener('click', closeModal);
     document.getElementById("new-password-close-btn").addEventListener('click', closeModal);
     document.getElementById("new-password-cancel-btn").addEventListener('click', closeModal);
-    document.getElementById("pay-balance-close-btn").addEventListener('click', closeModal);
+    if (payBalanceCloseButton) {
+      payBalanceCloseButton.addEventListener('click', closeModal);
+    }
 
     document.getElementById("delete-account-btn").addEventListener('click', function() {
       deleteAccountModal.className = "modal is-active";
@@ -259,9 +263,11 @@ if (!isset($_SESSION)) {
     document.getElementById("change-password-btn").addEventListener('click', function() {
       changePasswordModal.className = "modal is-active";
     });
-    document.getElementById("pay-balance-btn").addEventListener('click', function() {
-      payBalanceModal.className = "modal is-active";
-    });
+    if (payBalanceButton) {
+      payBalanceButton.addEventListener('click', function() {
+        payBalanceModal.className = "modal is-active";
+      });
+    }
   </script>
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </body>

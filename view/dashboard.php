@@ -53,14 +53,20 @@ if (!isset($_SESSION)) {
   <?php endif; ?>
   <script type="text/javascript">
     const payBalanceModal = document.getElementById("modal-pay-balance");
+    const payBalanceCloseButton = document.getElementById("pay-balance-close-btn");
+    const payBalanceButton = document.getElementById("pay-balance-btn");
 
     function closeModal() {
       payBalanceModal.className = "modal";
     }
-    document.getElementById("pay-balance-close-btn").addEventListener('click', closeModal);
-    document.getElementById("pay-balance-btn").addEventListener('click', function() {
-      payBalanceModal.className = "modal is-active";
-    });
+    if (payBalanceCloseButton) {
+      payBalanceCloseButton.addEventListener('click', closeModal);
+    }
+    if (payBalanceButton) {
+      payBalanceButton.addEventListener('click', function() {
+        payBalanceModal.className = "modal is-active";
+      });
+    }
   </script>
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </body>
