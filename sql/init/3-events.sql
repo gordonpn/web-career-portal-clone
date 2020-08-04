@@ -1,0 +1,11 @@
+SET GLOBAL event_scheduler = ON;
+
+DELIMITER $$
+
+CREATE EVENT IF NOT EXISTS automaticCharges
+    ON SCHEDULE EVERY '1' MONTH
+        STARTS '2020-09-01 00:00:00'
+    DO BEGIN
+END $$
+
+DELIMITER ;
