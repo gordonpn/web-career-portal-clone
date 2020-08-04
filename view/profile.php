@@ -133,42 +133,26 @@ if (!isset($_SESSION)) {
               </section>
             </div>
           </div>
-          <script type="text/javascript">
-            const deleteAccountModal = document.getElementById("modal-delete-account");
-            const changePasswordModal = document.getElementById("modal-change-password");
-
-            function closeModal() {
-              deleteAccountModal.className = "modal";
-              changePasswordModal.className = "modal";
-            }
-            document.getElementById("delete-account-close-btn").addEventListener('click', closeModal);
-            document.getElementById("delete-account-cancel-btn").addEventListener('click', closeModal);
-            document.getElementById("new-password-close-btn").addEventListener('click', closeModal);
-            document.getElementById("new-password-cancel-btn").addEventListener('click', closeModal);
-            document.getElementById("delete-account-btn").addEventListener('click', function() {
-              deleteAccountModal.className = "modal is-active";
-            });
-            document.getElementById("change-password-btn").addEventListener('click', function() {
-              changePasswordModal.className = "modal is-active";
-            });
-          </script>
         </div>
       </section>
     </div>
     <div class="column">
-      <section class="section">
-        <div class="container" style="max-width:40vw">
-          <h1 class="title">Pay Balance</h1>
-          <a class="button is-link">
-            <span class="icon">
-              <i class="fas fa-dollar-sign"></i>
-            </span>
-            <span>
-              Pay Balance
-            </span>
-          </a>
-        </div>
-      </section>
+      <?php if (!$_SESSION['isAdmin'] && !$_SESSION['isAutomatic']) : ?>
+        <section class="section">
+          <div class="container" style="max-width:40vw">
+            <h1 class="title">Pay Balance</h1>
+            <a class="button is-link" id="pay-balance-btn">
+              <span class="icon">
+                <i class="fas fa-dollar-sign"></i>
+              </span>
+              <span>
+                Pay Balance
+              </span>
+            </a>
+            <?php include 'templates/payBalanceModal.html'; ?>
+          </div>
+        </section>
+      <?php endif; ?>
       <?php if (!$_SESSION['isAdmin']) : ?>
         <section class="section">
           <div class="container" style="max-width:40vw">
@@ -190,7 +174,7 @@ if (!isset($_SESSION)) {
               <div class="field">
                 <p class="control">
                   <button type="submit" class="button is-link">
-                    Confirm Change
+                    Change Payment Method
                   </button>
                 </p>
               </div>
@@ -224,7 +208,7 @@ if (!isset($_SESSION)) {
               <div class="field">
                 <p class="control">
                   <button type="submit" class="button is-link">
-                    Confirm Change
+                    Change Plan
                   </button>
                 </p>
               </div>
@@ -253,6 +237,32 @@ if (!isset($_SESSION)) {
       <?php endif; ?>
     </div>
   </div>
+  <script type="text/javascript">
+    const deleteAccountModal = document.getElementById("modal-delete-account");
+    const changePasswordModal = document.getElementById("modal-change-password");
+    const payBalanceModal = document.getElementById("modal-pay-balance");
+
+    function closeModal() {
+      deleteAccountModal.className = "modal";
+      changePasswordModal.className = "modal";
+      payBalanceModal.className = "modal";
+    }
+    document.getElementById("delete-account-close-btn").addEventListener('click', closeModal);
+    document.getElementById("delete-account-cancel-btn").addEventListener('click', closeModal);
+    document.getElementById("new-password-close-btn").addEventListener('click', closeModal);
+    document.getElementById("new-password-cancel-btn").addEventListener('click', closeModal);
+    document.getElementById("pay-balance-close-btn").addEventListener('click', closeModal);
+
+    document.getElementById("delete-account-btn").addEventListener('click', function() {
+      deleteAccountModal.className = "modal is-active";
+    });
+    document.getElementById("change-password-btn").addEventListener('click', function() {
+      changePasswordModal.className = "modal is-active";
+    });
+    document.getElementById("pay-balance-btn").addEventListener('click', function() {
+      payBalanceModal.className = "modal is-active";
+    });
+  </script>
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </body>
 
