@@ -31,7 +31,7 @@ BEGIN
 END $$
 
 CREATE TRIGGER userUpdate
-    AFTER UPDATE
+    BEFORE UPDATE
     ON Users
     FOR EACH ROW
 BEGIN
@@ -51,9 +51,20 @@ BEGIN
         INSERT INTO System_Activity(description, title)
         VALUES (concat(OLD.userID, ' has changed their activity status.'), 'User Account Status Changed');
     END IF;
+    IF NEW.isActive = 1 AND OLD.isActive = 0 THEN
+        SET NEW.startSufferingDate = NULL;
+    END IF;
     IF NOT NEW.balance <=> OLD.balance THEN
         INSERT INTO System_Activity(description, title)
         VALUES (concat(OLD.userID, ' has changed their balance.'), 'Balance Changed');
+    END IF;
+    IF NEW.balance < 0 AND OLD.balance >= 0 THEN
+        SET NEW.startSufferingDate = CURRENT_TIMESTAMP;
+        INSERT INTO Emails(userID, content, title)
+        VALUES (OLD.userID, concat('Your account is now suffering starting', CURRENT_TIMESTAMP), 'Balance Negative');
+    END IF;
+    IF NEW.balance >= 0 AND OLD.balance < 0 THEN
+        SET NEW.startSufferingDate = NULL;
     END IF;
     IF NOT NEW.isAutomatic <=> OLD.isAutomatic THEN
         INSERT INTO System_Activity(description, title)
@@ -62,12 +73,13 @@ BEGIN
 END $$
 
 CREATE TRIGGER userCreate
-    AFTER INSERT
+    BEFORE INSERT
     ON Users
     FOR EACH ROW
 BEGIN
     INSERT INTO System_Activity(description, title)
     VALUES (concat(NEW.userID, ' has been created.'), 'User Created');
+    SET NEW.startSufferingDate = NEW.dateCreated;
 END $$
 
 CREATE TRIGGER userDelete
