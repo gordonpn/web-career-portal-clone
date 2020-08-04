@@ -78,7 +78,7 @@ if (!isset($_SESSION)) {
     </div>
     <div class="modal" id="modal-change-password">
       <div class="modal-background"></div>
-      <?php include "templates/newPasswordModal.html"; ?>
+      <?php require "templates/newPasswordModal.html"; ?>
     </div>
   </section>
   <?php if ($_SESSION["isEmployer"]) : ?>
