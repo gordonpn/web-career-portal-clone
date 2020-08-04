@@ -57,7 +57,7 @@ if (!isset($_SESSION)) {
                 echo "<td>False</td>";
               }
               echo '<td>';
-              echo "<a class=\"button is-small is-info is-light\" href=\"\">";
+              echo "<a class=\"button is-small is-info is-light\" href=\"managePaymentMethods?updatePaymentMethod=$obj->paymentMethodID\">";
               echo 'Edit';
               echo '</a>';
               echo '</td>';
@@ -143,6 +143,43 @@ if (!isset($_SESSION)) {
       </section>
     </div>
   </div>
+  <?php if (isset($paymentMethod)) : ?>
+    <div class="modal is-active" id="modal-edit">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Edit Payment Method</p>
+          <a class="delete" aria-label="close" id="edit-method-close-btn"></a>
+        </header>
+        <section class="modal-card-body">
+          <form action="managePaymentMethods" method="POST">
+            <div class=" field has-addons has-addons-centered">
+              <p class="control">
+                <div class="select">
+                  <select name="updatePaymentType" required>
+                    <option value="Credit">Credit</option>
+                    <option value="Debit">Debit</option>
+                  </select>
+                </div>
+              </p>
+              <p class="control has-icons-left">
+                <input name="updateCardNumber" class="input" type="tel" inputmode="numeric" pattern="[0-9]{4,19}" autocomplete="cc-number" maxlength="19" value="<?php echo $paymentMethod->cardNumber; ?>" placeholder="<?php echo $paymentMethod->cardNumber; ?>">
+                <span class="icon is-small is-left">
+                  <i class="far fa-credit-card"></i>
+                </span>
+              </p>
+              <input type="hidden" name="updatePaymentMethodID" value="<?php echo $paymentMethod->paymentMethodID; ?>" />
+              <p class="control">
+                <button class="button is-info" type="submit">
+                  Update Payment Method
+                </button>
+              </p>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  <?php endif; ?>
   <script type="text/javascript">
     const changePreSelectedModal = document.getElementById("modal-change-preselected");
     const changePreSelectedCloseButton = document.getElementById("change-pre-selected-close-btn");
@@ -150,10 +187,13 @@ if (!isset($_SESSION)) {
     const addPaymentButton = document.getElementById("add-payment-btn");
     const addPaymentCloseButton = document.getElementById("add-method-close-btn");
     const addPaymentModal = document.getElementById("modal-add");
+    const editPaymentCloseButton = document.getElementById("edit-method-close-btn");
+    const editPaymentModal = document.getElementById("modal-edit");
 
     function closeModal() {
       changePreSelectedModal.className = "modal";
       addPaymentModal.className = "modal";
+      editPaymentModal.className = "modal";
     }
 
     if (changePreSelectedButton) {
@@ -171,6 +211,9 @@ if (!isset($_SESSION)) {
     }
     if (addPaymentCloseButton) {
       addPaymentCloseButton.addEventListener('click', closeModal);
+    }
+    if (editPaymentCloseButton) {
+      editPaymentCloseButton.addEventListener('click', closeModal);
     }
   </script>
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>

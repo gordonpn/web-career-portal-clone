@@ -56,6 +56,20 @@ class ManagePaymentMethodsController
       }
     }
 
+    if (isset($_GET['updatePaymentMethod'])) {
+      $paymentMethod = $this->paymentMethod->getPaymentMethod($_GET['updatePaymentMethod']);
+    }
+
+    if (isset($_POST['updateCardNumber']) && isset($_POST['updatePaymentType']) && isset($_POST['updatePaymentMethodID'])) {
+      if (!$this->paymentMethod->updatePaymentMethod(
+        $_POST['updatePaymentMethodID'],
+        $_POST['updateCardNumber'],
+        $_POST['updatePaymentType']
+      )) {
+        $error = "Error updating payment method.";
+      }
+    }
+
     $paymentMethods = $this->paymentMethod->getPaymentMethodsOf($_SESSION['username']);
 
     include 'view/managePaymentMethods.php';
