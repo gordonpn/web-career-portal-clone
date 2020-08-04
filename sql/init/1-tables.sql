@@ -24,7 +24,7 @@ CREATE TABLE Plans
 DROP TABLE IF EXISTS Users;
 CREATE TABLE Users
 (
-    userNumber         int          NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    userNumber         int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
     userID             varchar(255) NOT NULL UNIQUE,
     planID             int,
     email              varchar(255) NOT NULL UNIQUE,

@@ -10,11 +10,11 @@ BEGIN
     VALUES ((SELECT userID
              FROM Payment_Methods
              WHERE NEW.paymentMethodID = Payment_Methods.paymentMethodID),
-            concat('Payment made of ', NEW.amount, ' by ', userID, '. Current balance is ', (SELECT balance
-                                                                                             FROM Users,
-                                                                                                  Payment_Methods
-                                                                                             WHERE NEW.paymentMethodID = Payment_Methods.paymentMethodID
-                                                                                               AND Payment_Methods.userID = Users.userID),
+            concat('Payment made of $', NEW.amount, ' by ', userID, '. Current balance is ', (SELECT balance
+                                                                                              FROM Users,
+                                                                                                   Payment_Methods
+                                                                                              WHERE NEW.paymentMethodID = Payment_Methods.paymentMethodID
+                                                                                                AND Payment_Methods.userID = Users.userID),
                    '$.'),
             'Payment Made');
 END $$
@@ -68,7 +68,7 @@ BEGIN
     IF NEW.balance < 0 AND OLD.balance >= 0 THEN
         SET NEW.startSufferingDate = CURRENT_TIMESTAMP;
         INSERT INTO Emails(userID, content, title)
-        VALUES (OLD.userID, concat('Your account is now suffering starting', CURRENT_TIMESTAMP), 'Balance Negative');
+        VALUES (OLD.userID, concat('Your account is now suffering starting ', CURRENT_TIMESTAMP), 'Balance Negative');
     END IF;
     IF NEW.balance >= 0 AND OLD.balance < 0 THEN
         SET NEW.startSufferingDate = NULL;
