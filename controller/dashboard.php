@@ -4,14 +4,17 @@ if (!isset($_SESSION)) {
 }
 
 require "model/User.php";
+require "model/PaymentMethod.php";
 
 class Dashboard
 {
   public $user;
+  public $paymentMethod;
 
   public function __construct()
   {
     $this->user = new User();
+    $this->paymentMethod = new PaymentMethod();
   }
 
   public function invoke()
@@ -30,6 +33,11 @@ class Dashboard
         return null;
       }
     }
+
+    if (isset($_SESSION["loggedIn"])) {
+      $paymentMethods = $this->paymentMethod->getPaymentMethodsOf($_SESSION['username']);
+    }
+
     include 'view/dashboard.php';
   }
 

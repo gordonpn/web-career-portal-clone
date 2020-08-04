@@ -13,10 +13,14 @@
         <div class="field has-addons has-addons-centered">
           <p class="control">
             <span class="select">
-              <select>
-                <option>$</option>
-                <option>£</option>
-                <option>€</option>
+              <select name="paymentMethodID" required>
+                <?php
+                if (isset($paymentMethods)) {
+                  foreach ($paymentMethods as $index => $obj) {
+                    echo "<option value=\"$obj->paymentMethodID\">$obj->paymentType: $obj->cardNumber</option>";
+                  }
+                }
+                ?>
               </select>
             </span>
           </p>

@@ -62,6 +62,10 @@ class Profile
       return null;
     }
 
+    if (isset($_SESSION["loggedIn"])) {
+      $paymentMethods = $this->paymentMethod->getPaymentMethodsOf($_SESSION['username']);
+    }
+
     include 'view/profile.php';
   }
 }
