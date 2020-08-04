@@ -55,7 +55,11 @@ BEGIN
         VALUES (concat(OLD.userID, ' has changed their activity status.'), 'User Account Status Changed');
     END IF;
     IF NEW.isActive = 1 AND OLD.isActive = 0 THEN
-        SET NEW.startSufferingDate = NULL;
+        IF NEW.balance < 0 THEN
+            SET NEW.startSufferingDate = CURRENT_TIMESTAMP;
+        ELSE
+            SET NEW.startSufferingDate = NULL;
+        END IF;
     END IF;
     IF NOT NEW.balance <=> OLD.balance THEN
         INSERT INTO System_Activity(description, title)
