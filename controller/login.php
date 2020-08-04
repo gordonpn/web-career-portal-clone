@@ -62,6 +62,14 @@ class Login
     }
     unset($value);
 
+    if (!$_SESSION['isActive']) {
+      session_unset();
+      session_destroy();
+      $error = "Your account is deactivated. Contact an administrator to reactivate your account.";
+      include 'view/login.php';
+      return null;
+    }
+
     $_SESSION["loggedIn"] = true;
     include 'view/dashboard.php';
   }

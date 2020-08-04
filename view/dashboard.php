@@ -30,7 +30,7 @@ if (!isset($_SESSION)) {
           <h1 class="title">
             Your account is frozen.
           </h1>
-          <?php echo "<h2 class=\"subtitle\">Your current balance is {$_SESSION['balance']}$</h2>"; ?>
+          <?php echo "<h2 class=\"subtitle\">Your current balance is {$_SESSION['balance']}$ since {$_SESSION['startSufferingDate']}.</h2>"; ?>
           <a class="button is-danger is-inverted">
             <span class="icon">
               <i class="fas fa-dollar-sign"></i>

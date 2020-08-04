@@ -28,6 +28,11 @@ class Profile
       return null;
     }
 
+    if (isset($_SESSION["loggedIn"]) && $_SESSION["balance"] < 0) {
+      include 'view/dashboard.php';
+      return null;
+    }
+
     if (isset($_GET["switchWithdrawal"])) {
       if ($this->user->updateWithdrawal($_SESSION['username'])) {
         $_SESSION["isAutomatic"] = !$_SESSION["isAutomatic"];
@@ -55,11 +60,6 @@ class Profile
       } else {
         $error = "Could not update plan.";
       }
-    }
-
-    if (isset($_SESSION["loggedIn"]) && $_SESSION["balance"] < 0) {
-      include 'view/dashboard.php';
-      return null;
     }
 
     include 'view/profile.php';
