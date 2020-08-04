@@ -36,11 +36,11 @@ class Forgot
       if ($this->user->updatePassword($_SESSION['email'], $password)) {
         $showModalPassword = false;
         $message = "Your password has been changed successfully";
-        include 'view/login.php';
-        return null;
       } else {
         $error = "An error has occurred.";
       }
+      include 'view/dashboard.php';
+      return null;
     }
     include 'view/forgot.php';
   }
