@@ -149,7 +149,7 @@ if (!isset($_SESSION)) {
                 Pay Balance
               </span>
             </a>
-            <?php include 'templates/payBalanceModal.html'; ?>
+            <?php include 'templates/payBalanceModal.php'; ?>
           </div>
         </section>
       <?php endif; ?>

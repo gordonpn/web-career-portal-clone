@@ -38,7 +38,7 @@ if (!isset($_SESSION)) {
             Your account is frozen.
           </h1>
           <?php echo "<h2 class=\"subtitle\">Your current balance is {$_SESSION['balance']}$</h2>"; ?>
-          <a class="button is-danger is-inverted">
+          <a class="button is-danger is-inverted" id="pay-balance-btn">
             <span class="icon">
               <i class="fas fa-dollar-sign"></i>
             </span>
@@ -46,10 +46,22 @@ if (!isset($_SESSION)) {
               Pay your Balance
             </span>
           </a>
+          <?php include 'templates/payBalanceModal.php'; ?>
         </div>
       </div>
     </section>
   <?php endif; ?>
+  <script type="text/javascript">
+    const payBalanceModal = document.getElementById("modal-pay-balance");
+
+    function closeModal() {
+      payBalanceModal.className = "modal";
+    }
+    document.getElementById("pay-balance-close-btn").addEventListener('click', closeModal);
+    document.getElementById("pay-balance-btn").addEventListener('click', function() {
+      payBalanceModal.className = "modal is-active";
+    });
+  </script>
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </body>
 

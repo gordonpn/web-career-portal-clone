@@ -10,6 +10,6 @@ function validateAmount() {
     payBalanceErrorText.style.visibility = "visible";
     return false;
   }
-  passwordErrorText.style.visibility = "hidden";
+  payBalanceErrorText.style.visibility = "hidden";
   return true;
 };

@@ -12,8 +12,16 @@
       <form action="profile" method="POST" onsubmit="return validateAmount();">
         <div class="field has-addons has-addons-centered">
           <p class="control">
-            <input name="payBalanceAmount" class="input" type="number" min="0" placeholder="Amount"
-              id="pay-balance-amount" required>
+            <span class="select">
+              <select>
+                <option>$</option>
+                <option>£</option>
+                <option>€</option>
+              </select>
+            </span>
+          </p>
+          <p class="control">
+            <input name="payBalanceAmount" class="input" type="number" min="0" placeholder="Amount" id="pay-balance-amount" required>
           </p>
           <p class="control">
             <button class="button is-info" type="submit" id="pay-balance-btn">

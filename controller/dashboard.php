@@ -18,12 +18,12 @@ class Dashboard
   {
     if (isset($_GET["logout"])) {
       $this->logOut();
+      $message = "You've logged out.";
     }
 
     if (isset($_GET["deleteAccount"])) {
       if ($this->user->deleteUser($_SESSION["username"])) {
         $this->logout();
-        $message = "You've logged out.";
       } else {
         $error = "An error as occurred.";
         include 'view/profile.php';
