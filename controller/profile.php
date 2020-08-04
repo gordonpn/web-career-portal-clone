@@ -3,20 +3,23 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
-require_once "model/User.php";
-require_once "model/PaymentMethod.php";
+require "model/User.php";
+require "model/PaymentMethod.php";
+require "model/Payment.php";
 require "service/balance.php";
 
 class Profile
 {
   public $user;
   public $paymentMethod;
+  public $payment;
   public $balanceService;
 
   public function __construct()
   {
     $this->user = new User();
     $this->paymentMethod = new PaymentMethod();
+    $this->payment = new Payment();
     $this->balanceService = new BalanceService();
   }
 
@@ -25,6 +28,11 @@ class Profile
     if (!isset($_SESSION['loggedIn'])) {
       $error = "Please log in first.";
       include 'view/login.php';
+      return null;
+    }
+
+    if (isset($_SESSION["loggedIn"]) && $_SESSION["balance"] < 0) {
+      include 'view/dashboard.php';
       return null;
     }
 
@@ -57,9 +65,18 @@ class Profile
       }
     }
 
-    if (isset($_SESSION["loggedIn"]) && $_SESSION["balance"] < 0) {
-      include 'view/dashboard.php';
-      return null;
+    if (isset($_POST['paymentMethodID']) && isset($_POST['payBalanceAmount'])) {
+      $newBalance = $_SESSION['balance'] + $_POST['payBalanceAmount'];
+      if ($this->user->updateBalance($_SESSION['username'], $newBalance)) {
+        $_SESSION['balance'] = $newBalance;
+        $this->payment->createPayment($_POST['paymentMethodID'], $_POST['payBalanceAmount']);
+      } else {
+        $error = "Could not update balance.";
+      }
+    }
+
+    if (isset($_SESSION["loggedIn"])) {
+      $paymentMethods = $this->paymentMethod->getPaymentMethodsOf($_SESSION['username']);
     }
 
     include 'view/profile.php';

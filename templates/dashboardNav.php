@@ -8,7 +8,6 @@ if (!isset($_SESSION["loggedIn"])) {
     <div class="container">
       <ul>
         <?php
-
         if ($_SESSION["balance"] < 0) {
           return null;
         }
@@ -53,19 +52,19 @@ if (!isset($_SESSION["loggedIn"])) {
         }
 
         if ($_SESSION["isAdmin"]) {
-          if (strcasecmp($heroTitle, 'users') == 0) {
+          if (strcasecmp($heroTitle, 'manage users') == 0) {
             echo '<li class="is-active">';
           } else {
             echo '<li>';
           }
-          echo '<a>Users</a></li>';
+          echo '<a href="manageUsers">Manage Users</a></li>';
 
           if (strcasecmp($heroTitle, 'system activity') == 0) {
             echo '<li class="is-active">';
           } else {
             echo '<li>';
           }
-          echo '<a>System Activity</a></li>';
+          echo '<a href="systemActivity">System Activity</a></li>';
         }
 
         if (strcasecmp($heroTitle, 'my profile') == 0) {

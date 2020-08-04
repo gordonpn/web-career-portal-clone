@@ -20,11 +20,20 @@ switch ($request) {
     $login = new Login();
     $login->invoke();
     break;
+  case '/manageUsers':
+    include "controller/manageUsers.php";
+    $manageUsersController = new ManageUsersController();
+    $manageUsersController->invoke();
+    break;
   case '/signup':
-    include __DIR__ . '/view/signup.php';
+    include "controller/signup.php";
+    $signUpController = new SignUpController();
+    $signUpController->invoke();
     break;
   case '/jobs':
-    include __DIR__ . '/view/jobs.php';
+    include "controller/jobs.php";
+    $jobsController = new JobsController();
+    $jobsController->invoke();
     break;
   case '/categories':
     include __DIR__ . '/view/categories.php';
@@ -38,6 +47,11 @@ switch ($request) {
     include "controller/forgot.php";
     $forgot = new Forgot();
     $forgot->invoke();
+    break;
+  case '/systemActivity':
+    include "controller/systemActivity.php";
+    $systemActivityController = new SystemActivityController();
+    $systemActivityController->invoke();
     break;
   default:
     http_response_code(404);

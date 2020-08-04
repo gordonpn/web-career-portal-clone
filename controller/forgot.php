@@ -20,13 +20,14 @@ class Forgot
       $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
       if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = "Enter a valid email.";
+        include 'view/forgot.php';
         return null;
       }
       $_SESSION['email'] = $email;
-      if ($this->user->verifyEmail($email)) {
-        $showModalPassword = true;
-      } else {
+      if (is_null($this->user->verifyEmail($email))) {
         $error = "User not found.";
+      } else {
+        $showModalPassword = true;
       }
     }
 
@@ -35,11 +36,11 @@ class Forgot
       if ($this->user->updatePassword($_SESSION['email'], $password)) {
         $showModalPassword = false;
         $message = "Your password has been changed successfully";
-        include 'view/login.php';
-        return null;
       } else {
         $error = "An error has occurred.";
       }
+      include 'view/dashboard.php';
+      return null;
     }
     include 'view/forgot.php';
   }

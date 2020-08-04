@@ -91,4 +91,48 @@ class User
     $this->_db->bind(':user', $username, PDO::PARAM_STR);
     return $this->_db->execute();
   }
+
+  public function getUsersAdminTable()
+  {
+    $sql = "SELECT userID, email, Plans.userType, dateCreated, isActive, startSufferingDate
+    FROM Users,
+         Plans
+    WHERE Users.planID = Plans.planID";
+    $this->_db->query($sql);
+    return $this->_db->fetchAll();
+  }
+
+  public function toggleUserActive($username)
+  {
+    $sql = "UPDATE Users SET isActive = NOT isActive WHERE userID = :user";
+    $this->_db->query($sql);
+    $this->_db->bind(':user', $username, PDO::PARAM_STR);
+    return $this->_db->execute();
+  }
+
+  public function verifyUser($username)
+  {
+    $sql = "SELECT userID FROM Users WHERE userID = :user";
+    $this->_db->query($sql);
+    $this->_db->bind(':user', $username, PDO::PARAM_STR);
+    $this->_db->execute();
+    $rowCount = $this->_db->rowCount();
+    if ($rowCount < 1) {
+      return null;
+    } else {
+      return true;
+    }
+  }
+
+  public function createUser($username, $email, $password, $plan)
+  {
+    $sql = "INSERT INTO Users (userID, planID, email, password)
+    VALUES (:username, (SELECT planID FROM Plans WHERE name = :plan), :email, :password)";
+    $this->_db->query($sql);
+    $this->_db->bind(':username', $username, PDO::PARAM_STR);
+    $this->_db->bind(':plan', $plan, PDO::PARAM_STR);
+    $this->_db->bind(':email', $email, PDO::PARAM_STR);
+    $this->_db->bind(':password', $password, PDO::PARAM_STR);
+    return $this->_db->execute();
+  }
 }

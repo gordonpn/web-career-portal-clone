@@ -1,6 +1,7 @@
 SET TIME_ZONE = '-04:00';
 
-CREATE TABLE IF NOT EXISTS Location
+DROP TABLE IF EXISTS Location;
+CREATE TABLE Location
 (
     locationID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     address    varchar(255),
@@ -9,8 +10,8 @@ CREATE TABLE IF NOT EXISTS Location
     province   varchar(255)
 );
 
-
-CREATE TABLE IF NOT EXISTS Plans
+DROP TABLE IF EXISTS Plans;
+CREATE TABLE Plans
 (
     planID     int                                    NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name       varchar(255)                           NOT NULL,
@@ -20,10 +21,11 @@ CREATE TABLE IF NOT EXISTS Plans
     userType   enum ('admin', 'employer', 'employee') NOT NULL DEFAULT 'employee'
 );
 
-
-CREATE TABLE IF NOT EXISTS Users
+DROP TABLE IF EXISTS Users;
+CREATE TABLE Users
 (
-    userID             varchar(255) NOT NULL PRIMARY KEY,
+    userNumber         int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    userID             varchar(255) NOT NULL UNIQUE,
     planID             int,
     email              varchar(255) NOT NULL UNIQUE,
     password           varchar(255) NOT NULL,
@@ -35,11 +37,12 @@ CREATE TABLE IF NOT EXISTS Users
     FOREIGN KEY (planID) REFERENCES Plans (planID)
 );
 
-
-CREATE TABLE IF NOT EXISTS Profiles
+DROP TABLE IF EXISTS Profiles;
+CREATE TABLE Profiles
 (
-    userID         varchar(255) NOT NULL,
+    userID         varchar(255) NOT NULL PRIMARY KEY,
     locationID     int          NOT NULL,
+    companyName    varchar(255) NOT NULL,
     firstName      varchar(255),
     lastName       varchar(255),
     profession     varchar(255),
@@ -52,8 +55,8 @@ CREATE TABLE IF NOT EXISTS Profiles
     FOREIGN KEY (locationID) REFERENCES Location (locationID)
 );
 
-
-CREATE TABLE IF NOT EXISTS Jobs
+DROP TABLE IF EXISTS Jobs;
+CREATE TABLE Jobs
 (
     jobID              int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
     userID             varchar(255) NOT NULL,
@@ -61,7 +64,6 @@ CREATE TABLE IF NOT EXISTS Jobs
     title              varchar(255) NOT NULL,
     salary             int          NOT NULL,
     description        longtext,
-    companyName        varchar(255) NOT NULL,
     positionsAvailable int          NOT NULL,
     datePosted         timestamp    NOT NULL      DEFAULT CURRENT_TIMESTAMP,
     status             enum ('active', 'expired') DEFAULT 'active',
@@ -69,19 +71,19 @@ CREATE TABLE IF NOT EXISTS Jobs
     FOREIGN KEY (locationID) REFERENCES Location (locationID)
 );
 
-
-CREATE TABLE IF NOT EXISTS Payment_Methods
+DROP TABLE IF EXISTS Payment_Methods;
+CREATE TABLE Payment_Methods
 (
-    paymentMethodID int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    userID          varchar(255) NOT NULL,
-    isPreSelected   boolean      NOT NULL,
-    paymentType     enum ('credit', 'debit'),
-    cardNumber      bigint       NOT NULL,
+    paymentMethodID int                      NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    userID          varchar(255)             NOT NULL,
+    isPreSelected   boolean                  NOT NULL,
+    paymentType     enum ('credit', 'debit') NOT NULL,
+    cardNumber      bigint                   NOT NULL,
     FOREIGN KEY (userID) REFERENCES Users (userID) ON DELETE CASCADE
 );
 
-
-CREATE TABLE IF NOT EXISTS Payments
+DROP TABLE IF EXISTS Payments;
+CREATE TABLE Payments
 (
     paymentID       int       NOT NULL AUTO_INCREMENT PRIMARY KEY,
     paymentMethodID int       NOT NULL,
@@ -90,8 +92,8 @@ CREATE TABLE IF NOT EXISTS Payments
     FOREIGN KEY (paymentMethodID) REFERENCES Payment_Methods (paymentMethodID)
 );
 
-
-CREATE TABLE IF NOT EXISTS Applications
+DROP TABLE IF EXISTS Applications;
+CREATE TABLE Applications
 (
     jobID                int          NOT NULL,
     userID               varchar(255) NOT NULL,
@@ -102,15 +104,15 @@ CREATE TABLE IF NOT EXISTS Applications
     FOREIGN KEY (jobID) REFERENCES Jobs (jobID) ON DELETE CASCADE
 );
 
-
-CREATE TABLE IF NOT EXISTS Job_Categories_List
+DROP TABLE IF EXISTS Job_Categories_List;
+CREATE TABLE Job_Categories_List
 (
     jobCategoriesID int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
     categoryName    varchar(255) NOT NULL
 );
 
-
-CREATE TABLE IF NOT EXISTS Job_Categories
+DROP TABLE IF EXISTS Job_Categories;
+CREATE TABLE Job_Categories
 (
     jobID         int NOT NULL,
     jobCategoryID int NOT NULL,
@@ -118,8 +120,8 @@ CREATE TABLE IF NOT EXISTS Job_Categories
     FOREIGN KEY (jobID) REFERENCES Jobs (jobID) ON DELETE CASCADE
 );
 
-
-CREATE TABLE IF NOT EXISTS Emails
+DROP TABLE IF EXISTS Emails;
+CREATE TABLE Emails
 (
     emailID  int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
     userID   varchar(255) NOT NULL,
@@ -129,8 +131,8 @@ CREATE TABLE IF NOT EXISTS Emails
     FOREIGN KEY (userID) REFERENCES Users (userID)
 );
 
-
-CREATE TABLE IF NOT EXISTS Employer_Categories
+DROP TABLE IF EXISTS Employer_Categories;
+CREATE TABLE Employer_Categories
 (
     employerCategoryID int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
     userID             varchar(255) NOT NULL,
@@ -138,7 +140,8 @@ CREATE TABLE IF NOT EXISTS Employer_Categories
     FOREIGN KEY (userID) REFERENCES Users (userID) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS System_Activity
+DROP TABLE IF EXISTS System_Activity;
+CREATE TABLE System_Activity
 (
     activityID   int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
     description  longtext     NOT NULL,

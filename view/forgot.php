@@ -41,48 +41,15 @@ if (!isset($_SESSION)) {
       </form>
     </div>
     <?php if (isset($showModalPassword) && $showModalPassword) : ?>
-      <div class="modal is-active" id="modal">
+      <div class="modal is-active" id="new-password-modal">
         <div class="modal-background"></div>
-        <div class="modal-card">
-          <header class="modal-card-head">
-            <p class="modal-card-title">Type a new password</p>
-            <a class="delete" aria-label="close" id="close-btn"></a>
-          </header>
-          <section class="modal-card-body">
-            <form action="forgot" method="POST" onsubmit="return validatePassword();">
-              <div class="field">
-                <label class="label">New Password</label>
-                <p class="control has-icons-left">
-                  <input name="password" class="input" type="password" placeholder="Password" required id="new-password">
-                  <span class="icon is-small is-left">
-                    <i class="fas fa-lock"></i>
-                  </span>
-                </p>
-              </div>
-              <div class="field">
-                <label class="label">Confirm New Password</label>
-                <p class="control has-icons-left">
-                  <input class="input" type="password" placeholder="Password" required id="confirm-password">
-                  <span class="icon is-small is-left">
-                    <i class="fas fa-lock"></i>
-                  </span>
-                </p>
-                <p style="visibility: hidden" class="has-text-danger" id="error-text">Passwords entered do not match</p>
-              </div>
-              <button class="button is-outlined is-link" id="confirm-btn" type="submit">Confirm change</button>
-              <a class="button is-outlined" id="cancel-btn">Cancel</a>
-            </form>
-          </section>
-        </div>
+        <?php include "templates/newPasswordModal.html"; ?>
       </div>
     <?php endif; ?>
     <script type="text/javascript">
-      const modal = document.getElementById("modal");
-      const errorText = document.getElementById("error-text");
-      const newPassword = document.getElementById("new-password");
-      const confirmPassword = document.getElementById("confirm-password");
-      const closeButton = document.getElementById("close-btn");
-      const cancelButton = document.getElementById("cancel-btn");
+      const modal = document.getElementById("new-password-modal");
+      const closeButton = document.getElementById("new-password-close-btn");
+      const cancelButton = document.getElementById("new-password-cancel-btn");
 
       function closeModal() {
         modal.className = "modal";
@@ -94,16 +61,6 @@ if (!isset($_SESSION)) {
       if (cancelButton) {
         cancelButton.addEventListener('click', closeModal);
       }
-
-      function validatePassword() {
-        if (newPassword.value != confirmPassword.value) {
-          errorText.style.visibility = "visible";
-          return false;
-        } else {
-          errorText.style.visibility = "hidden";
-          return true;
-        }
-      };
     </script>
   </section>
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
