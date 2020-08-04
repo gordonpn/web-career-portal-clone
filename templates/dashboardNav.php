@@ -1,21 +1,80 @@
-<?php if (isset($_SESSION["loggedIn"])) : ?>
-  <div class="hero-foot">
-    <nav class="tabs">
-      <div class="container">
-        <ul>
-          <li><a href="jobs">Jobs</a></li>
-          <li><a href="categories">Job Categories</a></li>
-          <li><a>Applied Jobs</a></li>
-          <?php if ($_SESSION["isEmployer"]) : ?>
-            <li><a>Posted Jobs</a></li>
-          <?php endif; ?>
-          <?php if ($_SESSION["isAdmin"]) : ?>
-            <li><a>Users</a></li>
-            <li><a>System Activity</a></li>
-          <?php endif; ?>
-          <li><a href="profile">Profile</a></li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-<?php endif; ?>
+<?php
+if (!isset($_SESSION["loggedIn"])) {
+  return null;
+}
+?>
+<div class="hero-foot">
+  <nav class="tabs is-boxed">
+    <div class="container">
+      <ul>
+        <?php
+        if ($_SESSION["balance"] < 0) {
+          return null;
+        }
+
+        if ($_SESSION["isEmployee"]) {
+          if (strcasecmp($heroTitle, 'jobs') == 0) {
+            echo '<li class="is-active">';
+          } else {
+            echo '<li>';
+          }
+          echo '<a href="jobs">Jobs</a></li>';
+
+          if (strcasecmp($heroTitle, 'job categories') == 0) {
+            echo '<li class="is-active">';
+          } else {
+            echo '<li>';
+          }
+          echo '<a href="categories">Job Categories</a></li>';
+
+          if (strcasecmp($heroTitle, 'applied jobs') == 0) {
+            echo '<li class="is-active">';
+          } else {
+            echo '<li>';
+          }
+          echo '<a>Applied Jobs</a></li>';
+        }
+
+        if ($_SESSION["isEmployer"]) {
+          if (strcasecmp($heroTitle, 'posted jobs') == 0) {
+            echo '<li class="is-active">';
+          } else {
+            echo '<li>';
+          }
+          echo '<a>Posted Jobs</a></li>';
+
+          if (strcasecmp($heroTitle, 'applications') == 0) {
+            echo '<li class="is-active">';
+          } else {
+            echo '<li>';
+          }
+          echo '<a>Applications</a></li>';
+        }
+
+        if ($_SESSION["isAdmin"]) {
+          if (strcasecmp($heroTitle, 'manage users') == 0) {
+            echo '<li class="is-active">';
+          } else {
+            echo '<li>';
+          }
+          echo '<a href="manageUsers">Manage Users</a></li>';
+
+          if (strcasecmp($heroTitle, 'system activity') == 0) {
+            echo '<li class="is-active">';
+          } else {
+            echo '<li>';
+          }
+          echo '<a href="systemActivity">System Activity</a></li>';
+        }
+
+        if (strcasecmp($heroTitle, 'my profile') == 0) {
+          echo '<li class="is-active">';
+        } else {
+          echo '<li>';
+        }
+        echo '<a href="profile">My Profile</a></li>';
+        ?>
+      </ul>
+    </div>
+  </nav>
+</div>

@@ -2,40 +2,41 @@
 // namespace Model;
 
 // use \PDO;
-class Database {
-  private $host = '127.0.0.1';
-  private $user = 'gxc353_1';
-  private $pass = 'temp_password';
-  private $name = 'gxc353_1';
+class Database
+{
+  private $_host = '127.0.0.1';
+  private $_user = 'gxc353_1';
+  private $_pass = 'temp_password';
+  private $_name = 'gxc353_1';
 
-  private $db_handler;
-  private $stmt;
-  private $error;
+  private $_databaseHandler;
+  private $_statement;
+  private $_error;
 
-  public function __construct() {
-    // Set DSN
-    $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->name;
+  public function __construct()
+  {
+    $dsn = 'mysql:host=' . $this->_host . ';dbname=' . $this->_name;
     $options = [
-      PDO::ATTR_PERSISTENT => true,
+      PDO::ATTR_EMULATE_PREPARES => false,
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+      PDO::ATTR_PERSISTENT => true,
     ];
 
-    // Create PDO Instance
     try {
-      $this->db_handler = new PDO($dsn, $this->user, $this->pass, $options);
+      $this->_databaseHandler = new PDO($dsn, $this->_user, $this->_pass, $options);
     } catch (PDOException $e) {
-      $this->error = $e->getMessage();
-      echo $this->error;
+      $this->_error = $e->getMessage();
+      echo $this->_error;
     }
   }
 
-  // Prepare statement with query
-  public function query($sql) {
-    $this->stmt = $this->db_handler->prepare($sql);
+  public function query($sql)
+  {
+    $this->_statement = $this->_databaseHandler->prepare($sql);
   }
 
-  // Bind values
-  public function bind($param, $value, $type = null) {
+  public function bind($param, $value, $type = null)
+  {
     if (is_null($type)) {
       switch (true) {
         case is_int($value):
@@ -55,28 +56,28 @@ class Database {
       }
     }
 
-    $this->stmt->bindValue($param, $value, $type);
+    $this->_statement->bindValue($param, $value, $type);
   }
 
-  // Execute the prepared statement
-  public function execute() {
-    return $this->stmt->execute();
+  public function execute()
+  {
+    return $this->_statement->execute();
   }
 
-  // Get result set as array of objects
-  public function resultSet() {
+  public function fetchAll()
+  {
     $this->execute();
-    return $this->stmt->fetchAll(PDO::FETCH_OBJ);
+    return $this->_statement->fetchAll(PDO::FETCH_OBJ);
   }
 
-  // Get single record as object
-  public function single() {
+  public function fetchOne()
+  {
     $this->execute();
-    return $this->stmt->fetch(PDO::FETCH_OBJ);
+    return $this->_statement->fetch(PDO::FETCH_OBJ);
   }
 
-  // Get row count
-  public function rowCount() {
-    return $this->stmt->rowCount();
+  public function rowCount()
+  {
+    return $this->_statement->rowCount();
   }
 }

@@ -1,0 +1,16 @@
+name: code-style
+on:
+  push:
+    branches-ignore:
+      - master
+      - develop
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: PHP Code Style (phpcs)
+        uses: chindit/actions-phpcs@master
+        with:
+          dir: .

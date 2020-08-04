@@ -1,5 +1,5 @@
 <?php
-include "templates/head.html";
+require "templates/head.html";
 if (!isset($_SESSION)) {
   session_start();
 }
@@ -10,18 +10,22 @@ if (!isset($_SESSION)) {
 </head>
 
 <body>
-  <section class="hero is-info">
-    <?php include "templates/navbar.php"; ?>
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title">
-          Login
-        </h1>
-      </div>
-    </div>
-  </section>
+  <?php
+  $heroTitle = "Login";
+  require "templates/hero.php";
+  ?>
   <section class="section">
     <div class="container" style="max-width:30vw">
+      <?php if (isset($error)) : ?>
+        <p class="has-text-weight-bold has-text-danger">
+          <?php echo $error; ?>
+        </p>
+      <?php endif; ?>
+      <?php if (isset($message)) : ?>
+        <p class="has-text-weight-bold has-text-info">
+          <?php echo $message; ?>
+        </p>
+      <?php endif; ?>
       <form action="login" method="POST">
         <div class="field">
           <label class="label">Username</label>
@@ -49,6 +53,7 @@ if (!isset($_SESSION)) {
           </p>
         </div>
       </form>
+      <br>
       <p>
         <a href="signup">
           Don't have an account yet?
