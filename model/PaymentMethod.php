@@ -63,4 +63,24 @@ class PaymentMethod
     $this->_db->bind(':paymentMethodID', $paymentMethodID, PDO::PARAM_STR);
     return $this->_db->execute();
   }
+
+  public function getPaymentMethod($paymentMethodID)
+  {
+    $sql = "SELECT paymentMethodID, cardNumber, paymentType FROM Payment_Methods WHERE paymentMethodID = :paymentMethodID";
+    $this->_db->query($sql);
+    $this->_db->bind(':paymentMethodID', $paymentMethodID, PDO::PARAM_STR);
+    return $this->_db->fetchOne();
+  }
+
+  public function updatePaymentMethod($paymentMethodID, $cardNumber, $paymentType)
+  {
+    $sql = "UPDATE Payment_Methods
+    SET paymentType = :paymentType, cardNumber = :cardNumber
+    WHERE paymentMethodID = :paymentMethodID";
+    $this->_db->query($sql);
+    $this->_db->bind(':paymentMethodID', $paymentMethodID, PDO::PARAM_STR);
+    $this->_db->bind(':cardNumber', $cardNumber, PDO::PARAM_INT);
+    $this->_db->bind(':paymentType', $paymentType, PDO::PARAM_STR);
+    return $this->_db->execute();
+  }
 }
