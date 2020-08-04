@@ -45,6 +45,17 @@ class ManagePaymentMethodsController
       }
     }
 
+    if (isset($_POST['newCardNumber']) && isset($_POST['newPaymentType'])) {
+      if (!$this->paymentMethod->createPaymentMethod(
+        $_SESSION['username'],
+        $_POST['newPaymentType'],
+        $_POST['newCardNumber'],
+        false
+      )) {
+        $error = "An error occurred while creating a new payment method.";
+      }
+    }
+
     $paymentMethods = $this->paymentMethod->getPaymentMethodsOf($_SESSION['username']);
 
     include 'view/managePaymentMethods.php';
