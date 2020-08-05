@@ -17,8 +17,7 @@ class Jobs
     FROM Jobs
     JOIN Location ON Jobs.locationID = Location.locationID
     JOIN Profiles ON Profiles.userID = Jobs.userID
-    JOIN Users ON Users.userID = Jobs.userID
-    WHERE Profiles.userID = Jobs.userID;";
+    JOIN Users ON Users.userID = Jobs.userID";
     $this->_db->query($sql);
     return $this->_db->fetchAll();
   }
