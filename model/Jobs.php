@@ -40,6 +40,18 @@ class Jobs
     return $this->_db->fetchAll();
   }
 
+  public function getCategoryJobs($categoryID)
+  {
+    $sql = "SELECT jobCategoriesID, categoryName, title
+      FROM Jobs
+              JOIN Job_Categories JC on Jobs.jobID = JC.jobID
+              JOIN Job_Categories_List JCL on JC.jobCategoryID = JCL.jobCategoriesID
+      WHERE jobCategoriesID = :categoryID;";
+    $this->_db->query($sql);
+    $this->_db->bind(':categoryID', $categoryID, PDO::PARAM_INT);
+    return $this->_db->fetchAll();
+  }
+
   public function getJobsPostedBy($username)
   {
     $sql = "SELECT title, city, salary, description, status, positionsAvailable, datePosted, jobID

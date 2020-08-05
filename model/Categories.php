@@ -13,9 +13,9 @@ class Categories
 
     public function getCategories()
     {
-        $sql = "SELECT categoryName, COUNT(jobID) as numPostings
+        $sql = "SELECT jobCategoriesID, categoryName, COUNT(jobID) as numPostings
         FROM Job_Categories_List JOIN Job_Categories ON Job_Categories_List.jobCategoriesID = Job_Categories.jobCategoryID
-        GROUP BY categoryName";
+        GROUP BY jobCategoriesID, categoryName";
         $this->_db->query($sql);
         return $this->_db->fetchAll();
     }
