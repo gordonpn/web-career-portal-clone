@@ -5,16 +5,19 @@ if (!isset($_SESSION)) {
 
 require "model/User.php";
 require "model/PaymentMethod.php";
+require "model/Profile.php";
 
 class SignUpController
 {
   public $user;
   public $paymentMethod;
+  public $profile;
 
   public function __construct()
   {
     $this->user = new User();
     $this->paymentMethod = new PaymentMethod();
+    $this->profile = new Profile();
   }
 
   public function invoke()
@@ -54,6 +57,11 @@ class SignUpController
         $_POST['password'],
         $_POST['plan']
       )) {
+        if (!$this->profile->createProfile($_SESSION['username'])) {
+          $error  = "An error occurred.";
+          include 'view/signup.php';
+          return null;
+        }
         if ($this->paymentMethod->createPaymentMethod(
           $username,
           $_POST['paymentType'],
@@ -63,9 +71,13 @@ class SignUpController
           $message = "You are signed up with username: " . $username . ". You may log in now.";
         } else {
           $error  = "An error occurred.";
+          include 'view/signup.php';
+          return null;
         }
       } else {
         $error  = "An error occurred.";
+        include 'view/signup.php';
+        return null;
       }
     }
     include 'view/signup.php';

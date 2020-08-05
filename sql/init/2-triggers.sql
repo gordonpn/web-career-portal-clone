@@ -90,6 +90,7 @@ BEGIN
     IF NEW.balance < 0 THEN
         SET NEW.startSufferingDate = NEW.dateCreated;
     END IF;
+    INSERT INTO Profiles(userID) VALUES (NEW.userID);
 END $$
 
 DROP TRIGGER IF EXISTS userDelete $$
