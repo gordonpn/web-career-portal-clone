@@ -86,6 +86,14 @@ VALUES ('gordon',
         FALSE,
         -50,
         TRUE),
+       ('joe',
+        4,
+        'joe@comp353.com',
+        'joe',
+        '2020-01-14',
+        TRUE,
+        0,
+        TRUE),
        ('tyson',
         2,
         'tyson@comp353.com',
@@ -102,6 +110,24 @@ VALUES ('Human Resources'),
        ('IT Help Desk'),
        ('System Administrator'),
        ('Database Administrator');
+
+INSERT INTO Location (address, city, postalCode, province)
+VALUES ('3269  Brew Creek Rd', 'North Pender Island', 'V0N 2M1', 'British Columbia'),
+       ('1046  Scotts Lane', 'Cobble Hill', 'V0R 1L1', 'British Columbia'),
+       ('3719  Toy Avenue', 'Pickering', 'L1S 6L6', 'Ontario'),
+       ('4470  rue des Églises Est', 'Ile Perrot', 'J0P 1K0', 'Quebec');
+
+INSERT INTO Jobs(userID, locationID, title, salary, description, positionsAvailable, datePosted, status)
+VALUES (10, 1, 'Python Developer', 80000, 'Must know snakes', 5, '2020-08-01', 'active'),
+       (10, 2, 'Java Developer', 60000, 'Must like coffee', 2, '2020-08-02', 'active'),
+       (10, 3, 'JavaScript Developer', 70000, 'Must know all frameworks', 8, '2020-08-03', 'active'),
+       (10, 4, 'Rust Developer', 85000, 'We will ask about metals', 3, '2020-08-04', 'active');
+
+INSERT INTO Job_Categories (jobID, jobCategoryID)
+VALUES (1, 2),
+       (2, 2),
+       (3, 2),
+       (4, 2);
 
 INSERT INTO Payment_Methods(userID, isPreSelected, cardNumber, paymentType)
 VALUES ('gordon', TRUE, 1234, 'debit'),
