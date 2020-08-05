@@ -35,7 +35,7 @@ class Dashboard
     }
 
     if (isset($_POST["username"]) && isset($_POST["password"])) {
-      $username = filter_var(trim($_POST["username"]), FILTER_SANITIZE_STRING);
+      $username = filter_var(trim(strtolower($_POST["username"])), FILTER_SANITIZE_STRING);
       $password = $_POST["password"];
       $error = $this->checkUser($username, $password);
       if (!is_null($error)) {
