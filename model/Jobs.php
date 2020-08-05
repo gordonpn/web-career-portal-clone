@@ -34,4 +34,14 @@ class Jobs
         $this->_db->query($sql);
         return $this->_db->fetchAll();
     }
+
+    public function getEmployerInfo($employer)
+    {
+        $sql = "SELECT firstName, LastName, phoneNumber, Users.email
+        FROM Profiles, Users
+        WHERE Profiles.userID = Users.userID AND Profiles.userID = :employer";
+        $this->_db->query($sql);
+        $this->_db->bind(':employer', $employer, PDO::PARAM_STR);
+        return $this->_db->fetchAll();
+    }
 }
