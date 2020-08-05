@@ -26,7 +26,7 @@ class SignUpController
         return null;
       }
 
-      $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
+      $email = filter_var(trim(strtolower($_POST["email"])), FILTER_SANITIZE_EMAIL);
 
       if ($this->emailIsNotValid($email)) {
         $error = "Email address is not valid.";
@@ -40,7 +40,7 @@ class SignUpController
         return null;
       }
 
-      $username = filter_var(trim($_POST['username']), FILTER_SANITIZE_STRING);
+      $username = filter_var(trim(strtolower($_POST['username'])), FILTER_SANITIZE_STRING);
 
       if (!is_null($this->user->verifyUser($username))) {
         $error = "An account already exists with that username.";

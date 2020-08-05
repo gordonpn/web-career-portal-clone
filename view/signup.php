@@ -81,7 +81,7 @@ if (!isset($_SESSION)) {
         <label class="label">Payment Information</label>
         <div class="field is-grouped">
           <p class="control has-icons-left">
-            <input name="cardNumber" class="input" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="xxxx xxxx xxxx xxxx" required>
+            <input name="cardNumber" class="input" type="tel" inputmode="numeric" pattern="[0-9]{4,19}" autocomplete="cc-number" maxlength="19" placeholder="xxxx xxxx xxxx xxxx" required>
             <span class="icon is-small is-left">
               <i class="far fa-credit-card"></i>
             </span>

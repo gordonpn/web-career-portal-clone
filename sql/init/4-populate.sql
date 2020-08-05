@@ -152,7 +152,6 @@ VALUES ('123 Maple', 'Brossard', 'J4Y 1G6', 'Quebec'),
        ('3719  Toy Avenue', 'Pickering', 'L1S 6L6', 'Ontario'),
        ('4470  rue des Églises Est', 'Ile Perrot', 'J0P 1K0', 'Quebec');
 
-
 INSERT INTO Jobs(userID, locationID, title, salary, description, positionsAvailable, datePosted, status)
 VALUES ('leo', 1, 'Software Developer', 85000, 'Must have 15 years of experience in PHP', 3, '2020-07-15', 'active'),
        ('bob', 2, 'Human Resources', 120000, 'Must have 20 years experience at any company', 1, '2020-08-02', 'active'),

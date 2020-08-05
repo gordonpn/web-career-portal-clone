@@ -55,12 +55,6 @@ class Profile
       }
     }
 
-    if (isset($_POST['updatePaymentMethodType'])) {
-      if (!$this->paymentMethod->updatePaymentMethodType($_SESSION['username'], $_POST["updatePaymentMethodType"])) {
-        $error = "Could not change payment method type.";
-      }
-    }
-
     if (isset($_POST['newPlan'])) {
       if ($this->user->updatePlan($_SESSION['username'], $_POST['newPlan'])) {
         $balanceDifference = $this->balanceService->calculateBalanceDifference($_SESSION['planName'], $_POST['newPlan']);
