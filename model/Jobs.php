@@ -29,7 +29,7 @@ class Jobs
         FROM Jobs
           JOIN Location ON Jobs.locationID = Location.locationID
           JOIN Profiles ON Jobs.userID = Profiles.userID
-         WHERE LOWER(CONCAT(title, '', datePosted, '', description, '', Profiles.companyName, '', Jobs.userID, '', Location.city, '',salary, '', positionsAvailable, '', status))
+         WHERE LOWER(CONCAT(title, '', description, '', Profiles.companyName, '', Jobs.userID, '', Location.city))
            LIKE LOWER('%$keyword%')";
         $this->_db->query($sql);
         return $this->_db->fetchAll();
