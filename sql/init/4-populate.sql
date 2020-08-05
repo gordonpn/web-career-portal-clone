@@ -164,13 +164,20 @@ VALUES ('leo', 1, 'Software Developer', 85000, 'Must have 15 years of experience
        ('joe', 8, 'JavaScript Developer', 70000, 'Must know all frameworks', 8, '2020-08-03', 'active'),
        ('joe', 9, 'Rust Developer', 85000, 'We will ask about metals', 3, '2020-08-04', 'active');
 
-INSERT INTO Profiles(userID, locationID, companyName, firstName, lastName, profession, gender, displayPicture, resume,
-                     phoneNumber, dateOfBirth)
-VALUES ('leo', 1, 'Siens', 'Leo', 'Silao', 'Senior Developer', 'Male', NULL, NULL, '514-555-8888', NULL),
-       ('bob', 2, 'Stonks', 'Bob', 'Taylor', 'Doctor', 'Male', NULL, NULL, '514-567-8910', NULL),
-       ('sujan', 3, 'Diff', 'Sujan', 'S.', 'Tech Lead', 'Male', NULL, NULL, '514-676-6767', NULL),
-       ('jcole', 4, 'BigMusic', 'Jcole', 'Rapper', 'Singer', 'Male', NULL, NULL, '514-454-5454', NULL),
-       ('ariana', 5, 'SmallMusic', 'Ariana', 'Grande', 'Singer', 'Female', NULL, NULL, '514-232-2323', NULL);
+INSERT INTO Profiles(userID, locationID, companyName, firstName, lastName, profession, gender,
+                     phoneNumber)
+VALUES ('leo', 1, 'Siens', 'Leo', 'Silao', 'Senior Developer', 'Male', '514-555-8888'),
+       ('bob', 2, 'Stonks', 'Bob', 'Taylor', 'Doctor', 'Male', '514-567-8910'),
+       ('sujan', 3, 'Diff', 'Sujan', 'S.', 'Tech Lead', 'Male', '514-676-6767'),
+       ('jcole', 4, 'BigMusic', 'Jcole', 'Rapper', 'Singer', 'Male', '514-454-5454'),
+       ('ariana', 5, 'SmallMusic', 'Ariana', 'Grande', 'Singer', 'Female', '514-232-2323')
+ON DUPLICATE KEY UPDATE locationID  = VALUES(locationID),
+                        companyName = VALUES(companyName),
+                        firstName   = VALUES(firstName),
+                        lastName    = VALUES(lastName),
+                        profession  = VALUES(profession),
+                        gender      = VALUES(gender),
+                        phoneNumber = VALUES(phoneNumber);
 
 INSERT INTO Job_Categories(jobID, jobCategoryID)
 VALUES (1, 2),

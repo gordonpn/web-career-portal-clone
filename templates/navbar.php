@@ -3,6 +3,16 @@
     <div class="container">
       <div id="navbarMenuHeroA" class="navbar-menu">
         <div class="navbar-end">
+          <?php if (isset($_SESSION["isEmployer"])) : ?>
+            <span class="navbar-item">
+              <a class="button is-inverted" href="postJob">
+                <span class="icon">
+                  <i class="fas fa-plus"></i>
+                </span>
+                <span>Post New Job</span>
+              </a>
+            </span>
+          <?php endif; ?>
           <span class="navbar-item">
             <a class="button is-inverted" href="dashboard">
               <span class="icon">
