@@ -3,10 +3,15 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
+require "model/Jobs.php";
+
 class JobsController
 {
+  public $jobs;
+
   public function __construct()
   {
+    $this->jobs = new Jobs();
   }
 
   public function invoke()
@@ -28,6 +33,12 @@ class JobsController
       return null;
     }
 
+    if (isset($_GET['searchKeyword'])) {
+      $jobs = $this->jobs->getJobSearch($_GET['searchKeyword']);
+      include 'view/jobs.php';
+      return null;
+    }
+    $jobs = $this->jobs->getJobs();
     include 'view/jobs.php';
   }
 }
