@@ -213,15 +213,35 @@ if (!isset($_SESSION)) {
                 <div class="control">
                   <div class="select">
                     <select name="newPlan">
-                      <?php if ($_SESSION["isEmployee"]) : ?>
-                        <option value="Employee Basic">Employee Basic</option>
-                        <option value="Employee Prime">Employee Prime</option>
-                        <option value="Employee Gold">Employee Gold</option>
-                      <?php endif; ?>
-                      <?php if ($_SESSION["isEmployer"]) : ?>
-                        <option value="Employer Prime">Employer Prime</option>
-                        <option value="Employer Gold">employer gold</option>
-                      <?php endif; ?>
+                      <?php if ($_SESSION["isEmployee"]) {
+                        switch ($_SESSION['planName']) {
+                          case 'Employee Basic':
+                            echo '<option value="Employee Basic">Employee Basic</option>';
+                            echo '<option value="Employee Prime">Employee Prime</option>';
+                            echo '<option value="Employee Gold">Employee Gold</option>';
+                            break;
+                          case 'Employee Prime':
+                            echo '<option value="Employee Prime">Employee Prime</option>';
+                            echo '<option value="Employee Basic">Employee Basic</option>';
+                            echo '<option value="Employee Gold">Employee Gold</option>';
+                            break;
+                          case 'Employee Gold':
+                            echo '<option value="Employee Gold">Employee Gold</option>';
+                            echo '<option value="Employee Basic">Employee Basic</option>';
+                            echo '<option value="Employee Prime">Employee Prime</option>';
+                            break;
+                        }
+                      }
+                      if ($_SESSION["isEmployer"]) {
+                        if (strcmp($_SESSION['planName'], 'Employer Prime') == 0) {
+                          echo '<option value="Employer Prime">Employer Prime</option>';
+                          echo '<option value="Employer Gold">Employer Gold</option>';
+                        } else {
+                          echo '<option value="Employer Gold">Employer Gold</option>';
+                          echo '<option value="Employer Prime">Employer Prime</option>';
+                        }
+                      }
+                      ?>
                     </select>
                   </div>
                 </div>
