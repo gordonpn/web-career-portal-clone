@@ -108,7 +108,7 @@ DROP TABLE IF EXISTS Job_Categories_List;
 CREATE TABLE Job_Categories_List
 (
     jobCategoriesID int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    categoryName    varchar(255) NOT NULL
+    categoryName    varchar(255) NOT NULL UNIQUE
 );
 
 DROP TABLE IF EXISTS Job_Categories;

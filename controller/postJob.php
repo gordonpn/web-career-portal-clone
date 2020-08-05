@@ -6,18 +6,24 @@ if (!isset($_SESSION)) {
 require "model/Jobs.php";
 require "model/PaymentMethod.php";
 require "model/Location.php";
+require "model/JobCategoriesList.php";
+require "model/JobCategories.php";
 
 class PostJobController
 {
   public $jobs;
   public $paymentMethod;
   public $location;
+  public $jobCategoriesList;
+  public $jobCategories;
 
   public function __construct()
   {
     $this->jobs = new Jobs();
     $this->paymentMethod = new PaymentMethod();
     $this->location = new Location();
+    $this->jobCategoriesList = new JobCategoriesList();
+    $this->jobCategories = new JobCategories();
   }
 
   public function invoke()
@@ -47,22 +53,32 @@ class PostJobController
         return null;
       }
 
+      $jobCategory = ucwords(strtolower($_POST['jobCategory']));
+
+      $jobCategoryID = $this->jobCategoriesList->createJobCategory($jobCategory);
+
       $locationID = $this->location->createLocation(
         $_POST['address'],
-        $_POST['city'],
+        ucwords(strtolower($_POST['city'])),
         $_POST['postalCode'],
-        $_POST['province']
+        ucwords(strtolower($_POST['province']))
       );
 
-      if ($this->jobs->createJob(
+      $jobID = $this->jobs->createJob(
         $_SESSION['username'],
         $locationID,
         $_POST['title'],
         $_POST['salary'],
         $_POST['description'],
         $_POST['positionsAvailable']
-      )) {
-        $message = "Job posted successfully.";
+      );
+
+      if (!is_null($jobID)) {
+        if ($this->jobCategories->createJobCategoryLink($jobID, $jobCategoryID)) {
+          $message = "Job posted successfully.";
+        } else {
+          $error = "An error occurred while creating the job posting.";
+        }
       } else {
         $error = "An error occurred while creating the job posting.";
       }
@@ -77,6 +93,7 @@ class PostJobController
       && isset($_POST['salary'])
       && isset($_POST['positionsAvailable'])
       && isset($_POST['description'])
+      && isset($_POST['jobCategory'])
       && isset($_POST['city']));
   }
 }

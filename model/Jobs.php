@@ -73,6 +73,6 @@ class Jobs
     $this->_db->bind(':salary', $salary, PDO::PARAM_INT);
     $this->_db->bind(':description', $description, PDO::PARAM_STR);
     $this->_db->bind(':positionsAvailable', $positionsAvailable, PDO::PARAM_INT);
-    return $this->_db->execute();
+    return $this->_db->lastInsertId();
   }
 }
