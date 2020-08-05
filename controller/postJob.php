@@ -55,7 +55,13 @@ class PostJobController
 
       $jobCategory = ucwords(strtolower($_POST['jobCategory']));
 
-      $jobCategoryID = $this->jobCategoriesList->createJobCategory($jobCategory);
+      $jobCategoryObj = $this->jobCategoriesList->findJobCategory($jobCategory);
+
+      if (!$jobCategoryObj) {
+        $jobCategoryID = $this->jobCategoriesList->createJobCategory($jobCategory);
+      } else {
+        $jobCategoryID = $jobCategoryObj->jobCategoriesID;
+      }
 
       $locationID = $this->location->createLocation(
         $_POST['address'],
