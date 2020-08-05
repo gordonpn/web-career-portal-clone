@@ -30,19 +30,62 @@ if (!isset($_SESSION)) {
         </thead>
         <tbody>
           <?php
-          foreach ($categories as $index => $obj) {
-            echo '<tr>';
-            echo '<td>';
-            echo "<a class=\"is-info\">";
-            echo "$obj->categoryName";
-            echo '</a>';
-            echo "<td>$obj->numPostings</td>";
-            echo '</tr>';
+          if (isset($categories)) {
+            foreach ($categories as $index => $obj) {
+              echo '<tr>';
+              echo '<td>';
+              echo "<a class=\"is-info\" id=\"show-categories-modal\" href=\"categories?showCategoryJobs=$obj->jobCategoriesID\">";
+              echo "$obj->categoryName";
+              echo '</a>';
+              echo "<td>$obj->numPostings</td>";
+              echo '</tr>';
+            }
           }
           ?>
         </tbody>
       </table>
     </div>
   </section>
+  <div class="modal" id="categories-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Jobs</p>
+        <a class="delete" aria-label="close" id="categories-modal-close-btn"></a>
+      </header>
+      <section class="modal-card-body">
+        <div>
+          <ul>
+            <?php
+            if (isset($categoryJobs)) {
+              foreach ($categoryJobs as $index => $obj) {
+                echo "<li>$obj->title</li>";
+              }
+            }
+            ?>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </div>
+  <script>
+    const showCategoriesModal = document.getElementById("show-categories-modal")
+    const categoriesModal = document.getElementById("categories-modal");
+    const categoriesModalCloseBtn = document.getElementById("categories-modal-close-btn");
+
+    function closeModal() {
+      categoriesModal.className = "modal";
+    }
+
+    if (showCategoriesModal) {
+      showCategoriesModal.addEventListener("click", function() {
+        categoriesModal.className = "modal is-active";
+      });
+    }
+
+    if (categoriesModalCloseBtn) {
+      categoriesModalCloseBtn.addEventListener('click', closeModal);
+    }
+  </script>
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </body>
