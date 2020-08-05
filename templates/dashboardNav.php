@@ -48,7 +48,7 @@ if (!isset($_SESSION["loggedIn"])) {
           } else {
             echo '<li>';
           }
-          echo '<a>Applications</a></li>';
+          echo '<a href="applications">Applications</a></li>';
         }
 
         if ($_SESSION["isAdmin"]) {

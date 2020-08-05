@@ -84,5 +84,7 @@ if (!isset($_SESSION)) {
       </table>
     </div>
   </section>
-  <script defer src=" https://use.fontawesome.com/releases/v5.3.1/js/all.js"> </script>
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </body>
+
+</html>

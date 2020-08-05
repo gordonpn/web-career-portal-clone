@@ -33,6 +33,7 @@ class ManageUsersController
         $error = "An error occurred while toggling status for {$_GET['toggleActive']}";
       }
     }
+
     $users = $this->user->getUsersAdminTable();
     include 'view/manageUsers.php';
   }

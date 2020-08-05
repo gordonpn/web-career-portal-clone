@@ -3,17 +3,17 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
-require "model/Jobs.php";
+require "model/Applications.php";
 require "model/PaymentMethod.php";
 
-class JobsController
+class ApplicationsController
 {
-  public $jobs;
+  public $applications;
   public $paymentMethod;
 
   public function __construct()
   {
-    $this->jobs = new Jobs();
+    $this->applications = new Applications();
     $this->paymentMethod = new PaymentMethod();
   }
 
@@ -25,8 +25,8 @@ class JobsController
       return null;
     }
 
-    if (!$_SESSION['isEmployee']) {
-      $error = "You must be an employee to access this page.";
+    if (!$_SESSION['isEmployer']) {
+      $error = "You must be an employer to access this page.";
       include 'view/dashboard.php';
       return null;
     }
@@ -37,12 +37,14 @@ class JobsController
       return null;
     }
 
-    if (isset($_GET['searchKeyword'])) {
-      $jobs = $this->jobs->getJobSearch($_GET['searchKeyword']);
-      include 'view/jobs.php';
-      return null;
+    if (isset($_GET['toggleAcceptanceEmployer'])) {
+      if (!$this->applications->updateEmployerAcceptance($_GET['toggleAcceptanceEmployer'], $_GET['applicant'])) {
+        $error = "An error occurred updating application status.";
+      }
     }
-    $jobs = $this->jobs->getJobs();
-    include 'view/jobs.php';
+
+    $applications = $this->applications->getApplicationsAsEmployer($_SESSION['username']);
+
+    include 'view/applications.php';
   }
 }
