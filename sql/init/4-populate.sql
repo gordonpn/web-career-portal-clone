@@ -185,3 +185,9 @@ VALUES (1, 2),
        (9, 2),
        (10, 2);
 
+INSERT INTO Applications (jobID, userID)
+VALUES (1, 'tiffany'),
+       (2, 'tiffany'),
+       (3, 'tiffany'),
+       (4, 'tiffany'),
+       (5, 'tiffany');
