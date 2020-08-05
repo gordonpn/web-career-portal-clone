@@ -86,7 +86,7 @@ VALUES ('gordon',
         FALSE,
         50,
         TRUE),
-        ('jcole',
+       ('jcole',
         5,
         'jcole@comp353.com',
         'jcole',
@@ -94,7 +94,7 @@ VALUES ('gordon',
         FALSE,
         50,
         TRUE),
-        ('ariana',
+       ('ariana',
         4,
         'ariana@comp353.com',
         'ariana',
@@ -135,24 +135,31 @@ VALUES ('gordon', TRUE, 1234, 'debit'),
 
 INSERT INTO Location(address, city, postalCode, province)
 VALUES ('123 Maple', 'Brossard', 'J4Y 1G6', 'Quebec'),
-        ('456 Oak', 'Laval', 'J8X 1J7', 'Quebec'),
-        ('789 Palm', 'Toronto', 'B7S 8H6', 'Ontario'),
-        ('9193 Rainbow Road', 'Burlington', '1001', 'Vermont'),
-        ('52 Bowser Castle', 'Los Angeles', '2002', 'California');
+       ('456 Oak', 'Laval', 'J8X 1J7', 'Quebec'),
+       ('789 Palm', 'Toronto', 'B7S 8H6', 'Ontario'),
+       ('9193 Rainbow Road', 'Burlington', '1001', 'Vermont'),
+       ('52 Bowser Castle', 'Los Angeles', '2002', 'California');
 
 INSERT INTO Jobs(userID, locationID, title, salary, description, positionsAvailable, datePosted, status)
 VALUES ('leo', 1, 'Software Developer', 85000, 'Must have 15 years of experience in PHP', 3, '2020-07-15', 'active'),
-        ('bob', 2, 'Human Resources', 120000, 'Must have 20 years experience at any company', 1, '2020-08-02', 'active'),
-        ('sujan', 3, 'IT Help Desk', 60000, 'Required Skills: Java, mySQL', 1, '2020-08-13', 'expired'),
-        ('jcole', 4, 'Business Analyst', 85000, 'Requirements: Bachelors in Business', 5, '2020-07-15', 'expired'),
-        ('jcole', 4, 'Software Developer', 90000, 'Must know C++', 3, '2020-07-15', 'active'),
-        ('ariana', 5, 'Database Administrator', 60000, 'Looking for McGill students only', 1, '2020-07-06', 'active');
+       ('bob', 2, 'Human Resources', 120000, 'Must have 20 years experience at any company', 1, '2020-08-02', 'active'),
+       ('sujan', 3, 'IT Help Desk', 60000, 'Required Skills: Java, mySQL', 1, '2020-08-13', 'expired'),
+       ('jcole', 4, 'Business Analyst', 85000, 'Requirements: Bachelors in Business', 5, '2020-07-15', 'expired'),
+       ('jcole', 4, 'Software Developer', 90000, 'Must know C++', 3, '2020-07-15', 'active'),
+       ('ariana', 5, 'Database Administrator', 60000, 'Looking for McGill students only', 1, '2020-07-06', 'active');
 
-INSERT INTO Profiles(userID, locationID, companyName, firstName, lastName, profession, gender, displayPicture, resume, phoneNumber, dateOfBirth)
+INSERT INTO Profiles(userID, locationID, companyName, firstName, lastName, profession, gender, displayPicture, resume,
+                     phoneNumber, dateOfBirth)
 VALUES ('leo', 1, 'Siens', 'Leo', 'Silao', 'Senior Developer', 'Male', NULL, NULL, '514-555-8888', NULL),
-        ('bob', 2, 'Stonks', 'Bob', 'Taylor', 'Doctor', 'Male', NULL, NULL, '514-567-8910', NULL),
-        ('sujan', 3, 'Diff', 'Sujan', 'S.', 'Tech Lead', 'Male', NULL, NULL, '514-676-6767', NULL),
-        ('jcole', 4, 'BigMusic', 'Jcole', 'Rapper', 'Singer', 'Male', NULL, NULL, '514-454-5454', NULL),
-        ('ariana', 5, 'SmallMusic', 'Ariana', 'Grande', 'Singer', 'Female', NULL, NULL, '514-232-2323', NULL);
+       ('bob', 2, 'Stonks', 'Bob', 'Taylor', 'Doctor', 'Male', NULL, NULL, '514-567-8910', NULL),
+       ('sujan', 3, 'Diff', 'Sujan', 'S.', 'Tech Lead', 'Male', NULL, NULL, '514-676-6767', NULL),
+       ('jcole', 4, 'BigMusic', 'Jcole', 'Rapper', 'Singer', 'Male', NULL, NULL, '514-454-5454', NULL),
+       ('ariana', 5, 'SmallMusic', 'Ariana', 'Grande', 'Singer', 'Female', NULL, NULL, '514-232-2323', NULL);
 
-
+INSERT INTO Job_Categories(jobID, jobCategoryID)
+VALUES (1, 2),
+       (2, 1),
+       (3, 4),
+       (4, 3),
+       (5, 2),
+       (6, 6);
