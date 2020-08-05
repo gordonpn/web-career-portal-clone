@@ -31,6 +31,16 @@ class Profile
       return null;
     }
 
+    if (isset($_POST['paymentMethodID']) && isset($_POST['payBalanceAmount'])) {
+      $newBalance = $_SESSION['balance'] + $_POST['payBalanceAmount'];
+      if ($this->user->updateBalance($_SESSION['username'], $newBalance)) {
+        $_SESSION['balance'] = $newBalance;
+        $this->payment->createPayment($_POST['paymentMethodID'], $_POST['payBalanceAmount']);
+      } else {
+        $error = "Could not update balance.";
+      }
+    }
+
     if (isset($_SESSION["loggedIn"]) && $_SESSION["balance"] < 0) {
       include 'view/dashboard.php';
       return null;
@@ -62,16 +72,6 @@ class Profile
         $_SESSION['planName'] = $_POST['newPlan'];
       } else {
         $error = "Could not update plan.";
-      }
-    }
-
-    if (isset($_POST['paymentMethodID']) && isset($_POST['payBalanceAmount'])) {
-      $newBalance = $_SESSION['balance'] + $_POST['payBalanceAmount'];
-      if ($this->user->updateBalance($_SESSION['username'], $newBalance)) {
-        $_SESSION['balance'] = $newBalance;
-        $this->payment->createPayment($_POST['paymentMethodID'], $_POST['payBalanceAmount']);
-      } else {
-        $error = "Could not update balance.";
       }
     }
 
