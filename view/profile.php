@@ -191,28 +191,15 @@ if (!isset($_SESSION)) {
         <section class="section">
           <div class="container" style="max-width:40vw">
             <h1 class="title">
-              Change Payment Method
+              Manage Payment Methods
             </h1>
-            <form action="profile" method="POST">
-              <div class="field">
-                <label class="label">New Payment Method</label>
-                <div class="control">
-                  <div class="select">
-                    <select name="updatePaymentMethodType">
-                      <option value="Credit">Credit</option>
-                      <option value="Debit">Debit</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="field">
-                <p class="control">
-                  <button type="submit" class="button is-link">
-                    Change Payment Method
-                  </button>
-                </p>
-              </div>
-            </form>
+            <div class="field">
+              <p class="control">
+                <a class="button is-link" href="managePaymentMethods">
+                  Manage Payment Methods
+                </a>
+              </p>
+            </div>
           </div>
         </section>
         <section class="section">

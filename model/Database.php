@@ -24,7 +24,7 @@ class Database
       $this->_databaseHandler = new PDO($dsn, $this->_user, $this->_pass, $options);
     } catch (PDOException $e) {
       $this->_error = $e->getMessage();
-      echo $this->_error;
+      echo "<p class=\"has-text-black has-background-warning\">$this->_error</p>";
     }
   }
 

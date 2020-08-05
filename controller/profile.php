@@ -34,7 +34,18 @@ class Profile
       return null;
     }
 
+    if (isset($_POST['paymentMethodID']) && isset($_POST['payBalanceAmount'])) {
+      $newBalance = $_SESSION['balance'] + $_POST['payBalanceAmount'];
+      if ($this->user->updateBalance($_SESSION['username'], $newBalance)) {
+        $_SESSION['balance'] = $newBalance;
+        $this->payment->createPayment($_POST['paymentMethodID'], $_POST['payBalanceAmount']);
+      } else {
+        $error = "Could not update balance.";
+      }
+    }
+
     if (isset($_SESSION["loggedIn"]) && $_SESSION["balance"] < 0) {
+      $paymentMethods = $this->paymentMethod->getPaymentMethodsOf($_SESSION['username']);
       include 'view/dashboard.php';
       return null;
     }
@@ -44,12 +55,6 @@ class Profile
         $_SESSION["isAutomatic"] = !$_SESSION["isAutomatic"];
       } else {
         $error = "An error as occurred.";
-      }
-    }
-
-    if (isset($_POST['updatePaymentMethodType'])) {
-      if (!$this->paymentMethod->updatePaymentMethodType($_SESSION['username'], $_POST["updatePaymentMethodType"])) {
-        $error = "Could not change payment method type.";
       }
     }
 
@@ -65,16 +70,6 @@ class Profile
         $_SESSION['planName'] = $_POST['newPlan'];
       } else {
         $error = "Could not update plan.";
-      }
-    }
-
-    if (isset($_POST['paymentMethodID']) && isset($_POST['payBalanceAmount'])) {
-      $newBalance = $_SESSION['balance'] + $_POST['payBalanceAmount'];
-      if ($this->user->updateBalance($_SESSION['username'], $newBalance)) {
-        $_SESSION['balance'] = $newBalance;
-        $this->payment->createPayment($_POST['paymentMethodID'], $_POST['payBalanceAmount']);
-      } else {
-        $error = "Could not update balance.";
       }
     }
 
