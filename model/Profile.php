@@ -2,7 +2,7 @@
 
 require_once "model/Database.php";
 
-class Profile
+class ProfileModel
 {
   private $_db;
 
@@ -21,5 +21,13 @@ class Profile
 
   public function updateProfile()
   {
+  }
+
+  public function getProfile($username)
+  {
+    $sql = "SELECT * FROM Profiles WHERE userID = :username";
+    $this->_db->query($sql);
+    $this->_db->bind(':username', $username, PDO::PARAM_STR);
+    return $this->_db->fetchOne();
   }
 }

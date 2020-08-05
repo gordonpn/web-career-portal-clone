@@ -3,24 +3,27 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
-require "model/User.php";
-require "model/PaymentMethod.php";
 require "model/Payment.php";
+require "model/PaymentMethod.php";
+require "model/Profile.php";
+require "model/User.php";
 require "service/balance.php";
 
 class Profile
 {
-  public $user;
-  public $paymentMethod;
-  public $payment;
   public $balanceService;
+  public $payment;
+  public $paymentMethod;
+  public $profile;
+  public $user;
 
   public function __construct()
   {
-    $this->user = new User();
-    $this->paymentMethod = new PaymentMethod();
-    $this->payment = new Payment();
     $this->balanceService = new BalanceService();
+    $this->payment = new Payment();
+    $this->paymentMethod = new PaymentMethod();
+    $this->profile = new ProfileModel();
+    $this->user = new User();
   }
 
   public function invoke()
@@ -78,6 +81,8 @@ class Profile
     if (isset($_SESSION["loggedIn"])) {
       $paymentMethods = $this->paymentMethod->getPaymentMethodsOf($_SESSION['username']);
     }
+
+    $profileInfo = $this->profile->getProfile($_SESSION['username']);
 
     include 'view/profile.php';
   }

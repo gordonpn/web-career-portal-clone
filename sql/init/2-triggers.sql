@@ -90,8 +90,17 @@ BEGIN
     IF NEW.balance < 0 THEN
         SET NEW.startSufferingDate = NEW.dateCreated;
     END IF;
+END $$
+
+DROP TRIGGER IF EXISTS createEmptyProfile $$
+CREATE TRIGGER createEmptyProfile
+    AFTER INSERT
+    ON Users
+    FOR EACH ROW
+BEGIN
     INSERT INTO Profiles(userID) VALUES (NEW.userID);
 END $$
+
 
 DROP TRIGGER IF EXISTS userDelete $$
 CREATE TRIGGER userDelete

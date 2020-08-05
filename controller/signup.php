@@ -17,7 +17,7 @@ class SignUpController
   {
     $this->user = new User();
     $this->paymentMethod = new PaymentMethod();
-    $this->profile = new Profile();
+    $this->profile = new ProfileModel();
   }
 
   public function invoke()
