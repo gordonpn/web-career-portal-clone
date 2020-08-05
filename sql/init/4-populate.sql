@@ -22,12 +22,12 @@ VALUES ('gordon', 1, 'gordon@comp353.com', 'gordon', '2020-01-15', TRUE, 0, TRUE
        ('tyson', 2, 'tyson@comp353.com', 'tyson', '2020-03-15', TRUE, -10, TRUE);
 
 INSERT INTO Job_Categories_List(categoryName)
-VALUES ('Technology'),
-       ('Business'),
+VALUES ('Finance'),
+       ('Technology'),
+       ('Busines'),
        ('IT'),
-       ('System'),
        ('Database'),
-       ('Finance');
+       ('System');
 
 INSERT INTO Payment_Methods(userID, isPreSelected, cardNumber, paymentType)
 VALUES ('gordon', TRUE, 1234, 'debit'),
