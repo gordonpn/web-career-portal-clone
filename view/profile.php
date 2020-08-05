@@ -89,21 +89,55 @@ if (!isset($_SESSION)) {
             <h1 class="title">
               Change Employer Information
             </h1>
-            <div class="field">
-              <label class="label">Employer Contact</label>
-              <div class="control has-icons-left has-icons-right" style="max-width:400px;">
-                <input class="input" type="tel" name="phone" pattern="[0-9]{10}" maxlength="10" placeholder="0000000000" required>
-                <span class="icon is-small is-left">
-                  <i class="fas fa-phone"></i>
-                </span>
-              </div>
-            </div>
-            <div class="field">
-              <p class="control">
-                <button class="button is-link">
-                  Change Contact Info
-                </button>
-              </p>
+            <button class="button is-link" id="employer-contact-btn">
+              Change Employer Information
+            </button>
+          </div>
+          <div class="modal" id="modal-employer-contact">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+              <header class="modal-card-head">
+                <p class="modal-card-title">Change Employer Contact Information</p>
+                <button class="delete" aria-label="close" id="employer-contact-close-btn"></button>
+              </header>
+              <?php if (isset($profileInfo)) : ?>
+                <section class="modal-card-body">
+                  <form action="profile" method="POST">
+                    <label class="label">First Name and Last Name</label>
+                    <div class="field has-addons">
+                      <div class="control">
+                        <input class="input" name="firstName" type="text" placeholder="<?php echo "$profileInfo->firstName"; ?>">
+                      </div>
+                      <div class="control">
+                        <input class="input" name="lastName" type="text" placeholder="<?php echo "$profileInfo->lastName"; ?>">
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label class="label">Phone Number</label>
+                      <div class="control has-icons-left has-icons-right" style="max-width:400px;">
+                        <input class="input" type="tel" name="phoneNumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" maxlength="13" placeholder="<?php echo "$profileInfo->phoneNumber"; ?>" required>
+                        <span class="icon is-small is-left">
+                          <i class="fas fa-phone"></i>
+                        </span>
+                      </div>
+                      <p class="help">Format: 000-000-0000</p>
+                    </div>
+                    <div class="field">
+                      <label class="label">Company Name</label>
+                      <div class="control">
+                        <input class="input" name="companyName" type="text" placeholder="<?php echo "$profileInfo->companyName"; ?>">
+                      </div>
+                    </div>
+                </section>
+                <footer class="modal-card-foot">
+                  <button class="button is-success" type="submit">Save changes</button>
+                </footer>
+                </form>
+              <?php else : ?>
+                <section class="modal-card-body">
+                  <p class="has-text-weight-bold has-text-danger">Failed retrieving profile information.</p>
+                </section>
+              <?php endif; ?>
             </div>
           </div>
         </section>
@@ -230,11 +264,23 @@ if (!isset($_SESSION)) {
     const payBalanceModal = document.getElementById("modal-pay-balance");
     const payBalanceCloseButton = document.getElementById("pay-balance-close-btn");
     const payBalanceButton = document.getElementById("pay-balance-btn");
+    const contactInfoModal = document.getElementById("modal-employer-contact");
+    const contactInfoCloseButton = document.getElementById("employer-contact-close-btn");
+    const contactInfoButton = document.getElementById("employer-contact-btn");
 
     function closeModal() {
-      deleteAccountModal.className = "modal";
-      changePasswordModal.className = "modal";
-      payBalanceModal.className = "modal";
+      if (deleteAccountModal) {
+        deleteAccountModal.className = "modal";
+      }
+      if (changePasswordModal) {
+        changePasswordModal.className = "modal";
+      }
+      if (payBalanceModal) {
+        payBalanceModal.className = "modal";
+      }
+      if (contactInfoModal) {
+        contactInfoModal.className = "modal";
+      }
     }
     document.getElementById("delete-account-close-btn").addEventListener('click', closeModal);
     document.getElementById("delete-account-cancel-btn").addEventListener('click', closeModal);
@@ -242,6 +288,9 @@ if (!isset($_SESSION)) {
     document.getElementById("new-password-cancel-btn").addEventListener('click', closeModal);
     if (payBalanceCloseButton) {
       payBalanceCloseButton.addEventListener('click', closeModal);
+    }
+    if (contactInfoCloseButton) {
+      contactInfoCloseButton.addEventListener('click', closeModal);
     }
 
     document.getElementById("delete-account-btn").addEventListener('click', function() {
@@ -253,6 +302,11 @@ if (!isset($_SESSION)) {
     if (payBalanceButton) {
       payBalanceButton.addEventListener('click', function() {
         payBalanceModal.className = "modal is-active";
+      });
+    }
+    if (contactInfoButton) {
+      contactInfoButton.addEventListener('click', function() {
+        contactInfoModal.className = "modal is-active";
       });
     }
   </script>
