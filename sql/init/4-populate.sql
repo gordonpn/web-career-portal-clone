@@ -120,12 +120,12 @@ VALUES ('gordon',
         TRUE);
 
 INSERT INTO Job_Categories_List(categoryName)
-VALUES ('Technology'),
-       ('Business'),
+VALUES ('Finance'),
+       ('Technology'),
+       ('Busines'),
        ('IT'),
-       ('System'),
        ('Database'),
-       ('Finance');
+       ('System');
 
 INSERT INTO Payment_Methods(userID, isPreSelected, cardNumber, paymentType)
 VALUES ('gordon', TRUE, 1234, 'debit'),

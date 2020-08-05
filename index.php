@@ -56,7 +56,9 @@ switch ($request) {
     $managePaymentMethodsController->invoke();
     break;
   case '/categories':
-    include __DIR__ . '/view/categories.php';
+    include "controller/categories.php";
+    $categoriesController = new CategoriesController();
+    $categoriesController->invoke();
     break;
   case '/profile':
     include "controller/profile.php";
