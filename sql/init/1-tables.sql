@@ -41,7 +41,7 @@ DROP TABLE IF EXISTS Profiles;
 CREATE TABLE Profiles
 (
     userID         varchar(255) NOT NULL PRIMARY KEY,
-    locationID     int         ,
+    locationID     int,
     companyName    varchar(255),
     firstName      varchar(255),
     lastName       varchar(255),

@@ -100,24 +100,44 @@ if (!isset($_SESSION)) {
                 <p class="modal-card-title">Change Employer Contact Information</p>
                 <button class="delete" aria-label="close" id="employer-contact-close-btn"></button>
               </header>
-              <section class="modal-card-body">
-                <?php if (isset($profileInfo)) : ?>
-                  <div class="field">
-                    <label class="label">Phone Number</label>
-                    <div class="control has-icons-left has-icons-right" style="max-width:400px;">
-                      <input class="input" type="tel" name="phoneNumber" pattern="[0-9]{10}" maxlength="10" placeholder="<?php echo "$profileInfo->phoneNumber"; ?>" required>
-                      <span class="icon is-small is-left">
-                        <i class="fas fa-phone"></i>
-                      </span>
+              <?php if (isset($profileInfo)) : ?>
+                <section class="modal-card-body">
+                  <form action="profile" method="POST">
+                    <label class="label">First Name and Last Name</label>
+                    <div class="field has-addons">
+                      <div class="control">
+                        <input class="input" name="firstName" type="text" placeholder="<?php echo "$profileInfo->firstName"; ?>">
+                      </div>
+                      <div class="control">
+                        <input class="input" name="lastName" type="text" placeholder="<?php echo "$profileInfo->lastName"; ?>">
+                      </div>
                     </div>
-                  </div>
-                <?php else : ?>
+                    <div class="field">
+                      <label class="label">Phone Number</label>
+                      <div class="control has-icons-left has-icons-right" style="max-width:400px;">
+                        <input class="input" type="tel" name="phoneNumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" maxlength="13" placeholder="<?php echo "$profileInfo->phoneNumber"; ?>" required>
+                        <span class="icon is-small is-left">
+                          <i class="fas fa-phone"></i>
+                        </span>
+                      </div>
+                      <p class="help">Format: 000-000-0000</p>
+                    </div>
+                    <div class="field">
+                      <label class="label">Company Name</label>
+                      <div class="control">
+                        <input class="input" name="companyName" type="text" placeholder="<?php echo "$profileInfo->companyName"; ?>">
+                      </div>
+                    </div>
+                </section>
+                <footer class="modal-card-foot">
+                  <button class="button is-success" type="submit">Save changes</button>
+                </footer>
+                </form>
+              <?php else : ?>
+                <section class="modal-card-body">
                   <p class="has-text-weight-bold has-text-danger">Failed retrieving profile information.</p>
-                <?php endif; ?>
-              </section>
-              <footer class="modal-card-foot">
-                <button class="button is-success">Save changes</button>
-              </footer>
+                </section>
+              <?php endif; ?>
             </div>
           </div>
         </section>

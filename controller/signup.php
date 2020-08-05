@@ -57,11 +57,6 @@ class SignUpController
         $_POST['password'],
         $_POST['plan']
       )) {
-        if (!$this->profile->createProfile($_SESSION['username'])) {
-          $error  = "An error occurred.";
-          include 'view/signup.php';
-          return null;
-        }
         if ($this->paymentMethod->createPaymentMethod(
           $username,
           $_POST['paymentType'],

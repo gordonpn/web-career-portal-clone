@@ -78,6 +78,18 @@ class Profile
       }
     }
 
+    if (isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['phoneNumber']) && isset($_POST['companyName'])) {
+      if (!$this->profile->updateProfile(
+        $_SESSION['username'],
+        $_POST['firstName'],
+        $_POST['lastName'],
+        $_POST['phoneNumber'],
+        $_POST['companyName']
+      )) {
+        $error = "An error occurred while updating.";
+      }
+    }
+
     if (isset($_SESSION["loggedIn"])) {
       $paymentMethods = $this->paymentMethod->getPaymentMethodsOf($_SESSION['username']);
     }
