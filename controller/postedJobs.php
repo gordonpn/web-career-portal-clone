@@ -4,14 +4,17 @@ if (!isset($_SESSION)) {
 }
 
 require "model/PaymentMethod.php";
+require "model/Jobs.php";
 
 class PostedJobsController
 {
   public $paymentMethod;
+  public $jobs;
 
   public function __construct()
   {
     $this->paymentMethod = new PaymentMethod();
+    $this->jobs = new Jobs();
   }
 
   public function invoke()
@@ -27,6 +30,20 @@ class PostedJobsController
       include 'view/dashboard.php';
       return null;
     }
+
+    if (isset($_GET['toggleStatus'])) {
+      if (!$this->jobs->updateJobStatus($_GET['toggleStatus'])) {
+        $error = "An error occurred while updating job status.";
+      }
+    }
+
+    if (isset($_GET['deleteJob'])) {
+      if (!$this->jobs->deleteJob($_GET['deleteJob'])) {
+        $error = "An error occurred while deleting job.";
+      }
+    }
+
+    $postedJobs = $this->jobs->getJobsPostedBy($_SESSION['username']);
 
     include 'view/postedJobs.php';
   }
