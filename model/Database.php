@@ -78,4 +78,10 @@ class Database
   {
     return $this->_statement->rowCount();
   }
+
+  public function lastInsertId()
+  {
+    $this->_statement->execute();
+    return $this->_databaseHandler->lastInsertId();
+  }
 }
