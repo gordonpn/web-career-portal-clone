@@ -32,6 +32,7 @@ class Profile
     }
 
     if (isset($_SESSION["loggedIn"]) && $_SESSION["balance"] < 0) {
+      $paymentMethods = $this->paymentMethod->getPaymentMethodsOf($_SESSION['username']);
       include 'view/dashboard.php';
       return null;
     }
