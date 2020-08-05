@@ -27,10 +27,13 @@ if (!isset($_SESSION)) {
         </p>
       <?php endif; ?>
       <form action="postJob" method="POST">
-        <div class="field">
-          <label class="label">Title</label>
-          <div class="control">
+        <label class="label">Title and Job Category</label>
+        <div class="field has-addons">
+          <div class="control is-expanded">
             <input class="input" name="title" type="text" placeholder="Title" required>
+          </div>
+          <div class="control is-expanded">
+            <input class="input" name="jobCategory" type="text" placeholder="Job Category" required>
           </div>
         </div>
         <label class="label">Salary and Positions Available</label>
