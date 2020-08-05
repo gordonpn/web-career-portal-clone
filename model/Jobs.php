@@ -34,4 +34,31 @@ class Jobs
     $this->_db->query($sql);
     return $this->_db->fetchAll();
   }
+
+  public function getJobsPostedBy($username)
+  {
+    $sql = "SELECT title, city, salary, description, status, positionsAvailable, datePosted, jobID
+    FROM Jobs
+    JOIN Location ON Jobs.locationID = Location.locationID
+    WHERE userID = :username";
+    $this->_db->query($sql);
+    $this->_db->bind(':username', $username, PDO::PARAM_STR);
+    return $this->_db->fetchAll();
+  }
+
+  public function deleteJob($jobID)
+  {
+    $sql = "DELETE FROM Jobs WHERE jobID = :jobID";
+    $this->_db->query($sql);
+    $this->_db->bind(':jobID', $jobID, PDO::PARAM_STR);
+    return $this->_db->execute();
+  }
+
+  public function updateJobStatus($jobID)
+  {
+    $sql = "UPDATE Jobs SET status = IF(status = 'active', 'expired', 'active') WHERE jobID = :jobID";
+    $this->_db->query($sql);
+    $this->_db->bind(':jobID', $jobID, PDO::PARAM_STR);
+    return $this->_db->execute();
+  }
 }

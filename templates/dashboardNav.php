@@ -41,7 +41,7 @@ if (!isset($_SESSION["loggedIn"])) {
           } else {
             echo '<li>';
           }
-          echo '<a>Posted Jobs</a></li>';
+          echo '<a href="postedJobs">Posted Jobs</a></li>';
 
           if (strcasecmp($heroTitle, 'applications') == 0) {
             echo '<li class="is-active">';

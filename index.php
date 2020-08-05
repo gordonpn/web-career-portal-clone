@@ -35,6 +35,11 @@ switch ($request) {
     $jobsController = new JobsController();
     $jobsController->invoke();
     break;
+  case '/postedJobs':
+    include "controller/postedJobs.php";
+    $postedJobsController = new PostedJobsController();
+    $postedJobsController->invoke();
+    break;
   case '/managePaymentMethods':
     include "controller/managePaymentMethods.php";
     $managePaymentMethodsController = new ManagePaymentMethodsController();
