@@ -29,8 +29,13 @@ class Jobs
     JOIN Location ON Jobs.locationID = Location.locationID
     JOIN Profiles ON Jobs.userID = Profiles.userID
     JOIN Users ON Users.userID = Jobs.userID
-    WHERE LOWER(CONCAT(title, '', description, '', Profiles.companyName, '', Jobs.userID, '', Location.city))
-    LIKE LOWER('%$keyword%');";
+    WHERE LOWER(title) LIKE LOWER('%$keyword%')
+    OR LOWER(description) LIKE LOWER('%$keyword%')
+    OR LOWER(Profiles.companyName) LIKE LOWER('%$keyword%')
+    OR LOWER(Profiles.firstName) LIKE LOWER('%$keyword%')
+    OR LOWER(Profiles.lastName) LIKE LOWER('%$keyword%')
+    OR LOWER(Jobs.userID) LIKE LOWER('%$keyword%')
+    OR LOWER(Location.city) LIKE LOWER('%$keyword%');";
     $this->_db->query($sql);
     return $this->_db->fetchAll();
   }
