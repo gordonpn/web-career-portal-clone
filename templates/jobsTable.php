@@ -28,11 +28,37 @@
       echo '<td>';
       include "templates/contactModal.php";
       echo '</td>';
-      echo '<td>';
-      echo "<a class=\"button is-small is-success\">";
-      echo 'Apply';
-      echo '</a>';
-      echo '</td>';
+      if (strcasecmp($obj->status, 'active') == 0) {
+        echo '<td>';
+        if ($obj->applied) {
+          if (strcasecmp($fromPage, "categories") == 0) {
+            echo "<a class=\"button is-small is-warning\" href=\"categories?jobWithdraw={$obj->jobID}&showCategoryJobs=$previousCategory\">";
+          } else {
+            if (isset($previousSearch)) {
+              echo "<a class=\"button is-small is-warning\" href=\"jobs?jobWithdraw={$obj->jobID}&searchKeyword=$previousSearch\">";
+            } else {
+              echo "<a class=\"button is-small is-warning\" href=\"jobs?jobWithdraw=$obj->jobID\">";
+            }
+          }
+          echo 'Withdraw';
+        } else {
+          if (strcasecmp($fromPage, "categories") == 0) {
+            echo "<a class=\"button is-small is-success\" href=\"categories?jobApply={$obj->jobID}&showCategoryJobs=$previousCategory\">";
+          } else {
+            if (isset($previousSearch)) {
+              echo "<a class=\"button is-small is-success\" href=\"jobs?jobApply={$obj->jobID}&searchKeyword=$previousSearch\">";
+            } else {
+              echo "<a class=\"button is-small is-success\" href=\"jobs?jobApply=$obj->jobID\">";
+            }
+          }
+          echo 'Apply';
+        }
+        echo '</a>';
+        echo '</td>';
+      } else {
+        echo '<td>';
+        echo '</td>';
+      }
       echo '</tr>';
     }
     ?>
