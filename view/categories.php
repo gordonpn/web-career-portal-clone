@@ -49,11 +49,11 @@ if (!isset($_SESSION)) {
         </div>
         <div class="column">
           <?php
-          if (isset($jobs)) :
+          if (isset($jobs)) {
             $fromPage = "categories";
+          }
+          include 'templates/jobsTable.php';
           ?>
-            <?php include 'templates/jobsTable.php'; ?>
-          <?php endif; ?>
         </div>
       </div>
     </div>
