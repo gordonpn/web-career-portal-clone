@@ -131,8 +131,6 @@ CREATE TRIGGER jobCreate
     ON Jobs
     FOR EACH ROW
 BEGIN
-    INSERT INTO System_Activity(description, title)
-    VALUES (concat(NEW.jobID, ' has been created.'), 'Job Created');
     IF (SELECT planID FROM Users WHERE Users.userID = NEW.userID) = 4 AND
        (SELECT count(*) FROM Jobs WHERE userID = NEW.userID) > 4 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Employer Prime plan cannot post to more than 5 jobs';
@@ -142,6 +140,8 @@ BEGIN
             WHERE U.userID = NEW.userID) = 'employee' THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Employees do not make job postings';
     END IF;
+    INSERT INTO System_Activity(description, title)
+    VALUES (concat(NEW.jobID, ' has been created.'), 'Job Created');
 END $$
 
 DROP TRIGGER IF EXISTS jobDelete $$
@@ -193,8 +193,6 @@ CREATE TRIGGER applicationCreate
     ON Applications
     FOR EACH ROW
 BEGIN
-    INSERT INTO System_Activity(description, title)
-    VALUES (concat(NEW.userID, ' created an application to job ', NEW.jobID), 'Application Created');
     IF (SELECT planID FROM Users WHERE Users.userID = NEW.userID) = 1 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Employee Basic plan cannot apply';
     ELSEIF (SELECT planID FROM Users WHERE Users.userID = NEW.userID) = 2 AND
@@ -206,6 +204,8 @@ BEGIN
             WHERE U.userID = NEW.userID) = 'employer' THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Employers do not apply to jobs';
     END IF;
+    INSERT INTO System_Activity(description, title)
+    VALUES (concat(NEW.userID, ' created an application to job ', NEW.jobID), 'Application Created');
 END $$
 
 DROP TRIGGER IF EXISTS applicationDelete $$
@@ -244,6 +244,12 @@ CREATE TRIGGER employerCategoryCreate
     ON Employer_Categories
     FOR EACH ROW
 BEGIN
+    IF (SELECT userType
+        FROM Plans
+                 JOIN Users U ON Plans.planID = U.planID
+        WHERE U.userID = NEW.userID) = 'employee' THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Employees cannot create records in Employer Categories table';
+    END IF;
     INSERT INTO System_Activity(description, title)
     VALUES (concat(NEW.categoryName, ' has been created.'), 'Employer Category Created');
 END $$
