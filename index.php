@@ -80,6 +80,11 @@ switch ($request) {
     $systemActivityController = new SystemActivityController();
     $systemActivityController->invoke();
     break;
+  case '/reports':
+    include "controller/reports.php";
+    $reportsController = new ReportsController();
+    $reportsController->invoke();
+    break;
   default:
     http_response_code(404);
     include __DIR__ . '/view/404.php';

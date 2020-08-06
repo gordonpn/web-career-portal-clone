@@ -51,6 +51,15 @@ if (!isset($_SESSION["loggedIn"])) {
           echo '<a href="applications">Applications</a></li>';
         }
 
+        if (!$_SESSION["isAdmin"]) {
+          if (strcasecmp($heroTitle, 'reports') == 0) {
+            echo '<li class="is-active">';
+          } else {
+            echo '<li>';
+          }
+          echo '<a href="reports">Reports</a></li>';
+        }
+
         if ($_SESSION["isAdmin"]) {
           if (strcasecmp($heroTitle, 'manage users') == 0) {
             echo '<li class="is-active">';
