@@ -51,8 +51,8 @@ if (!isset($_SESSION)) {
           <?php
           if (isset($jobs)) {
             $fromPage = "categories";
+            include 'templates/jobsTable.php';
           }
-          include 'templates/jobsTable.php';
           ?>
         </div>
       </div>
