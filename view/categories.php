@@ -48,7 +48,10 @@ if (!isset($_SESSION)) {
           </table>
         </div>
         <div class="column">
-          <?php if (isset($jobs)) : ?>
+          <?php
+          if (isset($jobs)) :
+            $fromPage = "categories";
+          ?>
             <?php include 'templates/jobsTable.php'; ?>
           <?php endif; ?>
         </div>

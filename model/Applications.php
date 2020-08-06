@@ -33,4 +33,35 @@ class Applications
     $this->_db->bind(':jobID', $jobID, PDO::PARAM_INT);
     return $this->_db->execute();
   }
+
+  public function updateEmployeeAcceptance($jobID, $username)
+  {
+    $sql = "UPDATE Applications
+    SET isAcceptedByEmployee = IF(isAcceptedByEmployee = TRUE, FALSE, TRUE)
+    WHERE jobID = :jobID
+    AND userID = :username";
+    $this->_db->query($sql);
+    $this->_db->bind(':username', $username, PDO::PARAM_STR);
+    $this->_db->bind(':jobID', $jobID, PDO::PARAM_INT);
+    return $this->_db->execute();
+  }
+
+  public function createApplication($jobID, $username)
+  {
+    $sql = "INSERT INTO Applications(jobID, userID)
+    VALUES (:jobID, :username)";
+    $this->_db->query($sql);
+    $this->_db->bind(':username', $username, PDO::PARAM_STR);
+    $this->_db->bind(':jobID', $jobID, PDO::PARAM_INT);
+    return $this->_db->execute();
+  }
+
+  public function deleteApplication($jobID, $username)
+  {
+    $sql = "DELETE FROM Applications WHERE jobID = :jobID AND userID = :username";
+    $this->_db->query($sql);
+    $this->_db->bind(':username', $username, PDO::PARAM_STR);
+    $this->_db->bind(':jobID', $jobID, PDO::PARAM_INT);
+    return $this->_db->execute();
+  }
 }

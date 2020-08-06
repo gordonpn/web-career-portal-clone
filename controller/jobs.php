@@ -5,16 +5,19 @@ if (!isset($_SESSION)) {
 
 require "model/Jobs.php";
 require "model/PaymentMethod.php";
+require "model/Applications.php";
 
 class JobsController
 {
   public $jobs;
   public $paymentMethod;
+  public $applications;
 
   public function __construct()
   {
     $this->jobs = new Jobs();
     $this->paymentMethod = new PaymentMethod();
+    $this->applications = new Applications();
   }
 
   public function invoke()
@@ -37,12 +40,25 @@ class JobsController
       return null;
     }
 
-    if (isset($_GET['searchKeyword'])) {
-      $jobs = $this->jobs->getJobSearch($_GET['searchKeyword']);
-      include 'view/jobs.php';
-      return null;
+    if (isset($_GET['jobApply'])) {
+      if (!$this->applications->createApplication($_GET['jobApply'], $_SESSION['username'])) {
+        $error = "An error occurred while applying.";
+      }
     }
-    $jobs = $this->jobs->getJobs();
+
+    if (isset($_GET['jobWithdraw'])) {
+      if (!$this->applications->deleteApplication($_GET['jobWithdraw'], $_SESSION['username'])) {
+        $error = "An error occurred while applying.";
+      }
+    }
+
+    $jobs = $this->jobs->getJobs($_SESSION['username']);
+
+    if (isset($_GET['searchKeyword'])) {
+      $previousSearch = $_GET['searchKeyword'];
+      $jobs = $this->jobs->getJobSearch($_GET['searchKeyword'], $_SESSION['username']);
+    }
+
     include 'view/jobs.php';
   }
 }

@@ -42,7 +42,10 @@ if (!isset($_SESSION)) {
           <?php echo $error; ?>
         </p>
       <?php endif; ?>
-      <?php require 'templates/jobsTable.php'; ?>
+      <?php
+      $fromPage = "jobs";
+      require 'templates/jobsTable.php';
+      ?>
     </div>
   </section>
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
