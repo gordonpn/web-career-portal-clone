@@ -104,4 +104,12 @@ class Jobs
     $this->_db->bind(':positionsAvailable', $positionsAvailable, PDO::PARAM_INT);
     return $this->_db->lastInsertId();
   }
+
+  public function getJobsCount($username)
+  {
+    $sql = "SELECT count(*) AS count FROM Jobs WHERE userID = :username";
+    $this->_db->query($sql);
+    $this->_db->bind(':username', $username, PDO::PARAM_STR);
+    return $this->_db->fetchOne();
+  }
 }
