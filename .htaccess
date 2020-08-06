@@ -1,6 +1,7 @@
-DirectoryIndex index.php
+#DirectoryIndex index.php
 RewriteEngine On
-RewriteBase /
+#RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ index.php [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^(.*)$ index.php?$1 [QSA,L]
