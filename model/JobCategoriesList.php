@@ -28,4 +28,13 @@ class JobCategoriesList
     $lastID = $this->_db->lastInsertId();
     return $lastID;
   }
+
+  public function getCategories()
+  {
+    $sql = "SELECT jobCategoriesID, categoryName, COUNT(jobID) as numPostings
+      FROM Job_Categories_List JOIN Job_Categories ON Job_Categories_List.jobCategoriesID = Job_Categories.jobCategoryID
+      GROUP BY jobCategoriesID, categoryName";
+    $this->_db->query($sql);
+    return $this->_db->fetchAll();
+  }
 }
