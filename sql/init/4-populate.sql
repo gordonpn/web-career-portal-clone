@@ -24,10 +24,10 @@ VALUES ('gordon', 1, 'gordon@comp353.com', 'gordon', '2020-01-15', TRUE, 0, TRUE
 INSERT INTO Job_Categories_List(categoryName)
 VALUES ('Finance'),
        ('Technology'),
-       ('Busines'),
-       ('IT'),
+       ('Business'),
+       ('Information Technology'),
        ('Database'),
-       ('System');
+       ('System Engineering');
 
 INSERT INTO Payment_Methods(userID, isPreSelected, cardNumber, paymentType)
 VALUES ('gordon', TRUE, 1234, 'debit'),
