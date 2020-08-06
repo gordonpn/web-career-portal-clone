@@ -68,11 +68,35 @@ class Applications
   public function getAppliedJobs($username)
   {
     $sql = "SELECT title, description, status, isAcceptedByEmployer, isAcceptedByEmployee, dateApplied, J.jobID
-    FROM Applications 
-    JOIN Jobs J ON Applications.jobID = J.jobID 
+    FROM Applications
+    JOIN Jobs J ON Applications.jobID = J.jobID
     WHERE Applications.userID = :username;";
     $this->_db->query($sql);
     $this->_db->bind(':username', $username, PDO::PARAM_STR);
     return $this->_db->fetchAll();
+  }
+
+  public function getApplicationCount($username)
+  {
+    $sql = "SELECT count(*) AS count FROM Applications WHERE userID = :username";
+    $this->_db->query($sql);
+    $this->_db->bind(':username', $username, PDO::PARAM_STR);
+    return $this->_db->fetchOne();
+  }
+
+  public function getJobOfferedCount($username)
+  {
+    $sql = "SELECT count(*) AS count FROM Applications WHERE userID = :username AND isAcceptedByEmployer = TRUE";
+    $this->_db->query($sql);
+    $this->_db->bind(':username', $username, PDO::PARAM_STR);
+    return $this->_db->fetchOne();
+  }
+
+  public function getJobAcceptedCount($username)
+  {
+    $sql = "SELECT count(*) AS count FROM Applications WHERE userID = :username AND isAcceptedByEmployee = TRUE";
+    $this->_db->query($sql);
+    $this->_db->bind(':username', $username, PDO::PARAM_STR);
+    return $this->_db->fetchOne();
   }
 }
