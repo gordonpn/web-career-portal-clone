@@ -1,4 +1,4 @@
-SET TIME_ZONE = '-04:00';
+SET TIME_ZONE = 'America/Montreal';
 
 DROP TABLE IF EXISTS Location;
 CREATE TABLE Location
@@ -135,7 +135,7 @@ DROP TABLE IF EXISTS Employer_Categories;
 CREATE TABLE Employer_Categories
 (
     employerCategoryID int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    userID             varchar(255) NOT NULL,
+    userID             varchar(255) UNIQUE NOT NULL,
     categoryName       varchar(255) NOT NULL,
     FOREIGN KEY (userID) REFERENCES Users (userID) ON DELETE CASCADE
 );
