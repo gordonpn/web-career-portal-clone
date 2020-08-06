@@ -39,10 +39,10 @@ if (!isset($_SESSION)) {
         <label class="label">Salary and Positions Available</label>
         <div class="field has-addons">
           <p class="control">
-            <input name="salary" class="input" type="number" min="1" placeholder="Salary" required>
+            <input name="salary" class="input" type="number" min="0" placeholder="Salary" required>
           </p>
           <p class="control">
-            <input name="positionsAvailable" class="input" type="number" min="0" placeholder="Positions Available" required>
+            <input name="positionsAvailable" class="input" type="number" min="1" placeholder="Positions Available" required>
           </p>
         </div>
         <div class="field">

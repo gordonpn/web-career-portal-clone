@@ -42,11 +42,14 @@ class Jobs
 
   public function getCategoryJobs($categoryID)
   {
-    $sql = "SELECT jobCategoriesID, categoryName, title
-      FROM Jobs
-              JOIN Job_Categories JC on Jobs.jobID = JC.jobID
-              JOIN Job_Categories_List JCL on JC.jobCategoryID = JCL.jobCategoriesID
-      WHERE jobCategoriesID = :categoryID;";
+    $sql = "SELECT title, datePosted, description, companyName, Jobs.userID, city, salary, positionsAvailable, status, firstName, lastName, phoneNumber, email, Jobs.jobID
+    FROM Jobs
+    JOIN Location ON Jobs.locationID = Location.locationID
+    JOIN Profiles ON Profiles.userID = Jobs.userID
+    JOIN Users ON Users.userID = Jobs.userID
+    JOIN Job_Categories JC on Jobs.jobID = JC.jobID
+    JOIN Job_Categories_List JCL on JC.jobCategoryID = JCL.jobCategoriesID
+    WHERE jobCategoriesID = :categoryID";
     $this->_db->query($sql);
     $this->_db->bind(':categoryID', $categoryID, PDO::PARAM_INT);
     return $this->_db->fetchAll();

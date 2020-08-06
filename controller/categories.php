@@ -1,40 +1,50 @@
 <?php
 if (!isset($_SESSION)) {
-  session_start();
+    session_start();
 }
 
-require "model/Categories.php";
+require "model/JobCategoriesList.php";
 require "model/Jobs.php";
+require "model/PaymentMethod.php";
 
 class CategoriesController
 {
-  public $categories;
+    public $jobCategoriesList;
+    public $jobs;
+    public $paymentMethod;
 
-  public function __construct()
-  {
-    $this->categories = new Categories();
-    $this->jobs = new Jobs();
-  }
-
-  public function invoke()
-  {
-    if (!isset($_SESSION['loggedIn'])) {
-      $error = "Please log in first.";
-      include 'view/login.php';
-      return null;
+    public function __construct()
+    {
+        $this->jobCategoriesList = new JobCategoriesList();
+        $this->jobs = new Jobs();
+        $this->paymentMethod = new PaymentMethod();
     }
 
-    if (!$_SESSION['isEmployee']) {
-      $error = "You must be an employee to access this page.";
-      include 'view/dashboard.php';
-      return null;
-    }
+    public function invoke()
+    {
+        if (!isset($_SESSION['loggedIn'])) {
+            $error = "Please log in first.";
+            include 'view/login.php';
+            return null;
+        }
 
-    if (isset($_GET['showCategoryJobs'])) {
-      $categoryJobs = $this->jobs->getCategoryJobs($_GET['showCategoryJobs']);
-    }
+        if (!$_SESSION['isEmployee']) {
+            $error = "You must be an employee to access this page.";
+            include 'view/dashboard.php';
+            return null;
+        }
 
-    $categories = $this->categories->getCategories();
-    include 'view/categories.php';
-  }
+        if (isset($_SESSION["loggedIn"]) && $_SESSION["balance"] < 0) {
+            $paymentMethods = $this->paymentMethod->getPaymentMethodsOf($_SESSION['username']);
+            include 'view/dashboard.php';
+            return null;
+        }
+
+        if (isset($_GET['showCategoryJobs'])) {
+            $jobs = $this->jobs->getCategoryJobs($_GET['showCategoryJobs']);
+        }
+
+        $categories = $this->jobCategoriesList->getCategories();
+        include 'view/categories.php';
+    }
 }
