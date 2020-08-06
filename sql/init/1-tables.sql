@@ -4,11 +4,11 @@ DROP TABLE IF EXISTS Payments;
 DROP TABLE IF EXISTS Payment_Methods;
 DROP TABLE IF EXISTS Emails;
 DROP TABLE IF EXISTS Employer_Categories;
-DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Profiles;
 DROP TABLE IF EXISTS Applications;
 DROP TABLE IF EXISTS Job_Categories;
 DROP TABLE IF EXISTS Jobs;
+DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Location;
 DROP TABLE IF EXISTS Plans;
 DROP TABLE IF EXISTS Job_Categories_List;
@@ -147,5 +147,5 @@ CREATE TABLE System_Activity
     activityID   int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
     description  longtext     NOT NULL,
     title        varchar(255) NOT NULL,
-    dateRecorded timestamp    NOT NULL DEFAULT current_timestamp
+    dateRecorded timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

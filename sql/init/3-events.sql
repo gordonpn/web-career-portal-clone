@@ -1,5 +1,3 @@
-SET GLOBAL event_scheduler = ON;
-
 DELIMITER $$
 
 DROP EVENT IF EXISTS automaticChargesEvent $$

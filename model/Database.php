@@ -59,7 +59,11 @@ class Database
 
   public function execute()
   {
-    return $this->_statement->execute();
+    try {
+      return $this->_statement->execute();
+    } catch (PDOException $e) {
+      echo "<p class=\"has-text-black has-background-warning\">{$e->getMessage()}</p>";
+    }
   }
 
   public function fetchAll()
