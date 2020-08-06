@@ -8,6 +8,7 @@
     </header>
     <section class="modal-card-body">
       <p class="is-size-2"><?php echo "$obj->companyName"; ?></p>
+      <p class="is-size-6"><?php echo "$obj->categoryName"; ?></p>
       <p class="is-size-3"><?php echo "$obj->firstName ";
                             echo "$obj->lastName"; ?></p>
       <p class="is-size-4">@<?php echo "$obj->userID"; ?></p>

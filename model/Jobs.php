@@ -13,12 +13,13 @@ class Jobs
 
   public function getJobs($username)
   {
-    $sql = "SELECT title, datePosted, description, companyName, Jobs.userID, city, salary, positionsAvailable, status, firstName, lastName, phoneNumber, email, Jobs.jobID,
+    $sql = "SELECT title, datePosted, description, companyName, Jobs.userID, city, salary, positionsAvailable, status, firstName, lastName, phoneNumber, email, Jobs.jobID, categoryName,
     IF(EXISTS(SELECT * FROM Applications WHERE Applications.userID = :username AND Applications.jobID = Jobs.jobID), TRUE, FALSE) AS applied
     FROM Jobs
     JOIN Location ON Jobs.locationID = Location.locationID
     JOIN Profiles ON Profiles.userID = Jobs.userID
-    JOIN Users ON Users.userID = Jobs.userID;";
+    JOIN Users ON Users.userID = Jobs.userID
+    JOIN Employer_Categories EC ON Jobs.userID = EC.userID";
     $this->_db->query($sql);
     $this->_db->bind(':username', $username, PDO::PARAM_STR);
     return $this->_db->fetchAll();
@@ -26,12 +27,13 @@ class Jobs
 
   public function getJobSearch($keyword, $username)
   {
-    $sql = "SELECT title, datePosted, description, companyName, Jobs.userID, city, salary, positionsAvailable, status, firstName, lastName, phoneNumber, email, Jobs.jobID,
+    $sql = "SELECT title, datePosted, description, companyName, Jobs.userID, city, salary, positionsAvailable, status, firstName, lastName, phoneNumber, email, Jobs.jobID, categoryName,
     IF(EXISTS(SELECT * FROM Applications WHERE Applications.userID = :username AND Applications.jobID = Jobs.jobID), TRUE, FALSE) AS applied
     FROM Jobs
     JOIN Location ON Jobs.locationID = Location.locationID
     JOIN Profiles ON Jobs.userID = Profiles.userID
     JOIN Users ON Users.userID = Jobs.userID
+    JOIN Employer_Categories EC ON Jobs.userID = EC.userID
     WHERE LOWER(title) LIKE LOWER('%$keyword%')
     OR LOWER(description) LIKE LOWER('%$keyword%')
     OR LOWER(Profiles.companyName) LIKE LOWER('%$keyword%')
@@ -46,13 +48,14 @@ class Jobs
 
   public function getCategoryJobs($categoryID, $username)
   {
-    $sql = "SELECT title, datePosted, description, companyName, Jobs.userID, city, salary, positionsAvailable, status, firstName, lastName, phoneNumber, email, Jobs.jobID,
+    $sql = "SELECT title, datePosted, description, companyName, Jobs.userID, city, salary, positionsAvailable, status, firstName, lastName, phoneNumber, email, Jobs.jobID, EC.categoryName,
     IF(EXISTS(SELECT * FROM Applications WHERE Applications.userID = :username AND Applications.jobID = Jobs.jobID), TRUE, FALSE) AS applied
     FROM Jobs
     JOIN Location ON Jobs.locationID = Location.locationID
     JOIN Profiles ON Profiles.userID = Jobs.userID
     JOIN Users ON Users.userID = Jobs.userID
     JOIN Job_Categories JC on Jobs.jobID = JC.jobID
+    JOIN Employer_Categories EC ON Jobs.userID = EC.userID
     JOIN Job_Categories_List JCL on JC.jobCategoryID = JCL.jobCategoriesID
     WHERE jobCategoriesID = :categoryID";
     $this->_db->query($sql);

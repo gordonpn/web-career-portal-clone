@@ -35,7 +35,10 @@ class ProfileModel
 
   public function getProfile($username)
   {
-    $sql = "SELECT * FROM Profiles WHERE userID = :username";
+    $sql = "SELECT firstName, lastName, phoneNumber, companyName, categoryName
+    FROM Profiles
+    JOIN Employer_Categories EC ON EC.userID = Profiles.userID
+    WHERE Profiles.userID = :username";
     $this->_db->query($sql);
     $this->_db->bind(':username', $username, PDO::PARAM_STR);
     return $this->_db->fetchOne();

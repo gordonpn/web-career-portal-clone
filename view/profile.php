@@ -128,6 +128,12 @@ if (!isset($_SESSION)) {
                         <input class="input" name="companyName" type="text" placeholder="<?php echo "$profileInfo->companyName"; ?>">
                       </div>
                     </div>
+                    <div class="field">
+                      <label class="label">Category Name</label>
+                      <div class="control">
+                        <input class="input" name="categoryName" type="text" placeholder="<?php echo "$profileInfo->categoryName"; ?>">
+                      </div>
+                    </div>
                 </section>
                 <footer class="modal-card-foot">
                   <button class="button is-success" type="submit">Save changes</button>
