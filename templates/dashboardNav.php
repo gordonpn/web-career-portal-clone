@@ -32,7 +32,7 @@ if (!isset($_SESSION["loggedIn"])) {
           } else {
             echo '<li>';
           }
-          echo '<a>Applied Jobs</a></li>';
+          echo '<a href="appliedJobs">Applied Jobs</a></li>';
         }
 
         if ($_SESSION["isEmployer"]) {

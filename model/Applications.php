@@ -64,4 +64,15 @@ class Applications
     $this->_db->bind(':jobID', $jobID, PDO::PARAM_INT);
     return $this->_db->execute();
   }
+
+  public function getAppliedJobs($username)
+  {
+    $sql = "SELECT title, description, status, isAcceptedByEmployer, isAcceptedByEmployee, dateApplied, J.jobID
+    FROM Applications 
+    JOIN Jobs J ON Applications.jobID = J.jobID 
+    WHERE Applications.userID = :username;";
+    $this->_db->query($sql);
+    $this->_db->bind(':username', $username, PDO::PARAM_STR);
+    return $this->_db->fetchAll();
+  }
 }
