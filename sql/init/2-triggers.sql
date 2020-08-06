@@ -1,6 +1,24 @@
 DELIMITER $$
 
 DROP TRIGGER IF EXISTS paymentMadeEmail $$
+DROP TRIGGER IF EXISTS paymentMade $$
+DROP TRIGGER IF EXISTS userUpdate $$
+DROP TRIGGER IF EXISTS userCreate $$
+DROP TRIGGER IF EXISTS createEmptyProfile $$
+DROP TRIGGER IF EXISTS createEmptyEmployerCategory $$
+DROP TRIGGER IF EXISTS userDelete $$
+DROP TRIGGER IF EXISTS jobCreate $$
+DROP TRIGGER IF EXISTS jobDelete $$
+DROP TRIGGER IF EXISTS paymentMethodCreate $$
+DROP TRIGGER IF EXISTS paymentMethodDelete $$
+DROP TRIGGER IF EXISTS paymentMethodUpdate $$
+DROP TRIGGER IF EXISTS applicationCreate $$
+DROP TRIGGER IF EXISTS applicationDelete $$
+DROP TRIGGER IF EXISTS jobCategoryCreate $$
+DROP TRIGGER IF EXISTS jobCategoryDelete $$
+DROP TRIGGER IF EXISTS employerCategoryCreate $$
+DROP TRIGGER IF EXISTS employerCategoryDelete $$
+
 CREATE TRIGGER paymentMadeEmail
     AFTER INSERT
     ON Payments
@@ -19,7 +37,6 @@ BEGIN
             'Payment Made');
 END $$
 
-DROP TRIGGER IF EXISTS paymentMade $$
 CREATE TRIGGER paymentMade
     AFTER INSERT
     ON Payments
@@ -32,7 +49,6 @@ BEGIN
                    NEW.amount), 'Payment Made');
 END $$
 
-DROP TRIGGER IF EXISTS userUpdate $$
 CREATE TRIGGER userUpdate
     BEFORE UPDATE
     ON Users
@@ -79,7 +95,6 @@ BEGIN
     END IF;
 END $$
 
-DROP TRIGGER IF EXISTS userCreate $$
 CREATE TRIGGER userCreate
     BEFORE INSERT
     ON Users
@@ -92,7 +107,6 @@ BEGIN
     END IF;
 END $$
 
-DROP TRIGGER IF EXISTS createEmptyProfile $$
 CREATE TRIGGER createEmptyProfile
     AFTER INSERT
     ON Users
@@ -101,7 +115,6 @@ BEGIN
     INSERT INTO Profiles(userID) VALUES (NEW.userID);
 END $$
 
-DROP TRIGGER IF EXISTS createEmptyEmployerCategory $$
 CREATE TRIGGER createEmptyEmployerCategory
     AFTER INSERT
     ON Users
@@ -115,7 +128,6 @@ BEGIN
     END IF;
 END $$
 
-DROP TRIGGER IF EXISTS userDelete $$
 CREATE TRIGGER userDelete
     AFTER DELETE
     ON Users
@@ -125,7 +137,6 @@ BEGIN
     VALUES (concat(OLD.userID, ' has been deleted.'), 'User Deleted');
 END $$
 
-DROP TRIGGER IF EXISTS jobCreate $$
 CREATE TRIGGER jobCreate
     BEFORE INSERT
     ON Jobs
@@ -144,7 +155,6 @@ BEGIN
     VALUES (concat(NEW.jobID, ' has been created.'), 'Job Created');
 END $$
 
-DROP TRIGGER IF EXISTS jobDelete $$
 CREATE TRIGGER jobDelete
     AFTER DELETE
     ON Jobs
@@ -154,7 +164,6 @@ BEGIN
     VALUES (concat(OLD.jobID, ' has been deleted.'), 'Job Deleted');
 END $$
 
-DROP TRIGGER IF EXISTS paymentMethodCreate $$
 CREATE TRIGGER paymentMethodCreate
     AFTER INSERT
     ON Payment_Methods
@@ -164,7 +173,6 @@ BEGIN
     VALUES (concat(NEW.userID, ' created a new payment method.'), 'Payment Method Created');
 END $$
 
-DROP TRIGGER IF EXISTS paymentMethodDelete $$
 CREATE TRIGGER paymentMethodDelete
     AFTER DELETE
     ON Payment_Methods
@@ -174,7 +182,6 @@ BEGIN
     VALUES (concat(OLD.userID, ' created a new payment method.'), 'Payment Method Deleted');
 END $$
 
-DROP TRIGGER IF EXISTS paymentMethodUpdate $$
 CREATE TRIGGER paymentMethodUpdate
     AFTER UPDATE
     ON Payment_Methods
@@ -187,7 +194,6 @@ BEGIN
     END IF;
 END $$
 
-DROP TRIGGER IF EXISTS applicationCreate $$
 CREATE TRIGGER applicationCreate
     BEFORE INSERT
     ON Applications
@@ -208,7 +214,6 @@ BEGIN
     VALUES (concat(NEW.userID, ' created an application to job ', NEW.jobID), 'Application Created');
 END $$
 
-DROP TRIGGER IF EXISTS applicationDelete $$
 CREATE TRIGGER applicationDelete
     AFTER DELETE
     ON Applications
@@ -218,7 +223,6 @@ BEGIN
     VALUES (concat(OLD.userID, ' deleted an application to job ', OLD.jobID), 'Application Deleted');
 END $$
 
-DROP TRIGGER IF EXISTS jobCategoryCreate $$
 CREATE TRIGGER jobCategoryCreate
     AFTER INSERT
     ON Job_Categories_List
@@ -228,7 +232,6 @@ BEGIN
     VALUES (concat(NEW.categoryName, ' has been created.'), 'Job Category Created');
 END $$
 
-DROP TRIGGER IF EXISTS jobCategoryDelete $$
 CREATE TRIGGER jobCategoryDelete
     AFTER DELETE
     ON Job_Categories_List
@@ -238,7 +241,6 @@ BEGIN
     VALUES (concat(OLD.categoryName, ' has been deleted.'), 'Job Category Deleted');
 END $$
 
-DROP TRIGGER IF EXISTS employerCategoryCreate $$
 CREATE TRIGGER employerCategoryCreate
     AFTER INSERT
     ON Employer_Categories
@@ -254,7 +256,6 @@ BEGIN
     VALUES (concat(NEW.categoryName, ' has been created.'), 'Employer Category Created');
 END $$
 
-DROP TRIGGER IF EXISTS employerCategoryDelete $$
 CREATE TRIGGER employerCategoryDelete
     AFTER DELETE
     ON Employer_Categories

@@ -3,6 +3,11 @@ SET GLOBAL event_scheduler = ON;
 DELIMITER $$
 
 DROP EVENT IF EXISTS automaticChargesEvent $$
+DROP EVENT IF EXISTS deactivateUserEvent $$
+DROP PROCEDURE IF EXISTS deactivateUser $$
+DROP PROCEDURE IF EXISTS chargeAccounts $$
+DROP PROCEDURE IF EXISTS chargeAccount $$
+
 CREATE EVENT automaticChargesEvent
     ON SCHEDULE EVERY 1 MONTH
         STARTS '2020-09-01 00:00:00'
@@ -10,7 +15,6 @@ CREATE EVENT automaticChargesEvent
     CALL chargeAccounts();
 END $$
 
-DROP EVENT IF EXISTS deactivateUserEvent $$
 CREATE EVENT deactivateUserEvent
     ON SCHEDULE EVERY 1 HOUR
     DO BEGIN
@@ -25,7 +29,6 @@ CREATE EVENT deactivateUserEvent
         END WHILE;
 END $$
 
-DROP PROCEDURE IF EXISTS deactivateUser $$
 CREATE PROCEDURE deactivateUser(in_userNumber int)
 BEGIN
     UPDATE Users
@@ -33,7 +36,6 @@ BEGIN
     WHERE userNumber = in_userNumber;
 END $$
 
-DROP PROCEDURE IF EXISTS chargeAccounts $$
 CREATE PROCEDURE chargeAccounts()
 BEGIN
     DECLARE n int DEFAULT 0;
@@ -47,7 +49,6 @@ BEGIN
         END WHILE;
 END $$
 
-DROP PROCEDURE IF EXISTS chargeAccount $$
 CREATE PROCEDURE chargeAccount(in_userNumber int)
 BEGIN
     IF (SELECT isActive FROM Users WHERE userNumber = in_userNumber) = TRUE AND
