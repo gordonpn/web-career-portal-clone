@@ -101,6 +101,19 @@ BEGIN
     INSERT INTO Profiles(userID) VALUES (NEW.userID);
 END $$
 
+DROP TRIGGER IF EXISTS createEmptyEmployerCategory $$
+CREATE TRIGGER createEmptyEmployerCategory
+    AFTER INSERT
+    ON Users
+    FOR EACH ROW
+BEGIN
+    IF (SELECT userType
+        FROM Plans
+                 JOIN Users U ON Plans.planID = U.planID
+        WHERE U.userID = NEW.userID) = 'employer' THEN
+        INSERT INTO Employer_Categories(userID, categoryName) VALUES (NEW.userID, '');
+    END IF;
+END $$
 
 DROP TRIGGER IF EXISTS userDelete $$
 CREATE TRIGGER userDelete
@@ -123,8 +136,12 @@ BEGIN
     IF (SELECT planID FROM Users WHERE Users.userID = NEW.userID) = 4 AND
        (SELECT count(*) FROM Jobs WHERE userID = NEW.userID) > 4 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Employer Prime plan cannot post to more than 5 jobs';
+    ELSEIF (SELECT userType
+            FROM Plans
+                     JOIN Users U ON Plans.planID = U.planID
+            WHERE U.userID = NEW.userID) = 'employee' THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Employees do not make job postings';
     END IF;
-
 END $$
 
 DROP TRIGGER IF EXISTS jobDelete $$
@@ -183,6 +200,11 @@ BEGIN
     ELSEIF (SELECT planID FROM Users WHERE Users.userID = NEW.userID) = 2 AND
            (SELECT count(*) FROM Applications WHERE userID = NEW.userID) > 4 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Employee Prime plan cannot apply to more than 5 jobs';
+    ELSEIF (SELECT userType
+            FROM Plans
+                     JOIN Users U ON Plans.planID = U.planID
+            WHERE U.userID = NEW.userID) = 'employer' THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Employers do not apply to jobs';
     END IF;
 END $$
 

@@ -71,6 +71,7 @@ VALUES ('leo', 1, 'Siens', 'Leo', 'Silao', 'Senior Developer', 'Male', '514-555-
        ('bob', 2, 'Stonks', 'Bob', 'Taylor', 'Doctor', 'Male', '514-567-8910'),
        ('sujan', 3, 'Diff', 'Sujan', 'S.', 'Tech Lead', 'Male', '514-676-6767'),
        ('jcole', 4, 'BigMusic', 'Jcole', 'Rapper', 'Singer', 'Male', '514-454-5454'),
+       ('joe', 9, 'Logic Industries', 'Logic', 'Joe', 'Musician', 'Male', '514-937-8367'),
        ('ariana', 5, 'SmallMusic', 'Ariana', 'Grande', 'Singer', 'Female', '514-232-2323')
 ON DUPLICATE KEY UPDATE locationID  = VALUES(locationID),
                         companyName = VALUES(companyName),
@@ -98,3 +99,12 @@ VALUES (1, 'tiffany'),
        (3, 'tiffany'),
        (4, 'tiffany'),
        (5, 'tiffany');
+
+INSERT INTO Employer_Categories(userID, categoryName)
+VALUES ('leo', 'STEM'),
+       ('bob', 'Stocks'),
+       ('sujan', 'Design'),
+       ('jcole', 'Music'),
+       ('joe', 'Software'),
+       ('ariana', 'Music')
+ON DUPLICATE KEY UPDATE categoryName = VALUES(categoryName);
