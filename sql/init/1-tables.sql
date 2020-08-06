@@ -1,6 +1,19 @@
 SET TIME_ZONE = '-04:00';
 
+DROP TABLE IF EXISTS Payments;
+DROP TABLE IF EXISTS Payment_Methods;
+DROP TABLE IF EXISTS Emails;
+DROP TABLE IF EXISTS Employer_Categories;
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Profiles;
+DROP TABLE IF EXISTS Applications;
+DROP TABLE IF EXISTS Job_Categories;
+DROP TABLE IF EXISTS Jobs;
 DROP TABLE IF EXISTS Location;
+DROP TABLE IF EXISTS Plans;
+DROP TABLE IF EXISTS Job_Categories_List;
+DROP TABLE IF EXISTS System_Activity;
+
 CREATE TABLE Location
 (
     locationID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -10,7 +23,6 @@ CREATE TABLE Location
     province   varchar(255)
 );
 
-DROP TABLE IF EXISTS Plans;
 CREATE TABLE Plans
 (
     planID     int                                    NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -21,7 +33,6 @@ CREATE TABLE Plans
     userType   enum ('admin', 'employer', 'employee') NOT NULL DEFAULT 'employee'
 );
 
-DROP TABLE IF EXISTS Users;
 CREATE TABLE Users
 (
     userNumber         int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -37,12 +48,11 @@ CREATE TABLE Users
     FOREIGN KEY (planID) REFERENCES Plans (planID)
 );
 
-DROP TABLE IF EXISTS Profiles;
 CREATE TABLE Profiles
 (
     userID         varchar(255) NOT NULL PRIMARY KEY,
-    locationID     int          NOT NULL,
-    companyName    varchar(255) NOT NULL,
+    locationID     int,
+    companyName    varchar(255),
     firstName      varchar(255),
     lastName       varchar(255),
     profession     varchar(255),
@@ -55,7 +65,6 @@ CREATE TABLE Profiles
     FOREIGN KEY (locationID) REFERENCES Location (locationID)
 );
 
-DROP TABLE IF EXISTS Jobs;
 CREATE TABLE Jobs
 (
     jobID              int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -71,7 +80,6 @@ CREATE TABLE Jobs
     FOREIGN KEY (locationID) REFERENCES Location (locationID)
 );
 
-DROP TABLE IF EXISTS Payment_Methods;
 CREATE TABLE Payment_Methods
 (
     paymentMethodID int                      NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -82,7 +90,6 @@ CREATE TABLE Payment_Methods
     FOREIGN KEY (userID) REFERENCES Users (userID) ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS Payments;
 CREATE TABLE Payments
 (
     paymentID       int       NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -92,7 +99,6 @@ CREATE TABLE Payments
     FOREIGN KEY (paymentMethodID) REFERENCES Payment_Methods (paymentMethodID)
 );
 
-DROP TABLE IF EXISTS Applications;
 CREATE TABLE Applications
 (
     jobID                int          NOT NULL,
@@ -104,14 +110,12 @@ CREATE TABLE Applications
     FOREIGN KEY (jobID) REFERENCES Jobs (jobID) ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS Job_Categories_List;
 CREATE TABLE Job_Categories_List
 (
     jobCategoriesID int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    categoryName    varchar(255) NOT NULL
+    categoryName    varchar(255) NOT NULL UNIQUE
 );
 
-DROP TABLE IF EXISTS Job_Categories;
 CREATE TABLE Job_Categories
 (
     jobID         int NOT NULL,
@@ -120,7 +124,6 @@ CREATE TABLE Job_Categories
     FOREIGN KEY (jobID) REFERENCES Jobs (jobID) ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS Emails;
 CREATE TABLE Emails
 (
     emailID  int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -131,16 +134,14 @@ CREATE TABLE Emails
     FOREIGN KEY (userID) REFERENCES Users (userID)
 );
 
-DROP TABLE IF EXISTS Employer_Categories;
 CREATE TABLE Employer_Categories
 (
     employerCategoryID int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    userID             varchar(255) NOT NULL,
+    userID             varchar(255) UNIQUE NOT NULL,
     categoryName       varchar(255) NOT NULL,
     FOREIGN KEY (userID) REFERENCES Users (userID) ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS System_Activity;
 CREATE TABLE System_Activity
 (
     activityID   int          NOT NULL AUTO_INCREMENT PRIMARY KEY,

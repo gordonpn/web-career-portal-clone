@@ -32,7 +32,7 @@ if (!isset($_SESSION["loggedIn"])) {
           } else {
             echo '<li>';
           }
-          echo '<a>Applied Jobs</a></li>';
+          echo '<a href="appliedJobs">Applied Jobs</a></li>';
         }
 
         if ($_SESSION["isEmployer"]) {
@@ -41,14 +41,23 @@ if (!isset($_SESSION["loggedIn"])) {
           } else {
             echo '<li>';
           }
-          echo '<a>Posted Jobs</a></li>';
+          echo '<a href="postedJobs">Posted Jobs</a></li>';
 
           if (strcasecmp($heroTitle, 'applications') == 0) {
             echo '<li class="is-active">';
           } else {
             echo '<li>';
           }
-          echo '<a>Applications</a></li>';
+          echo '<a href="applications">Applications</a></li>';
+        }
+
+        if (!$_SESSION["isAdmin"]) {
+          if (strcasecmp($heroTitle, 'reports') == 0) {
+            echo '<li class="is-active">';
+          } else {
+            echo '<li>';
+          }
+          echo '<a href="reports">Reports</a></li>';
         }
 
         if ($_SESSION["isAdmin"]) {

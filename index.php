@@ -35,8 +35,35 @@ switch ($request) {
     $jobsController = new JobsController();
     $jobsController->invoke();
     break;
+  case '/appliedJobs':
+    include "controller/appliedJobs.php";
+    $appliedJobsController = new AppliedJobsController();
+    $appliedJobsController->invoke();
+    break;
+  case '/postedJobs':
+    include "controller/postedJobs.php";
+    $postedJobsController = new PostedJobsController();
+    $postedJobsController->invoke();
+    break;
+  case '/postJob':
+    include "controller/postJob.php";
+    $postJobController = new PostJobController();
+    $postJobController->invoke();
+    break;
+  case '/applications':
+    include "controller/applications.php";
+    $applicationsController = new ApplicationsController();
+    $applicationsController->invoke();
+    break;
+  case '/managePaymentMethods':
+    include "controller/managePaymentMethods.php";
+    $managePaymentMethodsController = new ManagePaymentMethodsController();
+    $managePaymentMethodsController->invoke();
+    break;
   case '/categories':
-    include __DIR__ . '/view/categories.php';
+    include "controller/categories.php";
+    $categoriesController = new CategoriesController();
+    $categoriesController->invoke();
     break;
   case '/profile':
     include "controller/profile.php";
@@ -52,6 +79,11 @@ switch ($request) {
     include "controller/systemActivity.php";
     $systemActivityController = new SystemActivityController();
     $systemActivityController->invoke();
+    break;
+  case '/reports':
+    include "controller/reports.php";
+    $reportsController = new ReportsController();
+    $reportsController->invoke();
     break;
   default:
     http_response_code(404);

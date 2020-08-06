@@ -3,18 +3,21 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
+require "model/JobCategoriesList.php";
 require "model/Jobs.php";
 require "model/PaymentMethod.php";
 require "model/Applications.php";
 
-class JobsController
+class CategoriesController
 {
+  public $jobCategoriesList;
   public $jobs;
   public $paymentMethod;
   public $applications;
 
   public function __construct()
   {
+    $this->jobCategoriesList = new JobCategoriesList();
     $this->jobs = new Jobs();
     $this->paymentMethod = new PaymentMethod();
     $this->applications = new Applications();
@@ -52,13 +55,12 @@ class JobsController
       }
     }
 
-    $jobs = $this->jobs->getJobs($_SESSION['username']);
-
-    if (isset($_GET['searchKeyword'])) {
-      $previousSearch = $_GET['searchKeyword'];
-      $jobs = $this->jobs->getJobSearch($_GET['searchKeyword'], $_SESSION['username']);
+    if (isset($_GET['showCategoryJobs'])) {
+      $previousCategory = $_GET['showCategoryJobs'];
+      $jobs = $this->jobs->getCategoryJobs($_GET['showCategoryJobs'], $_SESSION['username']);
     }
 
-    include 'view/jobs.php';
+    $categories = $this->jobCategoriesList->getCategories();
+    include 'view/categories.php';
   }
 }

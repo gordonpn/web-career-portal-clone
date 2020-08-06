@@ -15,23 +15,49 @@ if (!isset($_SESSION)) {
   require "templates/hero.php";
   ?>
   <section class="section">
-    <div class="container" style="max-width:40vw">
-      <h1 class="title">
-        Search by category
-      </h1>
-      <div class="field has-addons">
-        <div class="control has-icons-left has-icons-right">
-          <input class="input" type="text" placeholder="Category">
-          <span class="icon is-small is-left">
-            <i class="fa fa-search" aria-hidden="true"></i>
-          </span>
+    <div class="container">
+      <?php if (isset($error)) : ?>
+        <p class="has-text-weight-bold has-text-danger">
+          <?php echo $error; ?>
+        </p>
+      <?php endif; ?>
+      <div class="columns">
+        <div class="column">
+          <table class="table is-bordered is-striped is-narrow is-hoverable">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Jobs Available</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              if (isset($categories)) {
+                foreach ($categories as $index => $obj) {
+                  echo '<tr>';
+                  echo '<td>';
+                  echo "<a class=\"is-info\" href=\"categories?showCategoryJobs=$obj->jobCategoriesID\">";
+                  echo "$obj->categoryName";
+                  echo '</a>';
+                  echo "<td>$obj->numPostings</td>";
+                  echo '</tr>';
+                }
+              }
+              ?>
+            </tbody>
+          </table>
         </div>
-        <div class="control">
-          <a class="button is-link">
-            Search
-          </a>
+        <div class="column">
+          <?php
+          if (isset($jobs)) {
+            $fromPage = "categories";
+            include 'templates/jobsTable.php';
+          }
+          ?>
         </div>
       </div>
+    </div>
   </section>
-  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js">
+  </script>
 </body>

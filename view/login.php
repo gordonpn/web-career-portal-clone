@@ -26,7 +26,7 @@ if (!isset($_SESSION)) {
           <?php echo $message; ?>
         </p>
       <?php endif; ?>
-      <form action="login" method="POST">
+      <form action="dashboard" method="POST">
         <div class="field">
           <label class="label">Username</label>
           <div class="control has-icons-left has-icons-right">

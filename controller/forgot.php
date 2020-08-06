@@ -17,7 +17,7 @@ class Forgot
   public function invoke()
   {
     if (isset($_POST['email'])) {
-      $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
+      $email = filter_var(trim(strtolower($_POST["email"])), FILTER_SANITIZE_EMAIL);
       if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = "Enter a valid email.";
         include 'view/forgot.php';

@@ -1,7 +1,5 @@
 <?php
-// namespace Model;
 
-// use \PDO;
 class Database
 {
   private $_host = '127.0.0.1';
@@ -26,7 +24,7 @@ class Database
       $this->_databaseHandler = new PDO($dsn, $this->_user, $this->_pass, $options);
     } catch (PDOException $e) {
       $this->_error = $e->getMessage();
-      echo $this->_error;
+      echo "<p class=\"has-text-black has-background-warning\">$this->_error</p>";
     }
   }
 
@@ -79,5 +77,11 @@ class Database
   public function rowCount()
   {
     return $this->_statement->rowCount();
+  }
+
+  public function lastInsertId()
+  {
+    $this->_statement->execute();
+    return $this->_databaseHandler->lastInsertId();
   }
 }

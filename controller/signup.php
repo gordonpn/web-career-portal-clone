@@ -5,16 +5,19 @@ if (!isset($_SESSION)) {
 
 require "model/User.php";
 require "model/PaymentMethod.php";
+require "model/Profile.php";
 
 class SignUpController
 {
   public $user;
   public $paymentMethod;
+  public $profile;
 
   public function __construct()
   {
     $this->user = new User();
     $this->paymentMethod = new PaymentMethod();
+    $this->profile = new ProfileModel();
   }
 
   public function invoke()
@@ -26,7 +29,7 @@ class SignUpController
         return null;
       }
 
-      $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
+      $email = filter_var(trim(strtolower($_POST["email"])), FILTER_SANITIZE_EMAIL);
 
       if ($this->emailIsNotValid($email)) {
         $error = "Email address is not valid.";
@@ -40,7 +43,7 @@ class SignUpController
         return null;
       }
 
-      $username = filter_var(trim($_POST['username']), FILTER_SANITIZE_STRING);
+      $username = filter_var(trim(strtolower($_POST['username'])), FILTER_SANITIZE_STRING);
 
       if (!is_null($this->user->verifyUser($username))) {
         $error = "An account already exists with that username.";
@@ -63,9 +66,13 @@ class SignUpController
           $message = "You are signed up with username: " . $username . ". You may log in now.";
         } else {
           $error  = "An error occurred.";
+          include 'view/signup.php';
+          return null;
         }
       } else {
         $error  = "An error occurred.";
+        include 'view/signup.php';
+        return null;
       }
     }
     include 'view/signup.php';

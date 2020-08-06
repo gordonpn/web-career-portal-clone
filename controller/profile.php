@@ -3,24 +3,27 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
-require "model/User.php";
-require "model/PaymentMethod.php";
 require "model/Payment.php";
+require "model/PaymentMethod.php";
+require "model/Profile.php";
+require "model/User.php";
 require "service/balance.php";
 
 class Profile
 {
-  public $user;
-  public $paymentMethod;
-  public $payment;
   public $balanceService;
+  public $payment;
+  public $paymentMethod;
+  public $profile;
+  public $user;
 
   public function __construct()
   {
-    $this->user = new User();
-    $this->paymentMethod = new PaymentMethod();
-    $this->payment = new Payment();
     $this->balanceService = new BalanceService();
+    $this->payment = new Payment();
+    $this->paymentMethod = new PaymentMethod();
+    $this->profile = new ProfileModel();
+    $this->user = new User();
   }
 
   public function invoke()
@@ -31,7 +34,18 @@ class Profile
       return null;
     }
 
+    if (isset($_POST['paymentMethodID']) && isset($_POST['payBalanceAmount'])) {
+      $newBalance = $_SESSION['balance'] + $_POST['payBalanceAmount'];
+      if ($this->user->updateBalance($_SESSION['username'], $newBalance)) {
+        $_SESSION['balance'] = $newBalance;
+        $this->payment->createPayment($_POST['paymentMethodID'], $_POST['payBalanceAmount']);
+      } else {
+        $error = "Could not update balance.";
+      }
+    }
+
     if (isset($_SESSION["loggedIn"]) && $_SESSION["balance"] < 0) {
+      $paymentMethods = $this->paymentMethod->getPaymentMethodsOf($_SESSION['username']);
       include 'view/dashboard.php';
       return null;
     }
@@ -41,12 +55,6 @@ class Profile
         $_SESSION["isAutomatic"] = !$_SESSION["isAutomatic"];
       } else {
         $error = "An error as occurred.";
-      }
-    }
-
-    if (isset($_POST['updatePaymentMethodType'])) {
-      if (!$this->paymentMethod->updatePaymentMethodType($_SESSION['username'], $_POST["updatePaymentMethodType"])) {
-        $error = "Could not change payment method type.";
       }
     }
 
@@ -65,18 +73,25 @@ class Profile
       }
     }
 
-    if (isset($_POST['paymentMethodID']) && isset($_POST['payBalanceAmount'])) {
-      $newBalance = $_SESSION['balance'] + $_POST['payBalanceAmount'];
-      if ($this->user->updateBalance($_SESSION['username'], $newBalance)) {
-        $_SESSION['balance'] = $newBalance;
-        $this->payment->createPayment($_POST['paymentMethodID'], $_POST['payBalanceAmount']);
-      } else {
-        $error = "Could not update balance.";
+    if (isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['phoneNumber']) && isset($_POST['companyName'])) {
+      if (!$this->profile->updateProfile(
+        $_SESSION['username'],
+        $_POST['firstName'],
+        $_POST['lastName'],
+        $_POST['phoneNumber'],
+        $_POST['companyName'],
+        $_POST['categoryName']
+      )) {
+        $error = "An error occurred while updating.";
       }
     }
 
     if (isset($_SESSION["loggedIn"])) {
       $paymentMethods = $this->paymentMethod->getPaymentMethodsOf($_SESSION['username']);
+    }
+
+    if ($_SESSION['isEmployer']) {
+      $profileInfo = $this->profile->getProfile($_SESSION['username']);
     }
 
     include 'view/profile.php';
