@@ -89,7 +89,9 @@ class Profile
       $paymentMethods = $this->paymentMethod->getPaymentMethodsOf($_SESSION['username']);
     }
 
-    $profileInfo = $this->profile->getProfile($_SESSION['username']);
+    if ($_SESSION['isEmployer']) {
+      $profileInfo = $this->profile->getProfile($_SESSION['username']);
+    }
 
     include 'view/profile.php';
   }
