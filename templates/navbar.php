@@ -3,7 +3,7 @@
     <div class="container">
       <div id="navbarMenuHeroA" class="navbar-menu">
         <div class="navbar-end">
-          <?php if (isset($_SESSION["isEmployer"])) : ?>
+          <?php if (isset($_SESSION["isEmployer"]) && $_SESSION["isEmployer"]) : ?>
             <span class="navbar-item">
               <a class="button is-inverted" href="postJob">
                 <span class="icon">

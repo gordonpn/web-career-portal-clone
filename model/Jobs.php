@@ -78,4 +78,18 @@ class Jobs
     $this->_db->bind(':jobID', $jobID, PDO::PARAM_STR);
     return $this->_db->execute();
   }
+
+  public function createJob($username, $locationID, $title, $salary, $description, $positionsAvailable)
+  {
+    $sql = "INSERT INTO Jobs(userID, locationID, title, salary, description, positionsAvailable)
+    VALUES (:username, :locationID, :title, :salary, :description, :positionsAvailable)";
+    $this->_db->query($sql);
+    $this->_db->bind(':username', $username, PDO::PARAM_STR);
+    $this->_db->bind(':locationID', $locationID, PDO::PARAM_STR);
+    $this->_db->bind(':title', $title, PDO::PARAM_STR);
+    $this->_db->bind(':salary', $salary, PDO::PARAM_INT);
+    $this->_db->bind(':description', $description, PDO::PARAM_STR);
+    $this->_db->bind(':positionsAvailable', $positionsAvailable, PDO::PARAM_INT);
+    return $this->_db->lastInsertId();
+  }
 }
