@@ -131,14 +131,14 @@ CREATE TRIGGER jobCreate
     ON Jobs
     FOR EACH ROW
 BEGIN
-    IF (SELECT planID FROM Users WHERE Users.userID = NEW.userID) = 4 AND
-       (SELECT count(*) FROM Jobs WHERE userID = NEW.userID) > 4 THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Employer Prime plan cannot post to more than 5 jobs';
-    ELSEIF (SELECT userType
-            FROM Plans
-                     JOIN Users U ON Plans.planID = U.planID
-            WHERE U.userID = NEW.userID) = 'employee' THEN
+    IF (SELECT userType
+        FROM Plans
+                 JOIN Users U ON Plans.planID = U.planID
+        WHERE U.userID = NEW.userID) = 'employee' THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Employees do not make job postings';
+    ELSEIF (SELECT planID FROM Users WHERE Users.userID = NEW.userID) = 4 AND
+           (SELECT count(*) FROM Jobs WHERE userID = NEW.userID) > 4 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Employer Prime plan cannot post to more than 5 jobs';
     END IF;
     INSERT INTO System_Activity(description, title)
     VALUES (concat(NEW.jobID, ' has been created.'), 'Job Created');
@@ -193,16 +193,16 @@ CREATE TRIGGER applicationCreate
     ON Applications
     FOR EACH ROW
 BEGIN
-    IF (SELECT planID FROM Users WHERE Users.userID = NEW.userID) = 1 THEN
+    IF (SELECT userType
+        FROM Plans
+                 JOIN Users U ON Plans.planID = U.planID
+        WHERE U.userID = NEW.userID) = 'employer' THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Employers do not apply to jobs';
+    ELSEIF (SELECT planID FROM Users WHERE Users.userID = NEW.userID) = 1 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Employee Basic plan cannot apply';
     ELSEIF (SELECT planID FROM Users WHERE Users.userID = NEW.userID) = 2 AND
            (SELECT count(*) FROM Applications WHERE userID = NEW.userID) > 4 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Employee Prime plan cannot apply to more than 5 jobs';
-    ELSEIF (SELECT userType
-            FROM Plans
-                     JOIN Users U ON Plans.planID = U.planID
-            WHERE U.userID = NEW.userID) = 'employer' THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Employers do not apply to jobs';
     END IF;
     INSERT INTO System_Activity(description, title)
     VALUES (concat(NEW.userID, ' created an application to job ', NEW.jobID), 'Application Created');
