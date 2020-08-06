@@ -79,7 +79,8 @@ class Profile
         $_POST['firstName'],
         $_POST['lastName'],
         $_POST['phoneNumber'],
-        $_POST['companyName']
+        $_POST['companyName'],
+        $_POST['categoryName']
       )) {
         $error = "An error occurred while updating.";
       }

@@ -106,16 +106,16 @@ if (!isset($_SESSION)) {
                     <label class="label">First Name and Last Name</label>
                     <div class="field has-addons">
                       <div class="control">
-                        <input class="input" name="firstName" type="text" placeholder="<?php echo "$profileInfo->firstName"; ?>">
+                        <input class="input" name="firstName" type="text" value="<?php echo "$profileInfo->firstName"; ?>">
                       </div>
                       <div class="control">
-                        <input class="input" name="lastName" type="text" placeholder="<?php echo "$profileInfo->lastName"; ?>">
+                        <input class="input" name="lastName" type="text" value="<?php echo "$profileInfo->lastName"; ?>">
                       </div>
                     </div>
                     <div class="field">
                       <label class="label">Phone Number</label>
                       <div class="control has-icons-left has-icons-right" style="max-width:400px;">
-                        <input class="input" type="tel" name="phoneNumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" maxlength="13" placeholder="<?php echo "$profileInfo->phoneNumber"; ?>" required>
+                        <input class="input" type="tel" name="phoneNumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" maxlength="13" value="<?php echo "$profileInfo->phoneNumber"; ?>">
                         <span class="icon is-small is-left">
                           <i class="fas fa-phone"></i>
                         </span>
@@ -125,13 +125,13 @@ if (!isset($_SESSION)) {
                     <div class="field">
                       <label class="label">Company Name</label>
                       <div class="control">
-                        <input class="input" name="companyName" type="text" placeholder="<?php echo "$profileInfo->companyName"; ?>">
+                        <input class="input" name="companyName" type="text" value="<?php echo "$profileInfo->companyName"; ?>">
                       </div>
                     </div>
                     <div class="field">
                       <label class="label">Category Name</label>
                       <div class="control">
-                        <input class="input" name="categoryName" type="text" placeholder="<?php echo "$profileInfo->categoryName"; ?>">
+                        <input class="input" name="categoryName" type="text" value="<?php echo "$profileInfo->categoryName"; ?>">
                       </div>
                     </div>
                 </section>
