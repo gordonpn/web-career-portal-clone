@@ -122,10 +122,10 @@ VALUES ('gordon',
 INSERT INTO Job_Categories_List(categoryName)
 VALUES ('Finance'),
        ('Technology'),
-       ('Busines'),
-       ('IT'),
+       ('Business'),
+       ('Information Technology'),
        ('Database'),
-       ('System');
+       ('System Engineering');
 
 INSERT INTO Payment_Methods(userID, isPreSelected, cardNumber, paymentType)
 VALUES ('gordon', TRUE, 1234, 'debit'),

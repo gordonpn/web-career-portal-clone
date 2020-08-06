@@ -34,7 +34,7 @@ if (!isset($_SESSION)) {
             foreach ($categories as $index => $obj) {
               echo '<tr>';
               echo '<td>';
-              echo "<a class=\"is-info\" id=\"show-categories-modal\" href=\"categories?showCategoryJobs=$obj->jobCategoriesID\">";
+              echo "<a class=\"is-info\" href=\"categories?showCategoryJobs=$obj->jobCategoriesID\">";
               echo "$obj->categoryName";
               echo '</a>';
               echo "<td>$obj->numPostings</td>";
@@ -46,41 +46,34 @@ if (!isset($_SESSION)) {
       </table>
     </div>
   </section>
-  <div class="modal" id="categories-modal">
-    <div class="modal-background"></div>
-    <div class="modal-card">
-      <header class="modal-card-head">
-        <p class="modal-card-title">Jobs</p>
-        <a class="delete" aria-label="close" id="categories-modal-close-btn"></a>
-      </header>
-      <section class="modal-card-body">
-        <div>
-          <ul>
-            <?php
-            if (isset($categoryJobs)) {
+  <?php if (isset($categoryJobs)) : ?>
+    <div class="modal is-active" id="categories-modal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Jobs</p>
+          <a class="delete" aria-label="close" id="categories-modal-close-btn"></a>
+        </header>
+        <section class="modal-card-body">
+          <div>
+            <ul>
+              <?php
               foreach ($categoryJobs as $index => $obj) {
                 echo "<li>$obj->title</li>";
               }
-            }
-            ?>
-          </ul>
-        </div>
-      </section>
+              ?>
+            </ul>
+          </div>
+        </section>
+      </div>
     </div>
-  </div>
+  <?php endif; ?>
   <script>
-    const showCategoriesModal = document.getElementById("show-categories-modal")
     const categoriesModal = document.getElementById("categories-modal");
     const categoriesModalCloseBtn = document.getElementById("categories-modal-close-btn");
 
     function closeModal() {
       categoriesModal.className = "modal";
-    }
-
-    if (showCategoriesModal) {
-      showCategoriesModal.addEventListener("click", function() {
-        categoriesModal.className = "modal is-active";
-      });
     }
 
     if (categoriesModalCloseBtn) {
