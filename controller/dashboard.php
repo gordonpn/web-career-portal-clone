@@ -3,18 +3,21 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
-require "model/User.php";
+require_once "model/User.php";
 require "model/PaymentMethod.php";
+require_once "service/refreshSession.php";
 
 class Dashboard
 {
   public $user;
   public $paymentMethod;
+  public $refreshSessionService;
 
   public function __construct()
   {
     $this->user = new User();
     $this->paymentMethod = new PaymentMethod();
+    $this->refreshSessionService = new RefreshSessionService();
   }
 
   public function invoke()
@@ -37,8 +40,15 @@ class Dashboard
     if (isset($_POST["username"]) && isset($_POST["password"])) {
       $username = filter_var(trim(strtolower($_POST["username"])), FILTER_SANITIZE_STRING);
       $password = $_POST["password"];
-      $error = $this->checkUser($username, $password);
-      if (!is_null($error)) {
+      $user = $this->user->getUser($username, $password);
+      if (is_null($user)) {
+        $error = "User does not exist";
+        include 'view/login.php';
+        return null;
+      }
+
+      if (!$this->refreshSessionService->refreshSession($user, null)) {
+        $error = "Your account is deactivated. Contact an administrator to reactivate your account.";
         include 'view/login.php';
         return null;
       }
@@ -55,49 +65,5 @@ class Dashboard
   {
     session_unset();
     session_destroy();
-  }
-
-  public function checkUser($username, $password)
-  {
-    $user = $this->user->getUser($username, $password);
-
-    if (is_null($user)) {
-      return "User does not exist";
-    }
-
-    $userVars = get_object_vars($user);
-    foreach ($userVars as $key => &$value) {
-
-      if ($key == 'userType') {
-        switch ($value):
-          case 'admin':
-            $_SESSION["isAdmin"] = true;
-            $_SESSION["isEmployer"] = false;
-            $_SESSION["isEmployee"] = false;
-            break;
-          case 'employer':
-            $_SESSION["isAdmin"] = false;
-            $_SESSION["isEmployer"] = true;
-            $_SESSION["isEmployee"] = false;
-            break;
-          case 'employee':
-            $_SESSION["isAdmin"] = false;
-            $_SESSION["isEmployer"] = false;
-            $_SESSION["isEmployee"] = true;
-            break;
-        endswitch;
-      }
-      $_SESSION[$key] = $value;
-    }
-    unset($value);
-
-    if (!$_SESSION['isActive']) {
-      session_unset();
-      session_destroy();
-      return "Your account is deactivated. Contact an administrator to reactivate your account.";
-    }
-
-    $_SESSION["loggedIn"] = true;
-    return null;
   }
 }

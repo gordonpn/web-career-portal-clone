@@ -6,7 +6,7 @@ if (!isset($_SESSION)) {
 require "model/Payment.php";
 require "model/PaymentMethod.php";
 require "model/Profile.php";
-require "model/User.php";
+require_once "model/User.php";
 require "service/balance.php";
 
 class Profile
