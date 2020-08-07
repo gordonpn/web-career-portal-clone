@@ -1,24 +1,5 @@
 DELIMITER $$
 
-DROP TRIGGER IF EXISTS paymentMadeEmail $$
-DROP TRIGGER IF EXISTS paymentMade $$
-DROP TRIGGER IF EXISTS userUpdate $$
-DROP TRIGGER IF EXISTS userCreate $$
-DROP TRIGGER IF EXISTS createEmptyProfile $$
-DROP TRIGGER IF EXISTS createEmptyEmployerCategory $$
-DROP TRIGGER IF EXISTS userDelete $$
-DROP TRIGGER IF EXISTS jobCreate $$
-DROP TRIGGER IF EXISTS jobDelete $$
-DROP TRIGGER IF EXISTS paymentMethodCreate $$
-DROP TRIGGER IF EXISTS paymentMethodDelete $$
-DROP TRIGGER IF EXISTS paymentMethodUpdate $$
-DROP TRIGGER IF EXISTS applicationCreate $$
-DROP TRIGGER IF EXISTS applicationDelete $$
-DROP TRIGGER IF EXISTS jobCategoryCreate $$
-DROP TRIGGER IF EXISTS jobCategoryDelete $$
-DROP TRIGGER IF EXISTS employerCategoryCreate $$
-DROP TRIGGER IF EXISTS employerCategoryDelete $$
-
 CREATE TRIGGER paymentMadeEmail
     AFTER INSERT
     ON Payments
