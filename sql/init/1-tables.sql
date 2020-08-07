@@ -96,7 +96,7 @@ CREATE TABLE Payments
     paymentMethodID int       NOT NULL,
     amount          int       NOT NULL,
     paymentDate     timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (paymentMethodID) REFERENCES Payment_Methods (paymentMethodID)
+    FOREIGN KEY (paymentMethodID) REFERENCES Payment_Methods (paymentMethodID) ON DELETE CASCADE
 );
 
 CREATE TABLE Applications
@@ -131,7 +131,7 @@ CREATE TABLE Emails
     content  longtext     NOT NULL,
     title    varchar(255) NOT NULL,
     dateSent timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (userID) REFERENCES Users (userID)
+    FOREIGN KEY (userID) REFERENCES Users (userID) ON DELETE CASCADE
 );
 
 CREATE TABLE Employer_Categories
