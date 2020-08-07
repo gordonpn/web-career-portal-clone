@@ -4,14 +4,14 @@ if (!isset($_SESSION)) {
 }
 
 $time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
+$timeoutDuration = 1800;
 if (isset($_SESSION['LAST_ACTIVITY'])) {
-  if (($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+  if (($time - $_SESSION['LAST_ACTIVITY']) > $timeoutDuration) {
     session_unset();
     session_destroy();
     session_start();
   } elseif (isset($_SESSION['loggedIn'])) {
-    require_once "service/refreshSession.php";
+    include_once "service/refreshSession.php";
     $refreshSessionService = new RefreshSessionService();
     if (!$refreshSessionService->refreshSession(null, $_SESSION['username'])) {
       $error = "Your account is deactivated. Contact an administrator to reactivate your account.";
