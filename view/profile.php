@@ -23,6 +23,11 @@ if (!isset($_SESSION)) {
               <?php echo $error; ?>
             </p>
           <?php endif; ?>
+          <?php if (isset($message)) : ?>
+            <p class="has-text-weight-bold has-text-info">
+              <?php echo $message; ?>
+            </p>
+          <?php endif; ?>
           <h1 class="title">
             General Information
           </h1>
@@ -47,22 +52,24 @@ if (!isset($_SESSION)) {
           <h1 class="title">
             Change Email
           </h1>
-          <div class="field">
-            <label class="label">Email</label>
-            <div class="control has-icons-left has-icons-right" style="max-width:400px;">
-              <input class="input" type="email" placeholder="Email" required>
-              <span class="icon is-small is-left">
-                <i class="fas fa-envelope"></i>
-              </span>
+          <form action="profile" method="POST">
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control has-icons-left has-icons-right" style="max-width:400px;">
+                <input name="updateEmail" class="input" type="email" placeholder="<?php echo "{$_SESSION['email']}"; ?>" required>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-envelope"></i>
+                </span>
+              </div>
             </div>
-          </div>
-          <div class="field">
-            <p class="control">
-              <button class="button is-link">
-                Change Email
-              </button>
-            </p>
-          </div>
+            <div class="field">
+              <p class="control">
+                <button class="button is-link" type="submit">
+                  Change Email
+                </button>
+              </p>
+            </div>
+          </form>
         </div>
       </section>
       <section class="section">

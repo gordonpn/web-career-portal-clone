@@ -65,6 +65,21 @@ class Profile
       return null;
     }
 
+    if (isset($_POST['updateEmail'])) {
+      $email = filter_var(trim(strtolower($_POST["updateEmail"])), FILTER_SANITIZE_EMAIL);
+
+      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "Email address is not valid.";
+      }
+
+      if (!$this->user->updateEmail($_SESSION['username'], $email)) {
+        $error = "An error occurred while updating the email address.";
+      }
+
+      $_SESSION['email'] = $email;
+      $message = "Email changed successfully.";
+    }
+
     if (isset($_GET["switchWithdrawal"])) {
       if ($this->user->updateWithdrawal($_SESSION['username'])) {
         $_SESSION["isAutomatic"] = !$_SESSION["isAutomatic"];

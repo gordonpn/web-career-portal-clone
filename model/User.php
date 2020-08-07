@@ -145,4 +145,13 @@ class User
     $this->_db->bind(':password', $password, PDO::PARAM_STR);
     return $this->_db->execute();
   }
+
+  public function updateEmail($username, $email)
+  {
+    $sql = "UPDATE Users SET email = :email WHERE userID = :username";
+    $this->_db->query($sql);
+    $this->_db->bind(':username', $username, PDO::PARAM_STR);
+    $this->_db->bind(':email', $email, PDO::PARAM_STR);
+    return $this->_db->execute();
+  }
 }
