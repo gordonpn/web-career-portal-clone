@@ -3,7 +3,7 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
-require 'model/User.php';
+require_once 'model/User.php';
 
 class Forgot
 {

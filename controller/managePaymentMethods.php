@@ -50,7 +50,7 @@ class ManagePaymentMethodsController
         $_SESSION['username'],
         $_POST['newPaymentType'],
         $_POST['newCardNumber'],
-        false
+        0
       )) {
         $error = "An error occurred while creating a new payment method.";
       }

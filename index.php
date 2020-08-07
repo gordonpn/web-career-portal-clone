@@ -3,6 +3,25 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
+$time = $_SERVER['REQUEST_TIME'];
+$timeout_duration = 1800;
+if (isset($_SESSION['LAST_ACTIVITY'])) {
+  if (($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+  } elseif (isset($_SESSION['loggedIn'])) {
+    require_once "service/refreshSession.php";
+    $refreshSessionService = new RefreshSessionService();
+    if (!$refreshSessionService->refreshSession(null, $_SESSION['username'])) {
+      $error = "Your account is deactivated. Contact an administrator to reactivate your account.";
+      include 'view/login.php';
+      return null;
+    }
+  }
+}
+$_SESSION['LAST_ACTIVITY'] = $time;
+
 $request = strtok($_SERVER["REQUEST_URI"], '?');
 
 switch ($request) {
