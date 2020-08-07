@@ -44,20 +44,6 @@ class Profile
       }
     }
 
-    if (isset($_SESSION["loggedIn"]) && $_SESSION["balance"] < 0) {
-      $paymentMethods = $this->paymentMethod->getPaymentMethodsOf($_SESSION['username']);
-      include 'view/dashboard.php';
-      return null;
-    }
-
-    if (isset($_GET["switchWithdrawal"])) {
-      if ($this->user->updateWithdrawal($_SESSION['username'])) {
-        $_SESSION["isAutomatic"] = !$_SESSION["isAutomatic"];
-      } else {
-        $error = "An error as occurred.";
-      }
-    }
-
     if (isset($_POST['newPlan'])) {
       if ($this->user->updatePlan($_SESSION['username'], $_POST['newPlan'])) {
         $balanceDifference = $this->balanceService->calculateBalanceDifference($_SESSION['planName'], $_POST['newPlan']);
@@ -70,6 +56,20 @@ class Profile
         $_SESSION['planName'] = $_POST['newPlan'];
       } else {
         $error = "Could not update plan.";
+      }
+    }
+
+    if (isset($_SESSION["loggedIn"]) && $_SESSION["balance"] < 0) {
+      $paymentMethods = $this->paymentMethod->getPaymentMethodsOf($_SESSION['username']);
+      include 'view/dashboard.php';
+      return null;
+    }
+
+    if (isset($_GET["switchWithdrawal"])) {
+      if ($this->user->updateWithdrawal($_SESSION['username'])) {
+        $_SESSION["isAutomatic"] = !$_SESSION["isAutomatic"];
+      } else {
+        $error = "An error as occurred.";
       }
     }
 

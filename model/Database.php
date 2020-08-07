@@ -80,12 +80,20 @@ class Database
 
   public function rowCount()
   {
-    return $this->_statement->rowCount();
+    try {
+      return $this->_statement->rowCount();
+    } catch (PDOException $e) {
+      echo "<p class=\"has-text-black has-background-warning\">{$e->getMessage()}</p>";
+    }
   }
 
   public function lastInsertId()
   {
-    $this->_statement->execute();
-    return $this->_databaseHandler->lastInsertId();
+    try {
+      $this->_statement->execute();
+      return $this->_databaseHandler->lastInsertId();
+    } catch (PDOException $e) {
+      echo "<p class=\"has-text-black has-background-warning\">{$e->getMessage()}</p>";
+    }
   }
 }
