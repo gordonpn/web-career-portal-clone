@@ -27,7 +27,7 @@ class PaymentMethod
     $this->_db->query($sql);
     $this->_db->bind(':username', $username, PDO::PARAM_STR);
     $this->_db->bind(':paymentType', $paymentType, PDO::PARAM_STR);
-    $this->_db->bind(':isPreSelected', $isPreSelected, PDO::PARAM_BOOL);
+    $this->_db->bind(':isPreSelected', $isPreSelected, PDO::PARAM_INT);
     $this->_db->bind(':cardNumber', $cardNumber, PDO::PARAM_INT);
     return $this->_db->execute();
   }

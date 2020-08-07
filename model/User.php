@@ -26,9 +26,19 @@ class User
     if ($rowCount < 1) {
       return null;
     }
-    $row = $this->_db->fetchOne();
+    return $this->_db->fetchOne();
+  }
 
-    return $row;
+  public function getExistingUser($user)
+  {
+    $sql = "SELECT userID as username, email, Plans.userType AS userType, Plans.name AS planName, isActive, startSufferingDate, balance, isAutomatic
+    FROM Users, Plans
+    WHERE userID = :user
+    AND Plans.planID = Users.planID";
+    $this->_db->query($sql);
+    $this->_db->bind(':user', $user, PDO::PARAM_STR);
+    $this->_db->execute();
+    return $this->_db->fetchOne();
   }
 
   public function updateWithdrawal($user)
@@ -133,6 +143,15 @@ class User
     $this->_db->bind(':plan', $plan, PDO::PARAM_STR);
     $this->_db->bind(':email', $email, PDO::PARAM_STR);
     $this->_db->bind(':password', $password, PDO::PARAM_STR);
+    return $this->_db->execute();
+  }
+
+  public function updateEmail($username, $email)
+  {
+    $sql = "UPDATE Users SET email = :email WHERE userID = :username";
+    $this->_db->query($sql);
+    $this->_db->bind(':username', $username, PDO::PARAM_STR);
+    $this->_db->bind(':email', $email, PDO::PARAM_STR);
     return $this->_db->execute();
   }
 }

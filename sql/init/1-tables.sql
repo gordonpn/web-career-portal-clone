@@ -1,19 +1,5 @@
 SET TIME_ZONE = '-04:00';
 
-DROP TABLE IF EXISTS Payments;
-DROP TABLE IF EXISTS Payment_Methods;
-DROP TABLE IF EXISTS Emails;
-DROP TABLE IF EXISTS Employer_Categories;
-DROP TABLE IF EXISTS Profiles;
-DROP TABLE IF EXISTS Applications;
-DROP TABLE IF EXISTS Job_Categories;
-DROP TABLE IF EXISTS Jobs;
-DROP TABLE IF EXISTS Users;
-DROP TABLE IF EXISTS Location;
-DROP TABLE IF EXISTS Plans;
-DROP TABLE IF EXISTS Job_Categories_List;
-DROP TABLE IF EXISTS System_Activity;
-
 CREATE TABLE Location
 (
     locationID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -96,7 +82,7 @@ CREATE TABLE Payments
     paymentMethodID int       NOT NULL,
     amount          int       NOT NULL,
     paymentDate     timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (paymentMethodID) REFERENCES Payment_Methods (paymentMethodID)
+    FOREIGN KEY (paymentMethodID) REFERENCES Payment_Methods (paymentMethodID) ON DELETE CASCADE
 );
 
 CREATE TABLE Applications
@@ -131,7 +117,7 @@ CREATE TABLE Emails
     content  longtext     NOT NULL,
     title    varchar(255) NOT NULL,
     dateSent timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (userID) REFERENCES Users (userID)
+    FOREIGN KEY (userID) REFERENCES Users (userID) ON DELETE CASCADE
 );
 
 CREATE TABLE Employer_Categories

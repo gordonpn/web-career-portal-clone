@@ -6,7 +6,7 @@ if (!isset($_SESSION)) {
 require "model/Payment.php";
 require "model/PaymentMethod.php";
 require "model/Profile.php";
-require "model/User.php";
+require_once "model/User.php";
 require "service/balance.php";
 
 class Profile
@@ -63,6 +63,21 @@ class Profile
       $paymentMethods = $this->paymentMethod->getPaymentMethodsOf($_SESSION['username']);
       include 'view/dashboard.php';
       return null;
+    }
+
+    if (isset($_POST['updateEmail'])) {
+      $email = filter_var(trim(strtolower($_POST["updateEmail"])), FILTER_SANITIZE_EMAIL);
+
+      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "Email address is not valid.";
+      }
+
+      if (!$this->user->updateEmail($_SESSION['username'], $email)) {
+        $error = "An error occurred while updating the email address.";
+      }
+
+      $_SESSION['email'] = $email;
+      $message = "Email changed successfully.";
     }
 
     if (isset($_GET["switchWithdrawal"])) {

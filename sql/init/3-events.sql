@@ -1,11 +1,5 @@
 DELIMITER $$
 
-DROP EVENT IF EXISTS automaticChargesEvent $$
-DROP EVENT IF EXISTS deactivateUserEvent $$
-DROP PROCEDURE IF EXISTS deactivateUser $$
-DROP PROCEDURE IF EXISTS chargeAccounts $$
-DROP PROCEDURE IF EXISTS chargeAccount $$
-
 CREATE EVENT automaticChargesEvent
     ON SCHEDULE EVERY 1 MONTH
         STARTS '2020-09-01 00:00:00'
