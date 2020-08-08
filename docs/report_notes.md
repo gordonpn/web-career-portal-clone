@@ -19,4 +19,4 @@
 <br  />
 ## Extra Features
 
-* We have implemented a session timeout of 30 mins upon a user logging in. 
+* If a user whose logged in does not have any activity (they do not click anything) within 30 minutes, they are automatically logged out.
