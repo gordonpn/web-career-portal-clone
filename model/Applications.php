@@ -86,7 +86,11 @@ class Applications
 
   public function getJobOfferedCount($username)
   {
-    $sql = "SELECT count(*) AS count FROM Applications WHERE userID = :username AND isAcceptedByEmployer = TRUE";
+    $sql = "SELECT count(*) AS count
+    FROM Applications
+    WHERE jobID = (SELECT Jobs.jobID FROM Jobs WHERE Jobs.userID = :username)
+    AND isAcceptedByEmployer = TRUE;
+    ";
     $this->_db->query($sql);
     $this->_db->bind(':username', $username, PDO::PARAM_STR);
     return $this->_db->fetchOne();
