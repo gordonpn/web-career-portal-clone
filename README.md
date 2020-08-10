@@ -4,7 +4,25 @@
 ![Docker 19.03.12](https://badgen.net/badge/Docker/19%2e03%2e12/blue)
 ![MySQL 8.0.16](https://badgen.net/badge/MySQL/8%2e0%2e16/yellow)
 
-## Instructions
+## Purpose
+
+Mock an application and job posting board, such as Indeed with the goal of learning database design and interacting with a database from a web user interface.
+
+Basically, there are user accounts, employer accounts and admin accounts. Features are implemented appropriately for each of the account types.
+
+An admin governs the platform, an employer creates job postings, reviews applications, etc. A user applies to jobs, browses for jobs, etc.
+
+## About the code
+
+The database design is normalized to third normal form.
+
+The web application is written with vanilla PHP in MVC (model-view-controller) design pattern.
+
+## Demo GIF
+
+![Demo GIF](./docs/demo.gif)
+
+## Instructions for development
 
 PHP must be installed.
 
@@ -13,6 +31,12 @@ On Mac: `brew install php`
 To use the make commands below, Docker must be installed.
 
 On Mac: <https://docs.docker.com/docker-for-mac/install/>
+
+These instructions are tested and based on \*nix based systems. Some minor modifications may be needed for Windows systems.
+
+## Seeding the database
+
+When the MySQL container started, the directory `sql/init` is automatically seeded and some sample data is automatically populated in to the tables.
 
 ### Start both local server and local database
 
